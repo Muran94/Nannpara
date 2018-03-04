@@ -3,3 +3,7 @@ p= @recruitment.description
 ul
   li= @recruitment.event_date
   li= @recruitment.venue
+
+- if current_user && @recruitment.owner?(current_user)
+  = link_to "編集", edit_recruitment_path(@recruitment)
+  = link_to "削除", recruitment_path(@recruitment), method: :delete, data: {confirm: "本当に削除しますか？"}
