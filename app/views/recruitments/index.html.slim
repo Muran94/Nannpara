@@ -1,2 +1,2 @@
-h1 Recruitments#index
-p Find me in app/views/recruitments/index.html.slim
+- @recruitments.each.with_index(1) do |recruitment|
+  =link_to recruitment.title, recruitment

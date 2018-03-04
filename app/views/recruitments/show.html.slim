@@ -1,2 +1,5 @@
-h1 Recruitments#show
-p Find me in app/views/recruitments/show.html.slim
+h1= @recruitment.title
+p= @recruitment.description
+ul
+  li= @recruitment.event_date
+  li= @recruitment.venue
