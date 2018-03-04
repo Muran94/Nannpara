@@ -33,6 +33,8 @@ class RecruitmentsController < ApplicationController
   end
 
   def destroy
+    @recruitment.delete
+    redirect_to root_path
   end
 
   private
