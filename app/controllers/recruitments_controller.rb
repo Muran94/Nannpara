@@ -25,6 +25,11 @@ class RecruitmentsController < ApplicationController
   end
 
   def update
+    if @recruitment.update(_recruitment_params)
+      redirect_to @recruitment
+    else
+      render :edit
+    end
   end
 
   def destroy
