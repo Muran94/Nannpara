@@ -4,6 +4,8 @@ ul
   li= @recruitment.event_date
   li= @recruitment.venue
 
+= render "messages/form"
+
 - @messages.each.with_index(1) do |message, i|
   = %(#{i}: #{message.message})
 

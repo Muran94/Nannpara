@@ -1,0 +1,5 @@
+= form_with model: @new_message, url: recruitment_messages_path(@recruitment, @new_message) do |f|
+  = f.label "メッセージ"
+  = f.text_area :message
+
+  = f.submit "送信"

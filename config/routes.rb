@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  get 'messages/create'
-
   devise_for :users
-  resources :recruitments
+  resources :recruitments do
+    resources :messages, only: [:create]
+  end
   root "recruitments#index"
 end
