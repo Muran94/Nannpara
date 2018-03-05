@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180304215611) do
+ActiveRecord::Schema.define(version: 20180305105044) do
+
+  create_table "messages", force: :cascade do |t|
+    t.text "message"
+    t.integer "user_id"
+    t.integer "recruitment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recruitment_id"], name: "index_messages_on_recruitment_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
 
   create_table "recruitments", force: :cascade do |t|
     t.string "title"

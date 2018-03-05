@@ -3,7 +3,8 @@ class MessagesController < ApplicationController
 
   def create
     @message = @recruitment.messages.build(_message_params)
-    @message.user_id = current_user.id
+    @message.user_id = current_user.id if current_user
+
     if @message.save
       flash[:success] = "メッセージの送信に成功しました。"
       redirect_to @recruitment
