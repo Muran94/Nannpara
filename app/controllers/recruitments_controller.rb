@@ -6,6 +6,8 @@ class RecruitmentsController < ApplicationController
   end
 
   def show
+    @messages = @recruitment.messages.order("created_at DESC")
+    @new_message = @recruitment.messages.build
   end
 
   def new
