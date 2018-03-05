@@ -17,6 +17,7 @@ gem 'slim-rails'
 gem 'devise'
 gem 'pry'
 gem 'active_decorator'
+gem 'annotate'
 
 group :development, :test do
    gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
