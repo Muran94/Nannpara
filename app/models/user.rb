@@ -25,4 +25,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :recruitments
+  has_many :messages
 end
