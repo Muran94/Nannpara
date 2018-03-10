@@ -20,7 +20,7 @@ class RecruitmentsController < ApplicationController
       flash[:success] = "募集記事の作成が完了しました。"
       redirect_to @recruitment
     else
-      flash[:success] = "募集記事の作成に失敗しました。"
+      flash[:alert] = "募集記事の作成に失敗しました。"
       render :new
     end
   end
@@ -33,7 +33,7 @@ class RecruitmentsController < ApplicationController
       flash[:success] = "募集記事の更新に完了しました。"
       redirect_to @recruitment
     else
-      flash[:success] = "募集記事の更新に失敗しました。"
+      flash[:alert] = "募集記事の更新に失敗しました。"
       render :edit
     end
   end

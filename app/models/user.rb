@@ -26,4 +26,6 @@ class User < ApplicationRecord
 
   has_many :recruitments
   has_many :messages
+
+  validates :name, presence: true, length: {maximum: 64}
 end
