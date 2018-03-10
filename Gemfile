@@ -34,6 +34,9 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'guard-rspec', require: false # guardでrspecを動かす
+  gem 'terminal-notifier'
+  gem 'terminal-notifier-guard'  # デスクトップ通知を行う
 end
 
 group :test do
