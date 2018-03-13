@@ -51,7 +51,7 @@ RSpec.describe MessagesController, type: :controller do
         it "レコードが増えない && flash[:alert]の値が正しい && recruitment/newがrenderされること" do
           aggregate_failures do
             expect {post :create, params: params}.not_to change(Message, :count)
-            expect(flash[:alert]).to eq "メッセージの送信に失敗しました。"
+            expect(flash[:error]).to eq "メッセージの送信に失敗しました。"
             expect(response).to render_template "recruitments/new"
           end
         end

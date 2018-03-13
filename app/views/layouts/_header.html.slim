@@ -1,13 +1,33 @@
-header
-  nav
-    site-logo
-      | NANPARA
+.ui.borderless.fixed.menu
+  .ui.container
+    = link_to "南原", root_path, class: "ui item header red"
 
-    ul
+    .right.menu
       - if current_user
-        li=link_to "募集をかける", new_recruitment_path
-        li=link_to "ユーザー情報編集", edit_user_registration_path
-        li=link_to "ログアウト", destroy_user_session_path
+        .item
+          = link_to new_recruitment_path, class: "ui button orange" do
+            i.icon.pencil.alternate
+            | 募集する
+        .ui.simple.dropdown.item
+          = image_tag("no_user_image.png", class: "ui image mini rounded")
+          i.dropdown.icon
+          .menu
+            = link_to "#", class: "item" do
+              = semantic_icon("user")
+              | マイページ
+            .divider
+            = link_to edit_user_registration_path, class: "item" do
+              = semantic_icon("edit")
+              | プロフィール編集
+            = link_to destroy_user_session_path, method: :delete, class: "item" do
+              = semantic_icon("sign out alternate")
+              | ログアウト
       - else
-        li=link_to "会員登録", new_user_registration_path
-        li=link_to "ログイン", new_user_session_path
+        .item
+          = link_to new_user_registration_path, class: "ui button orange" do
+            = semantic_icon("edit")
+            | 会員登録
+        .item
+          = link_to new_user_session_path do
+            = semantic_icon("sign in alternate")
+            | ログイン

@@ -30,6 +30,18 @@ RSpec.describe Recruitment, type: :model do
     end
 
     context "description" do
+      context "presenceチェック" do
+        it "descriptionが 空 か nil の場合バリデーションに引っかかる" do
+          aggregate_failures do
+            expect(build(:recruitment, description: "").valid?).to be_falsy
+            expect(build(:recruitment, description: nil).valid?).to be_falsy
+          end
+        end
+        it "descriptionが 空 でも nil でもなければバリデーションに引っかからない" do
+          expect(build(:recruitment, description: "よろしくお願いいたします！").valid?).to be_truthy
+        end
+      end
+
       context "lengthチェック" do
         it "descriptionの長さが 5121文字以上 ならバリデーションに引っかかる" do
           expect(build(:recruitment, description: "*" * 5121).valid?).to be_falsy
@@ -61,11 +73,11 @@ RSpec.describe Recruitment, type: :model do
           aggregate_failures do
             recruitment = build(:recruitment, event_date: 1.day.ago) # event_dateが過去のRecruitment
             expect(recruitment.valid?).to be_falsy
-            expect(recruitment.errors.messages[:event_date]).to match_array "開催日は、未来の日時のみ指定可能です。"
+            expect(recruitment.errors.messages[:event_date]).to match_array "開催日時に過去の日時を指定することはできません。"
 
             recruitment = build(:recruitment, event_date: Time.zone.now) # event_dateが現在のRecruitment
             expect(recruitment.valid?).to be_falsy
-            expect(recruitment.errors.messages[:event_date]).to match_array "開催日は、未来の日時のみ指定可能です。"
+            expect(recruitment.errors.messages[:event_date]).to match_array "開催日時に過去の日時を指定することはできません。"
           end
         end
         it "event_dateの日時が 未来 の場合、バリデーションに引っかからない" do

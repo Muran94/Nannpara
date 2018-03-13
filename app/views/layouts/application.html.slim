@@ -3,10 +3,22 @@ html
   head
     title Nannpara
     = csrf_meta_tags
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.css', media: 'all', type: 'text/css'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-  body
-    = render "layouts/header"
-    = render "layouts/flash"
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.js', media: 'all', type: 'text/javascript'
 
-    = yield
+  body(style="background: #F5F4F5")
+    = render "layouts/header"
+
+    .ui.main.container
+      = render "layouts/flash"
+
+      .ui.grid
+        .eleven.wide.column
+          = yield
+        .five.wide.column
+          .ui.segment.basic.bg-white
+            aaa
+
+    = render "layouts/footer"

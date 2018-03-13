@@ -105,7 +105,7 @@ RSpec.describe RecruitmentsController, type: :controller do
           it "レコードが増えない && flash[:alert]の値が正しい && newテンプレートをrender" do
             aggregate_failures do
               expect {post :create, params: params}.not_to change(Recruitment, :count)
-              expect(flash[:alert]).to eq "募集記事の作成に失敗しました。"
+              expect(flash[:error]).to eq "募集記事の作成に失敗しました。"
               expect(response).to render_template :new
             end
           end
@@ -169,7 +169,7 @@ RSpec.describe RecruitmentsController, type: :controller do
             patch :update, params: {id: recruitment.id, recruitment: recruitment_params}
             recruitment.reload
             expect(recruitment.title).to eq "修正前"
-            expect(flash[:alert]).to eq "募集記事の更新に失敗しました。"
+            expect(flash[:error]).to eq "募集記事の更新に失敗しました。"
             expect(response).to render_template :edit
           end
         end

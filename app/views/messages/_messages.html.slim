@@ -1,0 +1,7 @@
+.ui.comments
+  h3.ui.dividing.header
+    | メッセージ一覧
+  - if @messages.present?
+      = render @messages
+  - else
+    p まだメッセージがありません。

@@ -24,7 +24,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :recruitments
+  has_many :recruitments, dependent: :destroy
   has_many :messages
 
   validates :name, presence: true, length: {maximum: 64}
