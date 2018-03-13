@@ -1,14 +1,43 @@
-h1= @recruitment.title
-p= @recruitment.description
-ul
-  li= @recruitment.event_date
-  li= @recruitment.venue
+.ui.segment.basic.bg-white
+  .ui.text.menu
+    .item
+      = image_tag("no_user_image.png", class: "ui rounded mini image")
+    .browse.item
+      b= @recruitment.format_user_name
+    .item(style="color: #999999; font-size: 12px; margin-left: 15px;")
+      = %(#{@recruitment.format_created_at}に更新)
 
-= render "messages/form"
+    - if current_user && @recruitment.owner?(current_user)
+      .ui.right.dropdown.item
+        i.ellipsis.horizontal.icon
+        .menu
+          = link_to edit_recruitment_path(@recruitment), class: "item" do
+            i.icon.edit
+            | 編集
+          = link_to recruitment_path(@recruitment), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "item" do
+            i.trash.alternate.icon
+            | 削除
 
-- @messages.each.with_index(1) do |message, i|
-  = %(#{i}: #{message.message})
+  h2.ui.header.dividing= @recruitment.title
+  p(style="min-height: 100px; margin-bottom: 30px;")= @recruitment.description
 
-- if current_user && @recruitment.owner?(current_user)
-  = link_to "編集", edit_recruitment_path(@recruitment)
-  = link_to "削除", recruitment_path(@recruitment), method: :delete, data: {confirm: "本当に削除しますか？"}
+  .ui.equal.width.grid
+    .column
+      h5.ui.header.dividing
+        = semantic_icon("calendar alternate outline")
+        .content 開催日時
+      p= @recruitment.format_event_date
+
+    .column
+      h5.ui.header.dividing
+        = semantic_icon("map marker alternate")
+        .content 開催場所
+      p= @recruitment.venue
+
+
+.ui.segment.basic.bg-white
+  = render "messages/messages", messages: @messages
+  = render "messages/form"
+
+  javascript:
+    $('.ui.dropdown').dropdown();

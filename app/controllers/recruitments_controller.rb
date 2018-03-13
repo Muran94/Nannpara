@@ -2,11 +2,11 @@ class RecruitmentsController < ApplicationController
   before_action :_get_recruitment, only: [:show, :edit, :update, :destroy]
 
   def index
-    @recruitments = Recruitment.all.order("created_at DESC")
+    @recruitments = Recruitment.all.order("event_date ASC")
   end
 
   def show
-    @messages = @recruitment.messages.order("created_at DESC")
+    @messages = @recruitment.messages.order("created_at ASC")
     @new_message = @recruitment.messages.build
   end
 
@@ -20,7 +20,7 @@ class RecruitmentsController < ApplicationController
       flash[:success] = "募集記事の作成が完了しました。"
       redirect_to @recruitment
     else
-      flash[:alert] = "募集記事の作成に失敗しました。"
+      flash[:error] = "募集記事の作成に失敗しました。"
       render :new
     end
   end
@@ -33,14 +33,14 @@ class RecruitmentsController < ApplicationController
       flash[:success] = "募集記事の更新に完了しました。"
       redirect_to @recruitment
     else
-      flash[:alert] = "募集記事の更新に失敗しました。"
+      flash[:error] = "募集記事の更新に失敗しました。"
       render :edit
     end
   end
 
   def destroy
-    flash[:success] = "募集記事の削除が完了しました。"
     @recruitment.delete
+    flash[:success] = "募集記事の削除が完了しました。"
     redirect_to root_path
   end
 

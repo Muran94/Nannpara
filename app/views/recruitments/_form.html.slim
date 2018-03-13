@@ -1,14 +1,25 @@
-= form_with model: @recruitment do |f|
-  = f.label "タイトル"
-  = f.text_field :title
+= form_with model: @recruitment, html: {class: "ui form"} do |f|
+  .field
+    = f.label :title, "タイトル"
+    = f.text_field :title, placeholder: "例）渋谷ハチ公前。本日の18時開始。定員なし。"
 
-  = f.label "募集内容"
-  = f.text_area :description
+  .field
+    = f.label :description, "募集内容"
+    = f.text_area :description, placeholder: "例）よろしくお願い致します。"
 
-  = f.label "開催日時"
-  = f.datetime_select :event_date
+  .fields
+    .field.six.wide.ui.calendar
+      = f.label :event_date, "開催日時"
+      .ui.input.right.icon
+        i.circular.calendar.icon
+        = f.text_field :event_date, placeholder: %(例）#{Time.zone.now.strftime("%Y/%m/%d %H:%M")}), style: "cursor: pointer;"
 
-  = f.label "開催場所"
-  = f.text_field :venue
+    .field.six.wide
+      = f.label "都道府県"
+      = f.text_field :venue, placeholder: "例）東京都"
 
-  = f.submit "作成"
+    .field.six.wide
+      = f.label "開催場所"
+      = f.text_field :venue, placeholder: "例）渋谷ハチ公前"
+
+  = f.submit "作成", class: "ui fluid orange submit button"

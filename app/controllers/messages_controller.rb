@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
       flash[:success] = "メッセージの送信に成功しました。"
       redirect_to @recruitment
     else
-      flash[:alert] = "メッセージの送信に失敗しました。"
+      flash[:error] = "メッセージの送信に失敗しました。"
       render "recruitments/new"
     end
   end

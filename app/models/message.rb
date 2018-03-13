@@ -12,6 +12,7 @@
 
 class Message < ApplicationRecord
   belongs_to :recruitment
+  belongs_to :user, optional: true
 
   validates :message, presence: true, length: {maximum: 1024}
 end

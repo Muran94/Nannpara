@@ -1,2 +1,6 @@
-- @recruitments.each.with_index(1) do |recruitment|
-  =link_to recruitment.title, recruitment
+.ui.segment.basic.bg-white
+  h3.ui.dividing.header
+    = semantic_icon("rss")
+    | 募集一覧
+  .ui.relaxed.divided.items
+    = render @recruitments

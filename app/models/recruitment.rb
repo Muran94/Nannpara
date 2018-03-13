@@ -14,10 +14,10 @@
 
 class Recruitment < ApplicationRecord
   belongs_to :user
-  has_many :messages
+  has_many :messages, dependent: :destroy
 
   validates :title, presence: true, length: {maximum: 100}
-  validates :description, length: {maximum: 5120}
+  validates :description, presence: true, length: {maximum: 5120}
   validates :venue, length: {maximum: 64}
   validate :_event_date_cannot_be_past
 
@@ -29,7 +29,7 @@ class Recruitment < ApplicationRecord
 
   def _event_date_cannot_be_past
     if event_date.present? && event_date < Time.zone.now
-      errors.add(:event_date, "開催日は、未来の日時のみ指定可能です。")
+      errors.add(:event_date, "開催日時に過去の日時を指定することはできません。")
     end
   end
 end
