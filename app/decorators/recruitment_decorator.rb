@@ -7,10 +7,6 @@ module RecruitmentDecorator
     _format_date_time(event_date)
   end
 
-  def format_user_name
-    user.present? ? user.name : "南原さん"
-  end
-
   private
 
   def _format_date_time(date_time)

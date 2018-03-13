@@ -25,6 +25,11 @@ GEM
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
     active_decorator (1.0.0)
+    active_decorator-rspec (0.0.9)
+      actionpack
+      active_decorator
+      activesupport
+      rspec (>= 3.0)
     activejob (5.1.5)
       activesupport (= 5.1.5)
       globalid (>= 0.3.6)
@@ -282,6 +287,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_decorator
+  active_decorator-rspec
   annotate
   byebug
   capybara (~> 2.13)
