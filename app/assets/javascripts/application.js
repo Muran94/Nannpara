@@ -16,6 +16,5 @@
 
 // Loads all Semantic javascripts
 //= require semantic-ui
-//= require semantic_ui_calendar
 
 //= require_tree .
