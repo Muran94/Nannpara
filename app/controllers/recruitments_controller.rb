@@ -55,6 +55,7 @@ class RecruitmentsController < ApplicationController
       :title,
       :description,
       :event_date,
+      :prefecture_code,
       :venue
     )
   end

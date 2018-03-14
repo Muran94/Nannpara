@@ -21,6 +21,7 @@ gem 'active_decorator'
 gem 'annotate'
 gem 'semantic-ui-sass'
 gem 'active_decorator-rspec'
+gem 'jp_prefecture'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

@@ -55,6 +55,35 @@ RSpec.describe Recruitment, type: :model do
       end
     end
 
+    context "prefecture_code" do
+      context "presenceチェック" do
+        it "prefecture_codeが 空 か nil の場合バリデーションに引っかかる" do
+          aggregate_failures do
+            expect(build(:recruitment, prefecture_code: "").valid?).to be_falsy
+            expect(build(:recruitment, prefecture_code: nil).valid?).to be_falsy
+          end
+        end
+      end
+
+      context "inclusionチェック" do
+        it "prefecture_codeが 1 から 47 のどれにも含まれない場合バリデーションに引っかかる" do
+          aggregate_failures do
+            expect(build(:recruitment, prefecture_code: 0).valid?).to be_falsy
+            expect(build(:recruitment, prefecture_code: "0").valid?).to be_falsy
+            expect(build(:recruitment, prefecture_code: 48).valid?).to be_falsy
+            expect(build(:recruitment, prefecture_code: "48").valid?).to be_falsy
+            expect(build(:recruitment, prefecture_code: "よんじゅうはち").valid?).to be_falsy
+          end
+        end
+        it "prefecture_codeが 1 から 47 までのどれかの値であればバリデーションに引っかからない" do
+          aggregate_failures do
+            expect(build(:recruitment, prefecture_code: 13).valid?).to be_truthy
+            expect(build(:recruitment, prefecture_code: "13").valid?).to be_truthy
+          end
+        end
+      end
+    end
+
     context "venue" do
       context "lengthチェック" do
         it "venueの長さが 65文字以上 ならバリデーションに引っかかる" do
