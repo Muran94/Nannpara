@@ -13,6 +13,8 @@
 #
 
 class Recruitment < ApplicationRecord
+  include JpPrefecture
+
   belongs_to :user
   has_many :messages, dependent: :destroy
 
@@ -20,6 +22,8 @@ class Recruitment < ApplicationRecord
   validates :description, presence: true, length: {maximum: 5120}
   validates :venue, length: {maximum: 64}
   validate :_event_date_cannot_be_past
+
+  jp_prefecture :prefecture_code
 
   def owner?(current_user)
     current_user.id == user_id

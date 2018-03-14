@@ -4,8 +4,6 @@
       = image_tag("no_user_image.png", class: "ui rounded mini image")
     .browse.item
       b= @recruitment.user.name
-    .item(style="color: #999999; font-size: 12px; margin-left: 15px;")
-      = %(#{@recruitment.format_created_at}に更新)
 
     - if current_user && @recruitment.owner?(current_user)
       .ui.right.dropdown.item
@@ -32,7 +30,10 @@
       h5.ui.header.dividing
         = semantic_icon("map marker alternate")
         .content 開催場所
-      p= @recruitment.venue
+      p= @recruitment.format_venue
+
+  div(style="color: #bbb; font-size: 12px; text-align: right; margin-top: 25px;")
+    = %(#{@recruitment.format_created_at}に更新)
 
 
 .ui.segment.basic.bg-white
