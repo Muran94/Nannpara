@@ -1,6 +1,6 @@
 // How to use: https://github.com/mdehoog/Semantic-UI-Calendar
 
-$(function() {
+$(document).on('turbolinks:load', function() {
   $('.ui.calendar').calendar({
     type: 'datetime',
     minDate: new Date(),
