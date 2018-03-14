@@ -24,10 +24,10 @@
               | ログアウト
       - else
         .item
-          = link_to new_user_registration_path, class: "ui button orange" do
-            = semantic_icon("edit")
-            | 会員登録
-        .item
           = link_to new_user_session_path do
             = semantic_icon("sign in alternate")
             | ログイン
+        .item
+          = link_to new_user_registration_path, class: "ui button orange" do
+            = semantic_icon("edit")
+            | 会員登録（無料）
