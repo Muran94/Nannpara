@@ -29,8 +29,14 @@
     .column
       h5.ui.header.dividing
         = semantic_icon("map marker alternate")
+        .content 都道府県
+      p= @recruitment.prefecture.name
+
+    .column
+      h5.ui.header.dividing
+        = semantic_icon("map map outline")
         .content 開催場所
-      p= @recruitment.format_venue
+      p= @recruitment.venue
 
   div(style="color: #bbb; font-size: 12px; text-align: right; margin-top: 25px;")
     = %(#{@recruitment.format_created_at}に更新)
