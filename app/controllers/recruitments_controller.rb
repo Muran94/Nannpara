@@ -6,7 +6,7 @@ class RecruitmentsController < ApplicationController
   end
 
   def show
-    @messages = @recruitment.messages.order("created_at ASC")
+    @messages = @recruitment.messages.includes(:user).order("created_at ASC")
     @new_message = @recruitment.messages.build
   end
 
