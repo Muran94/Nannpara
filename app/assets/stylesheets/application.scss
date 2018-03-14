@@ -26,3 +26,7 @@ body {
   margin: 5em 0;
 }
 .bg-white {background: #fff !important;}
+.omit-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
