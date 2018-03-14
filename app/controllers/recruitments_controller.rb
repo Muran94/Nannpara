@@ -39,7 +39,7 @@ class RecruitmentsController < ApplicationController
   end
 
   def destroy
-    @recruitment.delete
+    @recruitment.destroy
     flash[:success] = "募集記事の削除が完了しました。"
     redirect_to root_path
   end
