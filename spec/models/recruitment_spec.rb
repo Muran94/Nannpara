@@ -86,12 +86,12 @@ RSpec.describe Recruitment, type: :model do
 
     context "venue" do
       context "lengthチェック" do
-        it "venueの長さが 65文字以上 ならバリデーションに引っかかる" do
-          expect(build(:recruitment, venue: "*" * 65).valid?).to be_falsy
+        it "venueの長さが 33文字以上 ならバリデーションに引っかかる" do
+          expect(build(:recruitment, venue: "*" * 33).valid?).to be_falsy
         end
-        it "venueの長さが 64文字以下 ならバリデーションに引っかからない" do
-          expect(build(:recruitment, venue: "*" * 64).valid?).to be_truthy
-          expect(build(:recruitment, venue: "*" * 63).valid?).to be_truthy
+        it "venueの長さが 32文字以下 ならバリデーションに引っかからない" do
+          expect(build(:recruitment, venue: "*" * 32).valid?).to be_truthy
+          expect(build(:recruitment, venue: "*" * 31).valid?).to be_truthy
         end
       end
     end
