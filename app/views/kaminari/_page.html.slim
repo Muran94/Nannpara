@@ -1,5 +1,5 @@
 - if page.current?
-  = link_to url, title: page, class: 'item active orange', remote: remote do
+  span.pagination-current-page-button.item
     = page
 - else
   = link_to url, title: page, class: 'item', remote: remote do
