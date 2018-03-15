@@ -16,7 +16,7 @@
             i.trash.alternate.icon
             | 削除
 
-  h2.ui.header.dividing(style="word-wrap: break-word;")= @recruitment.title
+  h2.ui.header.dividing.break-word= @recruitment.title
   p(style="min-height: 100px; margin-bottom: 30px;")= @recruitment.description
 
   .ui.equal.width.grid
@@ -36,7 +36,7 @@
       h5.ui.header.dividing
         = semantic_icon("map map outline")
         .content 開催場所
-      p= @recruitment.venue
+      p.break-word= @recruitment.venue
 
   div(style="color: #bbb; font-size: 12px; text-align: right; margin-top: 25px;")
     = %(#{@recruitment.format_created_at}に更新)
