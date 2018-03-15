@@ -44,6 +44,9 @@
 
 .ui.segment.basic.bg-white
   = render "messages/messages", messages: @messages
+.ui.center.aligned.container
+  = paginate @messages
+.ui.segment.basic.bg-white
   = render "messages/form"
 
   javascript:

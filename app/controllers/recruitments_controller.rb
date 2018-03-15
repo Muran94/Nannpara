@@ -2,11 +2,11 @@ class RecruitmentsController < ApplicationController
   before_action :_get_recruitment, only: [:show, :edit, :update, :destroy]
 
   def index
-    @recruitments = Recruitment.all.order("event_date ASC")
+    @recruitments = Recruitment.all.order("event_date ASC").page(params[:page])
   end
 
   def show
-    @messages = @recruitment.messages.includes(:user).order("created_at ASC")
+    @messages = @recruitment.messages.includes(:user).order("created_at ASC").page(params[:page])
     @new_message = @recruitment.messages.build
   end
 
