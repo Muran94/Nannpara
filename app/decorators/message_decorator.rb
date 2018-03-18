@@ -7,7 +7,7 @@ module MessageDecorator
     if user.present? && user.image.present?
       user.image.thumb.url
     else
-      "no_user_image.png"
+      'no_user_image.png'
     end
   end
 end
