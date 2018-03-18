@@ -18,14 +18,14 @@ module UserDecorator
   end
 
   def format_image_url(size = nil)
-    return "no_user_image.png" if image.blank?
+    return 'no_user_image.png' if image.blank?
     case size
     when nil
       image_url
-    when "thumb"
+    when 'thumb'
       image.thumb.url
     else
-      "no_user_image.png"
+      'no_user_image.png'
     end
   end
 end

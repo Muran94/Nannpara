@@ -25,6 +25,7 @@ gem 'jp_prefecture'
 gem 'kaminari'
 gem 'carrierwave'
 gem 'rmagick'
+gem 'seedbank'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

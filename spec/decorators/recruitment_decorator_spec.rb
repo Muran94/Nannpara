@@ -13,7 +13,7 @@ describe RecruitmentDecorator do
   end
 
   describe %(#thumb_image_url) do
-    let(:user) {create(:user)}
+    let(:user) { create(:user) }
     let(:recruitment) { create(:recruitment, user: user).extend RecruitmentDecorator }
 
     it %(userが画像を持っていれば その画像URL を、持っていなければ "no_user_image.png" を返す) do
@@ -21,7 +21,7 @@ describe RecruitmentDecorator do
         expect(recruitment.users_thumb_image_url).to eq recruitment.user.image.thumb.url
         user.image = nil
         user.save
-        expect(recruitment.users_thumb_image_url).to eq "no_user_image.png"
+        expect(recruitment.users_thumb_image_url).to eq 'no_user_image.png'
       end
     end
   end
