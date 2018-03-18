@@ -1,9 +1,11 @@
 .ui.segment.basic.bg-white
   .ui.text.menu(style="margin-top: 0;")
     .item
-      = image_tag("no_user_image.png", class: "ui rounded mini image")
-    .browse.item
-      b= @recruitment.user.name
+      = link_to profile_account_path(@recruitment.user) do
+          = image_tag(@recruitment.user.format_image_url("thumb"), class: "ui rounded mini image")
+      .browse.item
+        = link_to profile_account_path(@recruitment.user), style: "text-decoration: none; color: #212121" do
+          b= @recruitment.user.name
 
     - if current_user && @recruitment.owner?(current_user)
       .ui.right.dropdown.item

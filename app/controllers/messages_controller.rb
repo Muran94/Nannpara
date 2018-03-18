@@ -6,11 +6,11 @@ class MessagesController < ApplicationController
     @message.user_id = current_user.id if current_user
 
     if @message.save
-      flash[:success] = "メッセージの送信に成功しました。"
+      flash[:success] = 'メッセージの送信に成功しました。'
       redirect_to @recruitment
     else
-      flash[:error] = "メッセージの送信に失敗しました。"
-      render "recruitments/new"
+      flash[:error] = 'メッセージの送信に失敗しました。'
+      render 'recruitments/new'
     end
   end
 

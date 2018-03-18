@@ -1,6 +1,9 @@
 .item
   = link_to "#", class: "ui mini rounded image" do
-    = image_tag("no_user_image.png")
+    - if recruitment.user.present? && recruitment.user.image.present?
+      = image_tag(recruitment.user.image.thumb.url)
+    - else
+      = image_tag("no_user_image.png")
   .content.omit-overflow
     = link_to recruitment.title, recruitment, class: "header"
     .extra

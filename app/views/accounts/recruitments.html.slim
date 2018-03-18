@@ -1,0 +1,21 @@
+= render "tab", user: @user
+
+.ui.segment.basic.bg-white
+  - if account_owner?(@user)
+    =link_to new_recruitment_path, class: "ui orange right floated mini basic button"
+      = semantic_icon "pencil alternate"
+      | 募集する
+  br
+  .ui.divider
+
+  .ui.relaxed.divided.items
+    = render partial: "recruitments/recruitment", collection: @recruitments
+
+.ui.center.aligned.container
+  = paginate @recruitments
+
+scss:
+  .item.active {
+    background: #fff !important;
+    font-weight: bold !important;
+  }

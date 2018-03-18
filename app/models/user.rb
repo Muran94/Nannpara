@@ -16,16 +16,24 @@
 #  name                   :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  introduction           :text
+#  experience             :string
+#  age                    :integer
+#  prefecture_code        :integer
 #
 
 class User < ApplicationRecord
+  include JpPrefecture
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :timeoutable
 
+  jp_prefecture :prefecture_code
+  mount_uploader :image, ProfileImageUploader
+
   has_many :recruitments, dependent: :destroy
   has_many :messages
 
-  validates :name, presence: true, length: {maximum: 64}
+  validates :name, presence: true, length: { maximum: 64 }
 end

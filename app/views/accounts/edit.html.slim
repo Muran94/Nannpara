@@ -1,0 +1,30 @@
+.ui.segment.basic.bg-white
+  h3.ui.header.dividing
+    = semantic_icon "user"
+    | プロフィール
+  = form_for(@current_user, url: accounts_path, html: {method: :patch, class: "ui form"}) do |f|
+    .field
+      = f.label :image, "プロフィール画像"
+      = f.file_field :image
+
+    .field
+      = f.label :name, "ユーザー名"
+      = f.text_field :name
+    .field
+      = f.label :introduction, "自己紹介文"
+      = f.text_area :introduction, placeholder: "主に新宿で活動しています！よろしくお願いします！"
+
+    .fields
+      .field.six.wide
+        = f.label :age, "年齢"
+        = f.text_field :age, placeholder: "18歳から100歳まで入力可能"
+
+      .field.six.wide
+        = f.label :prefecture_code, "活動範囲"
+        = f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, {prompt: "選択してください"}, class: "ui fluid dropdown"
+
+      .field.six.wide
+        = f.label :experience, "ナンパ歴"
+        = f.text_field :experience, placeholder: "3年"
+
+    = f.submit "プロフィール更新", class: "ui fluid largered submit button orange"

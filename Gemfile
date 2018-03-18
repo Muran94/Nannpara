@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
 end
 
@@ -23,6 +23,8 @@ gem 'semantic-ui-sass'
 gem 'active_decorator-rspec'
 gem 'jp_prefecture'
 gem 'kaminari'
+gem 'carrierwave'
+gem 'rmagick'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -41,7 +43,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'guard-rspec', require: false # guardでrspecを動かす
   gem 'terminal-notifier'
-  gem 'terminal-notifier-guard'  # デスクトップ通知を行う
+  gem 'terminal-notifier-guard' # デスクトップ通知を行う
   gem 'bullet'
 end
 
