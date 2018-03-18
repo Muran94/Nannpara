@@ -16,6 +16,10 @@
 #  name                   :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  introduction           :text
+#  experience             :string
+#  age                    :integer
+#  prefecture_code        :integer
 #
 
 require 'test_helper'

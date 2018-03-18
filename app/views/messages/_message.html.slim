@@ -1,8 +1,15 @@
 .comment
-  a.avatar
-    = image_tag "no_user_image.png"
+  - if message.user
+    = link_to profile_account_path(message.user), class: "avatar" do
+      = image_tag message.user.format_image_url("thumb")
+  - else
+    span.avatar
+      = image_tag "no_user_image.png"
   .content
-    span.author= message.format_user_name
+    - if message.user
+      = link_to message.format_user_name, profile_account_path(message.user), class: "author"
+    - else
+      span.author= message.format_user_name
     .metadata
       span.data= message.created_at.strftime("%Y年%m月%d日 %H:%M")
     .text

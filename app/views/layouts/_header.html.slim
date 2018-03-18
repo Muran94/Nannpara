@@ -10,9 +10,9 @@
             | 募集する
         .ui.simple.dropdown.item
           = image_tag("no_user_image.png", class: "ui image mini rounded")
-          i.dropdown.icon
+          = semantic_icon("dropdown")
           .menu
-            = link_to "#", class: "item" do
+            = link_to profile_account_path(current_user), class: "item" do
               = semantic_icon("user")
               | マイページ
             .divider
