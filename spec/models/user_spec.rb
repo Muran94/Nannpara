@@ -62,11 +62,13 @@ RSpec.describe User, type: :model do
             expect(build(:user, age: User::MAXIMUM_AGE + 1).valid?).to be_falsy
           end
         end
-        it "ageが#{User::MINIMUM_AGE}歳以上、#{User::MAXIMUM_AGE}歳未満であればバリデーションに引っかからない" do
+        it "ageが #{User::MINIMUM_AGE}歳以上、#{User::MAXIMUM_AGE}歳以下、または、空（"" or nil) であればバリデーションに引っかからない" do
           aggregate_failures do
             expect(build(:user, age: User::MINIMUM_AGE).valid?).to be_truthy
             expect(build(:user, age: User::MINIMUM_AGE + 10).valid?).to be_truthy
             expect(build(:user, age: User::MAXIMUM_AGE).valid?).to be_truthy
+            expect(build(:user, age: "").valid?).to be_truthy
+            expect(build(:user, age: nil).valid?).to be_truthy
           end
         end
       end
