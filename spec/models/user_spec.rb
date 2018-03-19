@@ -53,5 +53,23 @@ RSpec.describe User, type: :model do
         end
       end
     end
+
+    context 'age' do
+      context 'inclusionチェック' do
+        it "ageが#{User::MINIMUM_AGE}歳から#{User::MAXIMUM_AGE}歳に含まれない場合はバリデーションに引っかかる" do
+          aggregate_failures do
+            expect(build(:user, age: User::MINIMUM_AGE - 1).valid?).to be_falsy
+            expect(build(:user, age: User::MAXIMUM_AGE + 1).valid?).to be_falsy
+          end
+        end
+        it "ageが#{User::MINIMUM_AGE}歳以上、#{User::MAXIMUM_AGE}歳未満であればバリデーションに引っかからない" do
+          aggregate_failures do
+            expect(build(:user, age: User::MINIMUM_AGE).valid?).to be_truthy
+            expect(build(:user, age: User::MINIMUM_AGE + 10).valid?).to be_truthy
+            expect(build(:user, age: User::MAXIMUM_AGE).valid?).to be_truthy
+          end
+        end
+      end
+    end
   end
 end

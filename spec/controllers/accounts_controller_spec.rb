@@ -116,7 +116,7 @@ RSpec.describe AccountsController, type: :controller do
       create(
         :user,
         introduction: 'あああ',
-        age: 10,
+        age: User::MINIMUM_AGE,
         prefecture_code: 13,
         experience: '1年'
       )
@@ -143,7 +143,7 @@ RSpec.describe AccountsController, type: :controller do
 
       it 'プロフィールの更新が完了する && flash[:sucess]の値が正しい && マイページにリダイレクト' do
         aggregate_failures do
-          expect(user.age).to eq 10 # 更新前の値を検証
+          expect(user.age).to eq User::MINIMUM_AGE # 更新前の値を検証
           patch :update, params: params
           user.reload
           expect(user.introduction).to eq new_introduction

@@ -32,8 +32,12 @@ class User < ApplicationRecord
   jp_prefecture :prefecture_code
   mount_uploader :image, ProfileImageUploader
 
+  MINIMUM_AGE = 18
+  MAXIMUM_AGE = 100
+
   has_many :recruitments, dependent: :destroy
   has_many :messages, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 64 }
+  validates :age, inclusion: { in: MINIMUM_AGE..MAXIMUM_AGE }
 end
