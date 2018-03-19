@@ -39,5 +39,7 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 64 }
+  validates :introduction, length: { maximum: 5120 }
   validates :age, allow_blank: true, inclusion: { in: MINIMUM_AGE..MAXIMUM_AGE }
+  validates :experience, length: { maximum: 32 }
 end
