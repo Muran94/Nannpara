@@ -51,8 +51,6 @@
         p ●●●●●●●●
         = link_to "変更", edit_password_accounts_path
 
-scss:
-  .item.active {
-    background: #fff !important;
-    font-weight: bold !important;
-  }
+  .ui.center.aligned.segment.basic
+    | 退会は
+    = link_to "こちら", user_registration_path, method: :delete, data: {confirm: "本当に退会しますか？\n一度退会するとアカウントを復元することはできません。"}
