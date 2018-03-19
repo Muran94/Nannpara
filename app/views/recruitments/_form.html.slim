@@ -1,4 +1,6 @@
 = form_with model: @recruitment, html: {class: "ui form"} do |f|
+  .ui.error.message
+
   .field.required
     = f.label :title, "タイトル"
     = f.text_field :title, placeholder: "渋谷ハチ公前。本日の18時開始。定員なし。"

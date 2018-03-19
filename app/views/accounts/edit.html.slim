@@ -3,6 +3,8 @@
     = semantic_icon "user"
     | プロフィール
   = form_for(@current_user, url: accounts_path, html: {method: :patch, class: "ui form"}) do |f|
+    .ui.error.message
+
     .field
       = f.label :image, "プロフィール画像"
       = f.file_field :image

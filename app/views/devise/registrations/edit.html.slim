@@ -4,6 +4,7 @@
     | メールアドレス変更
   = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put, class: "ui form"}) do |f|
     = devise_error_messages!
+    .ui.error.message
 
     h4.ui.header 現在のメールアドレス
     p= resource.email
