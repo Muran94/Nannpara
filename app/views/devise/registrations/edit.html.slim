@@ -8,7 +8,7 @@
     h4.ui.header 現在のメールアドレス
     p= resource.email
 
-    .field
+    .field.required
       = f.label :email, "新しいメールアドレス"
       = f.email_field :email, value: "", placeholder: "sample@gmail.com"
 

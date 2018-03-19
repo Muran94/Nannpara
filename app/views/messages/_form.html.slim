@@ -1,5 +1,5 @@
 = form_with model: @new_message, url: recruitment_messages_path(@recruitment, @new_message), html: {class: "ui form"} do |f|
-  .field
+  .field.required
     = f.label :message, "メッセージ"
     = f.text_area :message, placeholder: "例）参加希望です！"
 

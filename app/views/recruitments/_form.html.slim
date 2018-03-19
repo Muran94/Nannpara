@@ -1,24 +1,24 @@
 = form_with model: @recruitment, html: {class: "ui form"} do |f|
-  .field
+  .field.required
     = f.label :title, "タイトル"
     = f.text_field :title, placeholder: "渋谷ハチ公前。本日の18時開始。定員なし。"
 
-  .field
+  .field.required
     = f.label :description, "募集内容"
     = f.text_area :description, placeholder: "よろしくお願い致します。"
 
   .fields
-    .field.six.wide.ui.calendar
+    .field.six.wide.ui.calendar.required
       = f.label :event_date, "開催日時"
       .ui.input.right.icon
         i.circular.calendar.icon
         = f.text_field :event_date, placeholder: %(#{Time.zone.now.strftime("%Y/%m/%d %H:%M")}), style: "cursor: pointer;"
 
-    .field.six.wide
+    .field.six.wide.required
       = f.label "都道府県"
       = f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, {prompt: "選択してください"}, class: "ui fluid dropdown"
 
-    .field.six.wide
+    .field.six.wide.required
       = f.label "開催場所"
       = f.text_field :venue, placeholder: "渋谷ハチ公前"
 
