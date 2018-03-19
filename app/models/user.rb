@@ -33,7 +33,7 @@ class User < ApplicationRecord
   mount_uploader :image, ProfileImageUploader
 
   has_many :recruitments, dependent: :destroy
-  has_many :messages
+  has_many :messages, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 64 }
 end
