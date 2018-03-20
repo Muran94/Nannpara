@@ -14,11 +14,13 @@ html
     .ui.main.container
       = render "layouts/flash"
 
-      .ui.grid
-        .eleven.wide.column
-          = yield
-        .five.wide.column
-          .ui.segment.basic.bg-white
-            aaa
+      .ui.segment.basic.bg-white
+        = yield
+
+      / .ui.grid
+      /   .eleven.wide.column
+      /     = yield
+      /   .five.wide.column
+      /     .ui.segment.basic.bg-white
 
     = render "layouts/footer"
