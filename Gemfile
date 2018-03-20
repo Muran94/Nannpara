@@ -35,6 +35,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'rails-controller-testing'
+  gem 'test-queue' # Rspecの並列実行を実現するためのGem
 end
 
 group :development do

@@ -7,8 +7,8 @@ describe MessageDecorator do
 
   describe '#format_user_name' do
     context 'userを持つ場合（ログインユーザーによる投稿）' do
-      let(:user) { build(:user) }
-      let(:message) { build(:message, user: user).extend MessageDecorator }
+      let(:user) { build_stubbed(:user) }
+      let(:message) { build_stubbed(:message, user: user).extend MessageDecorator }
 
       it 'ユーザー名を返す' do
         expect(message.format_user_name).to eq message.user.name
@@ -16,7 +16,7 @@ describe MessageDecorator do
     end
 
     context 'userを持たない場合（未ログインユーザーによる投稿）' do
-      let(:message) { build(:message).extend MessageDecorator }
+      let(:message) { build_stubbed(:message).extend MessageDecorator }
 
       it '「南原さん」を返す' do
         expect(message.format_user_name).to eq '南原さん'
