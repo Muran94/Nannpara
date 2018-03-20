@@ -1,12 +1,9 @@
 require 'rails_helper'
 
 describe UserDecorator do
-  let(:user) { build(:user).extend UserDecorator }
-  subject { user }
-
   describe %(#format_introduction) do
-    let(:user_with_introduction) { build(:user, introduction: '初心者です！よろしく！').extend UserDecorator }
-    let(:user_without_introduction) { build(:user, introduction: '').extend UserDecorator }
+    let(:user_with_introduction) { build_stubbed(:user, introduction: '初心者です！よろしく！').extend UserDecorator }
+    let(:user_without_introduction) { build_stubbed(:user, introduction: '').extend UserDecorator }
 
     it %(introductionが 空 なら "#{UserDecorator::UNSET_MESSAGE}"、そうでなければintroductionを返す) do
       aggregate_failures do
@@ -17,8 +14,8 @@ describe UserDecorator do
   end
 
   describe %(#format_age) do
-    let(:user_with_age) { build(:user, age: 20).extend UserDecorator }
-    let(:user_without_age) { build(:user, age: nil).extend UserDecorator }
+    let(:user_with_age) { build_stubbed(:user, age: 20).extend UserDecorator }
+    let(:user_without_age) { build_stubbed(:user, age: nil).extend UserDecorator }
 
     it %(ageが 空 なら "#{UserDecorator::UNSET_MESSAGE}"、そうでなければageを返す) do
       aggregate_failures do
@@ -29,8 +26,8 @@ describe UserDecorator do
   end
 
   describe %(#format_prefecture) do
-    let(:user_with_prefecture_code) { build(:user, prefecture_code: 13).extend UserDecorator }
-    let(:user_without_prefecture_code) { build(:user, prefecture_code: nil).extend UserDecorator }
+    let(:user_with_prefecture_code) { build_stubbed(:user, prefecture_code: 13).extend UserDecorator }
+    let(:user_without_prefecture_code) { build_stubbed(:user, prefecture_code: nil).extend UserDecorator }
 
     it %(prefecture_codeが 空 なら "#{UserDecorator::UNSET_MESSAGE}"、そうでなければprefecture.nameを返す) do
       aggregate_failures do
@@ -41,8 +38,8 @@ describe UserDecorator do
   end
 
   describe %(#format_experience) do
-    let(:user_with_experience) { build(:user, experience: '3年').extend UserDecorator }
-    let(:user_without_experience) { build(:user, experience: nil).extend UserDecorator }
+    let(:user_with_experience) { build_stubbed(:user, experience: '3年').extend UserDecorator }
+    let(:user_without_experience) { build_stubbed(:user, experience: nil).extend UserDecorator }
 
     it %(experienceが 空 なら "#{UserDecorator::UNSET_MESSAGE}"、そうでなければexperienceを返す) do
       aggregate_failures do
