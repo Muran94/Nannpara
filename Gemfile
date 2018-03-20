@@ -53,6 +53,7 @@ group :test do
   gem 'database_cleaner', '~> 1.3.0' # テスト実行後にDBをクリア
   gem 'simplecov', require: false # テストカバレッジ(テストカバー率)
   gem 'email_spec' # メール送信系のカスタムマッチャを提供
+  gem 'chromedriver-helper'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
