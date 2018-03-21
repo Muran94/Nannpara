@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'CreateRecruitment', type: :system do
+RSpec.describe 'ShowRecruitment', type: :system do
   let(:user) {create(:user)}
   let(:other_user) {create(:user)}
   let(:recruitment) {create(:recruitment, user: user)}
