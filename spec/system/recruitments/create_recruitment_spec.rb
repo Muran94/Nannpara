@@ -8,15 +8,13 @@ RSpec.describe 'CreateRecruitment', type: :system do
   let(:prefecture) {"東京都"}
   let(:venue) {"新宿歌舞伎町"}
 
-  before do
-    login_as(user, :scope => :user)
-  end
-
   it %(募集記事作成テスト - 正常系) do
-    # 募集作成ページに遷移
+    # 募集記事作成ページに遷移
+    login_as(user, :scope => :user)
     visit new_recruitment_path
 
     # フォームの入力
+    sleep 0.1
     fill_in "recruitment[title]", with: title
     fill_in "recruitment[description]", with: description
     fill_in "recruitment[event_date]", with: event_date.strftime("%Y/%m/%d %H:%M")
@@ -47,11 +45,13 @@ RSpec.describe 'CreateRecruitment', type: :system do
     expect(page).to have_field "message[message]"
   end
 
-  it %(募集記事作成テスト - 異常系) do
+  it %(募集記事作成テスト - 異常系1: バリデーションに引っかかる) do
     # 募集作成ページに遷移
+    login_as(user, :scope => :user)
     visit new_recruitment_path
 
     # フォームを入力せずに作成ボタンをクリック
+    sleep 0.1
     click_button "作成"
 
     # 遷移先のページが正しいか確認
@@ -66,5 +66,17 @@ RSpec.describe 'CreateRecruitment', type: :system do
 
     # Recruitmentが作成されていないことを確認
     expect(Recruitment.count).to eq 0
+  end
+
+  it %(募集記事作成テスト - 異常系1: バリデーションに引っかかる) do
+    # 募集作成ページに遷移
+    visit new_recruitment_path
+
+    # ログイン画面にリダイレクトされていることを確認
+    sleep 0.1
+    expect(current_path).to eq new_user_session_path
+
+    # エラーメッセージが表示されていることを確認
+    expect(page).to have_content "アカウント登録もしくはログインしてください。"
   end
 end

@@ -1,5 +1,7 @@
 class RecruitmentsController < ApplicationController
   before_action :_get_recruitment, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :_redirect_unless_owner, only: [:edit, :update, :destroy]
 
   def index
     @recruitments = Recruitment.all.order('event_date ASC').includes(:user).page(params[:page])
@@ -25,11 +27,12 @@ class RecruitmentsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+  end
 
   def update
     if @recruitment.update(_recruitment_params)
-      flash[:success] = '募集記事の更新に完了しました。'
+      flash[:success] = '募集記事の更新が完了しました。'
       redirect_to @recruitment
     else
       flash[:error] = '募集記事の更新に失敗しました。'
@@ -47,6 +50,13 @@ class RecruitmentsController < ApplicationController
 
   def _get_recruitment
     @recruitment = Recruitment.find(params[:id])
+  end
+
+  def _redirect_unless_owner
+    unless @recruitment.user == current_user
+      flash[:error] = "不正な操作です。もう一度最初からやり直してください。"
+      redirect_to root_path
+    end
   end
 
   def _recruitment_params
