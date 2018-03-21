@@ -1,55 +1,74 @@
-.ui.segment.basic.bg-white
-  .ui.text.menu(style="margin-top: 0;")
-    .item
-      = link_to profile_account_path(@recruitment.user), id: "recruitment-owner-profile-image" do
-          = image_tag(@recruitment.user.format_image_url("thumb"), class: "ui rounded mini image")
-      .browse.item
-        = link_to profile_account_path(@recruitment.user), id: "recruitment-owner-profile-name" do
-          b= @recruitment.user.name
-
-    - if current_user && @recruitment.owner?(current_user)
-      .ui.right.dropdown.item
-        i.ellipsis.horizontal.icon#recruitment-menu
-        .menu
-          = link_to edit_recruitment_path(@recruitment), class: "item", id: "recruitment-edit-link" do
-            i.icon.edit
-            | 編集
-          = link_to recruitment_path(@recruitment), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "item", id: "recruitment-delete-link"  do
-            i.trash.alternate.icon
-            | 削除
-
-  h2.ui.header.dividing.break-word= @recruitment.title
-  p(style="min-height: 100px; margin-bottom: 30px;")= @recruitment.description
-
-  .ui.equal.width.grid
+.ui.grid.stackable
+  .row
     .column
-      h5.ui.header.dividing
-        = semantic_icon("calendar alternate outline")
-        .content 開催日時
-      p= @recruitment.format_event_date
+      .ui.segment.basic.bg-white
+        .ui.grid
+          .row.middle.aligned
+            // 投稿者画像と投稿者ユーザー名
+            // 右側に投稿の編集・削除メニュー
+            .column.without-right-padding.one.wide.computer.tablet.only.two.wide.mobile.only
+              = link_to profile_account_path(@recruitment.user), id: "recruitment-owner-profile-image" do
+                  = image_tag(@recruitment.user.format_image_url("thumb"), class: "ui circular image")
+            .column.ten.wide
+              = link_to profile_account_path(@recruitment.user), id: "recruitment-owner-profile-name" do
+                b= @recruitment.user.name
+            .right.floated.right.aligned.column.one.wide.computer.tablet.two.wide.mobile
+              - if current_user && @recruitment.owner?(current_user)
+                .ui.dropdown.right.top.pointing
+                  = semantic_icon("ellipsis horizontal", id: "recruitment-menu")
+                  .menu
+                    = link_to edit_recruitment_path(@recruitment), class: "item", id: "recruitment-edit-link" do
+                      = semantic_icon("edit")
+                      | 編集
+                    = link_to recruitment_path(@recruitment), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "item", id: "recruitment-delete-link"  do
+                      = semantic_icon("trash alternate")
+                      | 削除
+        .ui.grid.stackable
+          .column.sixteen.wide
+            // 投稿タイトルと投稿本文
+            h2.ui.header.dividing.break-word= @recruitment.title
+            p(style="min-height: 100px; margin-bottom: 30px;")= @recruitment.description
+          .three.column.row
+            .column
+              // 開催日時
+              h5.ui.header.dividing
+                = semantic_icon("calendar alternate outline")
+                .content 開催日時
+              p= @recruitment.format_event_date
+            .column
+              // 都道府県
+              h5.ui.header.dividing
+                = semantic_icon("map marker alternate")
+                .content 都道府県
+              p= @recruitment.prefecture.name
+            .column
+              // 開催場所
+              h5.ui.header.dividing
+                = semantic_icon("map map outline")
+                .content 開催場所
+              p.break-word= @recruitment.venue
+          .column.sixteen.wide
+            // 右側に投稿の作成日時
+            div(style="color: #bbb; font-size: 12px; text-align: right;")
+              = %(#{@recruitment.format_created_at}に更新)
 
+  .row
     .column
-      h5.ui.header.dividing
-        = semantic_icon("map marker alternate")
-        .content 都道府県
-      p= @recruitment.prefecture.name
+      // メッセージ一覧
+      .ui.segment.basic.bg-white
+        = render "messages/messages", messages: @messages
 
+  .row
     .column
-      h5.ui.header.dividing
-        = semantic_icon("map map outline")
-        .content 開催場所
-      p.break-word= @recruitment.venue
+      // メッセージページネーション
+      .ui.center.aligned.container
+        = paginate @messages
+  .row
+    .column
+      // メッセージフォーム
+      .ui.segment.basic.bg-white
+        = render "messages/form"
 
-  div(style="color: #bbb; font-size: 12px; text-align: right; margin-top: 25px;")
-    = %(#{@recruitment.format_created_at}に更新)
 
-
-.ui.segment.basic.bg-white
-  = render "messages/messages", messages: @messages
-.ui.center.aligned.container
-  = paginate @messages
-.ui.segment.basic.bg-white
-  = render "messages/form"
-
-  javascript:
-    $('.ui.dropdown').dropdown();
+javascript:
+  $('.ui.dropdown').dropdown();

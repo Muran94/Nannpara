@@ -17,13 +17,27 @@
 @import 'semantic-ui';
 
 body {
+  background: #F5F4F5;
+}
+.pusher {
+  background: #F5F4F5 !important;
   display: flex;
   min-height: 100vh;
   flex-direction: column;
 }
-.main.container {
+.pusher > .footer {
   flex: 1;
-  margin: 5em 0;
+}
+.main.container {
+  background: #F5F4F5;
+  margin: 6em 0 3em 0;
+}
+.column.without-right-padding {
+  padding-right: 0 !important;
+}
+.item.active {
+  background: #fff !important;
+  font-weight: bold !important;
 }
 .bg-white {background: #fff !important;}
 .omit-overflow {
@@ -37,4 +51,17 @@ body {
   background: #F2711C !important;
   color: #fff !important;
   cursor: default !important;
+}
+.open-sidebar {
+  position: fixed;
+  right: 3px !important;
+}
+
+html.ios {
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+html.ios,
+html.ios body {
+  height: initial !important;
 }

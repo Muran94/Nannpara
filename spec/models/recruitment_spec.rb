@@ -31,13 +31,13 @@ RSpec.describe Recruitment, type: :model do
       end
 
       context 'lengthチェック' do
-        it 'titleの長さが 101文字以上 ならバリデーションに引っかかる' do
-          expect(build_stubbed(:recruitment, title: '*' * 101).valid?).to be_falsy
+        it 'titleの長さが 65文字以上 ならバリデーションに引っかかる' do
+          expect(build_stubbed(:recruitment, title: '*' * (Recruitment::MAXIMUM_TITLE_LENGTH + 1)).valid?).to be_falsy
         end
-        it 'titleの長さが 100文字以下 ならバリデーションに引っかからない' do
+        it 'titleの長さが 64文字以下 ならバリデーションに引っかからない' do
           aggregate_failures do
-            expect(build_stubbed(:recruitment, title: '*' * 100).valid?).to be_truthy
-            expect(build_stubbed(:recruitment, title: '*' * 99).valid?).to be_truthy
+            expect(build_stubbed(:recruitment, title: '*' * Recruitment::MAXIMUM_TITLE_LENGTH).valid?).to be_truthy
+            expect(build_stubbed(:recruitment, title: '*' * (Recruitment::MAXIMUM_TITLE_LENGTH - 1)).valid?).to be_truthy
           end
         end
       end
@@ -57,13 +57,13 @@ RSpec.describe Recruitment, type: :model do
       end
 
       context 'lengthチェック' do
-        it 'descriptionの長さが 5121文字以上 ならバリデーションに引っかかる' do
-          expect(build_stubbed(:recruitment, description: '*' * 5121).valid?).to be_falsy
+        it 'descriptionの長さが 1025文字以上 ならバリデーションに引っかかる' do
+          expect(build_stubbed(:recruitment, description: '*' * (Recruitment::MAXIMUM_DESCRIPTION_LENGTH + 1)).valid?).to be_falsy
         end
-        it 'descriptionの長さが 5120文字以下 ならバリデーションに引っかからない' do
+        it 'descriptionの長さが 1024文字以下 ならバリデーションに引っかからない' do
           aggregate_failures do
-            expect(build_stubbed(:recruitment, description: '*' * 5120).valid?).to be_truthy
-            expect(build_stubbed(:recruitment, description: '*' * 5119).valid?).to be_truthy
+            expect(build_stubbed(:recruitment, description: '*' * Recruitment::MAXIMUM_DESCRIPTION_LENGTH).valid?).to be_truthy
+            expect(build_stubbed(:recruitment, description: '*' * (Recruitment::MAXIMUM_DESCRIPTION_LENGTH - 1)).valid?).to be_truthy
           end
         end
       end
@@ -100,12 +100,12 @@ RSpec.describe Recruitment, type: :model do
 
     context 'venue' do
       context 'lengthチェック' do
-        it 'venueの長さが 33文字以上 ならバリデーションに引っかかる' do
-          expect(build_stubbed(:recruitment, venue: '*' * 33).valid?).to be_falsy
+        it 'venueの長さが 17文字以上 ならバリデーションに引っかかる' do
+          expect(build_stubbed(:recruitment, venue: '*' * (Recruitment::MAXIMUM_VENUE_LENGTH  + 1)).valid?).to be_falsy
         end
-        it 'venueの長さが 32文字以下 ならバリデーションに引っかからない' do
-          expect(build_stubbed(:recruitment, venue: '*' * 32).valid?).to be_truthy
-          expect(build_stubbed(:recruitment, venue: '*' * 31).valid?).to be_truthy
+        it 'venueの長さが 16文字以下 ならバリデーションに引っかからない' do
+          expect(build_stubbed(:recruitment, venue: '*' * Recruitment::MAXIMUM_VENUE_LENGTH).valid?).to be_truthy
+          expect(build_stubbed(:recruitment, venue: '*' * (Recruitment::MAXIMUM_VENUE_LENGTH  - 1)).valid?).to be_truthy
         end
       end
     end

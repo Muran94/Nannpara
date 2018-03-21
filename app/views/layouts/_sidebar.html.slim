@@ -1,0 +1,24 @@
+.ui.sidebar.right.vertical.menu
+  - if current_user
+    .item
+      = link_to profile_account_path(current_user) do
+        = image_tag(current_user.thumb_image_url, class: "ui image middle aligned mini circular", style: "margin-right: 5px;")
+        | マイページ
+  - else
+    .item
+      = link_to new_user_registration_path do
+        = semantic_icon("edit")
+        | 会員登録（無料）
+    .item
+      = link_to new_user_session_path do
+        = semantic_icon("sign in alternate")
+        | ログイン
+
+  .item
+    = link_to recruitments_path do
+      = semantic_icon("rss")
+      | 募集一覧
+  .item
+    = link_to new_recruitment_path do
+      = semantic_icon("pencil alternate")
+      | 募集をかける
