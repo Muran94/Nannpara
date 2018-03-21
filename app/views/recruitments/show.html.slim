@@ -9,12 +9,12 @@
 
     - if current_user && @recruitment.owner?(current_user)
       .ui.right.dropdown.item
-        i.ellipsis.horizontal.icon
+        i.ellipsis.horizontal.icon#recruitment-menu
         .menu
-          = link_to edit_recruitment_path(@recruitment), class: "item" do
+          = link_to edit_recruitment_path(@recruitment), class: "item", id: "recruitment-edit-link" do
             i.icon.edit
             | 編集
-          = link_to recruitment_path(@recruitment), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "item" do
+          = link_to recruitment_path(@recruitment), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "item", id: "recruitment-delete-link"  do
             i.trash.alternate.icon
             | 削除
 
