@@ -35,10 +35,12 @@ class User < ApplicationRecord
   MINIMUM_AGE = 18
   MAXIMUM_AGE = 100
 
+  MAXIMUM_NAME_LENGTH = 64
+
   has_many :recruitments, dependent: :destroy
   has_many :messages, dependent: :destroy
 
-  validates :name, presence: true, length: { maximum: 64 }
+  validates :name, presence: true, length: { maximum: MAXIMUM_NAME_LENGTH }
   validates :introduction, length: { maximum: 5120 }
   validates :age, allow_blank: true, inclusion: { in: MINIMUM_AGE..MAXIMUM_AGE }
   validates :experience, length: { maximum: 32 }

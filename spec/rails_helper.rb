@@ -33,6 +33,13 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+
+  config.before(:each) do |example|
+    if example.metadata[:type] == :system
+      driven_by :selenium_chrome_headless, screen_size: [1400, 1400]
+    end
+  end
+
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
