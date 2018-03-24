@@ -19,7 +19,7 @@ describe UserDecorator do
 
     it %(ageが 空 なら "#{UserDecorator::UNSET_MESSAGE}"、そうでなければageを返す) do
       aggregate_failures do
-        expect(user_with_age.format_age).to eq user_with_age.age
+        expect(user_with_age.format_age).to eq "#{user_with_age.age}歳"
         expect(user_without_age.format_age).to eq UserDecorator::UNSET_MESSAGE
       end
     end

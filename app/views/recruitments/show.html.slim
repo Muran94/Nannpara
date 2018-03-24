@@ -1,10 +1,10 @@
 .ui.segment.basic.bg-white
   .ui.text.menu(style="margin-top: 0;")
     .item
-      = link_to profile_account_path(@recruitment.user) do
+      = link_to profile_account_path(@recruitment.user), id: "recruitment-owner-profile-image" do
           = image_tag(@recruitment.user.format_image_url("thumb"), class: "ui rounded mini image")
       .browse.item
-        = link_to profile_account_path(@recruitment.user), style: "text-decoration: none; color: #212121" do
+        = link_to profile_account_path(@recruitment.user), id: "recruitment-owner-profile-name" do
           b= @recruitment.user.name
 
     - if current_user && @recruitment.owner?(current_user)

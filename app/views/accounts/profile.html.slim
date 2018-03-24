@@ -1,11 +1,11 @@
 = render "tab", user: @user
 
 .ui.segment.basic.bg-white
-  = image_tag(@user.format_image_url, class: "ui centered small rounded image")
+  = image_tag(@user.format_image_url, class: "ui centered small rounded image profile-image")
   h2.ui.center.aligned.header= @user.name
 
   - if account_owner?(@user)
-    =link_to edit_accounts_path, class: "ui orange right floated mini basic button"
+    =link_to edit_accounts_path, class: "ui orange right floated mini basic button", id: "account-edit-link"
       = semantic_icon "edit"
       | 編集
   h5.ui.header.dividing 自己紹介文
@@ -36,21 +36,21 @@
 - if account_owner?(@user)
   .ui.grid.equal.width
     .ui.column
-      .ui.segment.basic.bg-white
+      .ui.segment.basic.bg-white#email-container
         h3.ui.header.dividing
           = semantic_icon "envelope"
           | メールアドレス
         p= @user.email
-        = link_to "変更", edit_user_registration_path
+        = link_to "変更", edit_user_registration_path, id: "edit-email-link"
 
     .ui.column
-      .ui.segment.basic.bg-white
+      .ui.segment.basic.bg-white#password-container
         h3.ui.header.dividing
           = semantic_icon "lock"
           | パスワード
         p ●●●●●●●●
-        = link_to "変更", edit_password_accounts_path
+        = link_to "変更", edit_password_accounts_path, id: "edit-password-link"
 
   .ui.center.aligned.segment.basic
     | 退会は
-    = link_to "こちら", user_registration_path, method: :delete, data: {confirm: "本当に退会しますか？\n一度退会するとアカウントを復元することはできません。"}
+    = link_to "こちら", user_registration_path, method: :delete, data: {confirm: "本当に退会しますか？\n一度退会するとアカウントを復元することはできません。"}, id: "resign-account-link"

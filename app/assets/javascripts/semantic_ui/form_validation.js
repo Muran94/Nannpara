@@ -73,6 +73,11 @@ $(document).on('turbolinks:load', function() {
           {
             type: 'empty',
             prompt: '[メールアドレス] 入力必須です。'
+          },
+          {
+            type: 'regExp',
+            value: /[^@\s]+@[^@\s]+/i,
+            prompt: '[メールアドレス] 形式が正しくありません。'
           }
         ]
       },
@@ -81,7 +86,15 @@ $(document).on('turbolinks:load', function() {
           {
             type: 'empty',
             prompt: '[パスワード] 入力必須です。'
-          }
+          },
+          {
+            type: 'minLength[6]',
+            prompt : '[パスワード] 6文字以上で入力してください。'
+          },
+          {
+            type: 'maxLength[128]',
+            prompt : '[パスワード] 128文字以下で入力してください。'
+          },
         ]
       },
       'user[current_password]': {
@@ -96,7 +109,7 @@ $(document).on('turbolinks:load', function() {
         rules: [
           {
             type: 'empty',
-            prompt: '[現在のパスワード] 入力必須です。'
+            prompt: '[新しいパスワード（再入力）] 入力必須です。'
           }
         ]
       },

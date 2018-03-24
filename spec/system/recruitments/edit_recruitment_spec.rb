@@ -40,7 +40,7 @@ RSpec.describe 'EditRecruitment', type: :system do
     expect(page).to have_field "recruitment[venue]", with: venue
 
     # フォーム書き換え
-    fill_in "recruitment[title]", with: new_title
+    fill_in "recruitment[title]", with: new_title # タイトル書き換え
     click_button "更新"
 
     # 更新データの確認

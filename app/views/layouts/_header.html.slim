@@ -15,10 +15,6 @@
             = link_to profile_account_path(current_user), class: "item" do
               = semantic_icon("user")
               | マイページ
-            .divider
-            = link_to edit_user_registration_path, class: "item" do
-              = semantic_icon("edit")
-              | プロフィール編集
             = link_to destroy_user_session_path, method: :delete, class: "item" do
               = semantic_icon("sign out alternate")
               | ログアウト
