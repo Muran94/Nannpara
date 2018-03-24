@@ -6,7 +6,7 @@ module UserDecorator
   end
 
   def format_age
-    age.blank? ? UNSET_MESSAGE : age
+    age.blank? ? UNSET_MESSAGE : "#{age}歳"
   end
 
   def format_prefecture

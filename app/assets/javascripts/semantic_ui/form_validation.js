@@ -109,7 +109,7 @@ $(document).on('turbolinks:load', function() {
         rules: [
           {
             type: 'empty',
-            prompt: '[現在のパスワード] 入力必須です。'
+            prompt: '[新しいパスワード（再入力）] 入力必須です。'
           }
         ]
       },

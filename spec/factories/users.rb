@@ -35,6 +35,14 @@ FactoryGirl.define do
     prefecture_code 13 # 東京都
     image Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/image/sample_image.jpg'))
 
+    trait :without_profile do
+      introduction nil
+      experience nil
+      age nil
+      prefecture_code nil
+      image nil
+    end
+
     trait :with_recruitments do
       after(:create) do |user|
         create_list(:recruitment, 3, user: user)

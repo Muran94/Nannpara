@@ -141,17 +141,36 @@ RSpec.describe AccountsController, type: :controller do
         }
       end
 
-      it 'プロフィールの更新が完了する && flash[:sucess]の値が正しい && マイページにリダイレクト' do
-        aggregate_failures do
-          expect(user.age).to eq User::MINIMUM_AGE # 更新前の値を検証
-          patch :update, params: params
-          user.reload
-          expect(user.introduction).to eq new_introduction
-          expect(user.age).to eq new_age
-          expect(user.prefecture_code).to eq new_prefecture_code
-          expect(user.experience).to eq new_experience
-          expect(flash[:success]).to eq 'プロフィール更新が完了しました。'
-          expect(response).to redirect_to profile_account_path(user)
+      context "正常系" do
+        it 'プロフィールの更新が完了する && flash[:sucess]の値が正しい && マイページにリダイレクト' do
+          aggregate_failures do
+            expect(user.age).to eq User::MINIMUM_AGE # 更新前の値を検証
+            patch :update, params: params
+            user.reload
+            expect(user.introduction).to eq new_introduction
+            expect(user.age).to eq new_age
+            expect(user.prefecture_code).to eq new_prefecture_code
+            expect(user.experience).to eq new_experience
+            expect(flash[:success]).to eq 'プロフィール更新が完了しました。'
+            expect(response).to redirect_to profile_account_path(user)
+          end
+        end
+      end
+
+      context "異常系" do
+        let(:new_experience) {"あ" * (User::MAXIMUM_INTRODUCTION_LENGTH + 1)}
+        it 'プロフィールの更新に失敗する && flash[:error]の値が正しい && editがrenderされる' do
+          aggregate_failures do
+            expect(user.age).to eq User::MINIMUM_AGE # 更新前の値を検証
+            patch :update, params: params
+            user.reload
+            expect(user.introduction).not_to eq new_introduction
+            expect(user.age).not_to eq new_age
+            expect(user.prefecture_code).not_to eq new_prefecture_code
+            expect(user.experience).not_to eq new_experience
+            expect(flash[:error]).to eq 'プロフィール更新に失敗しました。'
+            expect(response).to render_template :edit
+          end
         end
       end
     end

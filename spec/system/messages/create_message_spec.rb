@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'ShowMessage', type: :system do
+RSpec.describe 'CreateMessage', type: :system do
   let(:user) {create(:user)}
   let(:recruitment) {create(:recruitment)}
 

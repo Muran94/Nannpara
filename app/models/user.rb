@@ -32,16 +32,16 @@ class User < ApplicationRecord
   jp_prefecture :prefecture_code
   mount_uploader :image, ProfileImageUploader
 
-  MINIMUM_AGE = 18
-  MAXIMUM_AGE = 100
-
-  MAXIMUM_NAME_LENGTH = 64
-
   has_many :recruitments, dependent: :destroy
   has_many :messages, dependent: :destroy
 
+  MAXIMUM_NAME_LENGTH = 64
   validates :name, presence: true, length: { maximum: MAXIMUM_NAME_LENGTH }
-  validates :introduction, length: { maximum: 5120 }
+  MAXIMUM_INTRODUCTION_LENGTH = 5120
+  validates :introduction, length: { maximum: MAXIMUM_INTRODUCTION_LENGTH }
+  MINIMUM_AGE = 18
+  MAXIMUM_AGE = 100
   validates :age, allow_blank: true, inclusion: { in: MINIMUM_AGE..MAXIMUM_AGE }
-  validates :experience, length: { maximum: 32 }
+  MAXIMUM_EXPERIENCE_LENGTH = 32
+  validates :experience, length: { maximum: MAXIMUM_EXPERIENCE_LENGTH }
 end
