@@ -1,29 +1,51 @@
-.ui.borderless.fixed.menu
-  .ui.container
-    = link_to "南原", root_path, class: "ui item header red"
+.ui.grid
+  .computer.tablet.only.row
+    .ui.borderless.fixed.menu
+      .ui.container
+        = link_to "南原", root_path, class: "ui brand item red header"
+        .right.menu
+          - if current_user
+            .item
+              = link_to new_recruitment_path, class: "ui button orange" do
+                = semantic_icon("pencil alternate")
+                | 募集をかける
+            .ui.simple.dropdown.item
+              = image_tag("no_user_image.png", class: "ui image mini circular")
+              = semantic_icon("dropdown")
+              .menu
+                = link_to profile_account_path(current_user), class: "item" do
+                  = semantic_icon("user")
+                  | マイページ
+                = link_to destroy_user_session_path, method: :delete, class: "item" do
+                  = semantic_icon("sign out alternate")
+                  | ログアウト
+          - else
+            .item
+              = link_to new_user_session_path do
+                = semantic_icon("sign in alternate")
+                | ログイン
+            .item
+              = link_to new_user_registration_path, class: "ui button orange" do
+                = semantic_icon("edit")
+                | 会員登録（無料）
 
-    .right.menu
-      - if current_user
-        .item
-          = link_to new_recruitment_path, class: "ui button orange" do
-            i.icon.pencil.alternate
-            | 募集する
-        .ui.simple.dropdown.item
-          = image_tag("no_user_image.png", class: "ui image mini rounded")
-          = semantic_icon("dropdown")
-          .menu
-            = link_to profile_account_path(current_user), class: "item" do
-              = semantic_icon("user")
-              | マイページ
-            = link_to destroy_user_session_path, method: :delete, class: "item" do
-              = semantic_icon("sign out alternate")
-              | ログアウト
-      - else
-        .item
-          = link_to new_user_session_path do
-            = semantic_icon("sign in alternate")
-            | ログイン
-        .item
-          = link_to new_user_registration_path, class: "ui button orange" do
-            = semantic_icon("edit")
-            | 会員登録（無料）
+  .mobile.only.row
+    .ui.container
+      .ui.borderless.fixed.menu
+        = link_to "南原", root_path, class: "ui brand item red header"
+        .right.menu
+          - unless user_signed_in?
+            .item
+              = link_to new_user_session_path do
+                = semantic_icon("sign in alternate")
+                | ログイン
+          a.menu.item.open-sidebar
+            = semantic_icon("content large")
+
+javascript:
+  $('.open-sidebar').click(function() {
+    $('.ui.sidebar')
+      .sidebar('setting', 'transition', 'overlay')
+      .sidebar('toggle')
+    ;
+  });

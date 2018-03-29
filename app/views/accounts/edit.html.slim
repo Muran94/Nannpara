@@ -16,16 +16,16 @@
       = f.label :introduction, "自己紹介文"
       = f.text_area :introduction, placeholder: "主に新宿で活動しています！よろしくお願いします！"
 
-    .fields
-      .field.six.wide
+    .three.fields
+      .field
         = f.label :age, "年齢"
         = f.select :age, User::MINIMUM_AGE..User::MAXIMUM_AGE, {include_blank: true}, {class: "ui fluid dropdown"}
 
-      .field.six.wide
+      .field
         = f.label :prefecture_code, "活動範囲"
         = f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, {prompt: "選択してください"}, class: "ui fluid dropdown"
 
-      .field.six.wide
+      .field
         = f.label :experience, "ナンパ歴"
         = f.text_field :experience, placeholder: "3年"
 

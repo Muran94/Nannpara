@@ -61,7 +61,7 @@ RSpec.describe 'EditPassword', type: :system do
         expect(page).to have_content "[ユーザー名] 入力必須です。"
         fill_in "user[name]", with: "あ" * (User::MAXIMUM_NAME_LENGTH + 1)
         click_button "プロフィール更新"
-        expect(page).to have_content "[ユーザー名] 64文字以下で入力してください。"
+        expect(page).to have_content "[ユーザー名] 16文字以下で入力してください。"
 
         fill_in "user[introduction]", with: "あ" * (User::MAXIMUM_INTRODUCTION_LENGTH + 1)
         click_button "プロフィール更新"

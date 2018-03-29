@@ -116,8 +116,8 @@ $(document).on('turbolinks:load', function() {
       'user[name]': {
         rules: [
           {
-            type: 'maxLength[64]',
-            prompt : '[ユーザー名] 64文字以下で入力してください。'
+            type: 'maxLength[16]',
+            prompt : '[ユーザー名] 16文字以下で入力してください。'
           },
           {
             type: 'empty',

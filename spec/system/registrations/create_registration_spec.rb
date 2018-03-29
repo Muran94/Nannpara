@@ -38,7 +38,7 @@ RSpec.describe 'CreateRegistration', type: :system do
       # ユーザー名の最大長を超えた長さで入力し登録
       fill_in "user[name]", with: "あ" * (User::MAXIMUM_NAME_LENGTH + 10)
       click_button "登録"
-      expect(page).to have_content "[ユーザー名] 64文字以下で入力してください。"
+      expect(page).to have_content "[ユーザー名] 16文字以下で入力してください。"
 
       # メールアドレス
       # 何も入力しない登録

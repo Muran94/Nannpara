@@ -1,8 +1,9 @@
 .ui.segment.basic.bg-white
-  h3.ui.dividing.header
-    = semantic_icon("rss")
-    | 募集一覧
-  .ui.relaxed.divided.items
+  .ui.vertically.divided.padded.grid
+    .column.sixteen.wide
+      h3.ui.header
+        = semantic_icon("rss")
+        | 募集一覧
     = render @recruitments
 
 .ui.center.aligned.container

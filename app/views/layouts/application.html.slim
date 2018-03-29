@@ -3,23 +3,21 @@ html
   head
     title Nannpara
     = csrf_meta_tags
+    meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport"
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.css', media: 'all', type: 'text/css'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.js', media: 'all', type: 'text/javascript'
 
-  body(style="background: #F5F4F5")
-    = render "layouts/header"
+  body
+    = render "layouts/sidebar"
 
-    .ui.main.container
-      = render "layouts/flash"
+    .pusher
+      = render "layouts/header"
 
-      = yield
+      .ui.main.container
+        = render "layouts/flash"
 
-      / .ui.grid
-      /   .eleven.wide.column
-      /     = yield
-      /   .five.wide.column
-      /     .ui.segment.basic.bg-white
+        = yield
 
-    = render "layouts/footer"
+      = render "layouts/footer"

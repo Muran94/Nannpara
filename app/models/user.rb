@@ -35,7 +35,7 @@ class User < ApplicationRecord
   has_many :recruitments, dependent: :destroy
   has_many :messages, dependent: :destroy
 
-  MAXIMUM_NAME_LENGTH = 64
+  MAXIMUM_NAME_LENGTH = 16
   validates :name, presence: true, length: { maximum: MAXIMUM_NAME_LENGTH }
   MAXIMUM_INTRODUCTION_LENGTH = 5120
   validates :introduction, length: { maximum: MAXIMUM_INTRODUCTION_LENGTH }
@@ -44,4 +44,10 @@ class User < ApplicationRecord
   validates :age, allow_blank: true, inclusion: { in: MINIMUM_AGE..MAXIMUM_AGE }
   MAXIMUM_EXPERIENCE_LENGTH = 32
   validates :experience, length: { maximum: MAXIMUM_EXPERIENCE_LENGTH }
+
+
+  def thumb_image_url
+    return 'no_user_image.png' if image.blank?
+    image.thumb.url
+  end
 end
