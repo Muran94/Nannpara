@@ -34,13 +34,19 @@
     .ui.borderless.fixed.menu(style="vertical-align: bottom;")
       .ui.container
         = link_to root_path do
-          = image_tag("site_logo.png", class: "site-logo")
+          = image_tag("site_logo.png", class: "site-logo-for-mobile")
         .right.menu
-          - unless user_signed_in?
+          - if user_signed_in?
+            .item
+              = link_to new_recruitment_path, class: "ui button basic mini orange", style: "font-size: 12px;" do
+                = semantic_icon("pencil alternate")
+                | 募集
+          - else
             .item
               = link_to new_user_session_path do
                 = semantic_icon("sign in alternate")
                 | ログイン
+
           a.menu.item.open-sidebar
             = semantic_icon("content large")
 
