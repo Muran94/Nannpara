@@ -24,7 +24,7 @@
 
 .byebug_history
 
-vendor/bundle/
-public/uploads
+/vendor/bundle/
+/public/uploads
 coverage
 .DS_Store

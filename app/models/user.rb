@@ -50,4 +50,12 @@ class User < ApplicationRecord
     return 'no_user_image.png' if image.blank?
     image.thumb.url
   end
+
+  private
+
+  def _valid_image_size?
+    if image.size > 5.megabytes
+      errors.add(:image, "画像のファイルサイズが大きすぎます。5MB以下の画像を選択してください。")
+    end
+  end
 end
