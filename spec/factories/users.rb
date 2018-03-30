@@ -28,7 +28,7 @@ FactoryGirl.define do
     password 'password'
     password_confirmation 'password'
 
-    name 'ナンパ師１号'
+    name Faker::Name.name[0..User::MAXIMUM_NAME_LENGTH]
     introduction 'ナンパ初心者です！よろしくお願いします！'
     experience '3年'
     age 33
