@@ -64,12 +64,13 @@ RSpec.describe User, type: :model do
       end
 
       context 'exclusionチェック' do
-        it '特定の値を持つ場合はバリデーションに引っかかること' do
+        it '特定の値を持つ場合はバリデーションに引っかかること 持たない場合はバリデーションに引っかからない' do
           aggregate_failures do
             expect(build_stubbed(:user, name: "南原さん").valid?).to be_falsy
             expect(build_stubbed(:user, name: "南原").valid?).to be_falsy
             expect(build_stubbed(:user, name: "NANBARA管理人").valid?).to be_falsy
             expect(build_stubbed(:user, name: "管理人").valid?).to be_falsy
+            expect(build_stubbed(:user, name: "一般人").valid?).to be_falsy
           end
         end
       end

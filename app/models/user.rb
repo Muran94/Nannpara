@@ -36,7 +36,7 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
 
   MAXIMUM_NAME_LENGTH = 16
-  validates :name, uniqueness: true, presence: true, length: { maximum: MAXIMUM_NAME_LENGTH }, exclusion: {in: %w(南原 南原さん NANBARA管理人 管理人)}
+  validates :name, uniqueness: true, presence: true, length: { maximum: MAXIMUM_NAME_LENGTH }# , exclusion: {in: %w(南原 南原さん NANBARA管理人 管理人)}
   MAXIMUM_INTRODUCTION_LENGTH = 5120
   validates :introduction, length: { maximum: MAXIMUM_INTRODUCTION_LENGTH }
   MINIMUM_AGE = 18
