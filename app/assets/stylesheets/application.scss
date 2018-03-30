@@ -19,6 +19,10 @@
 body {
   background: #F5F4F5;
 }
+.site-logo {
+  height: 50px;
+  margin-top: 5px;
+}
 .pusher {
   background: #F5F4F5 !important;
   display: flex;
@@ -52,10 +56,10 @@ body {
   color: #fff !important;
   cursor: default !important;
 }
-.open-sidebar {
-  position: fixed;
-  right: 3px !important;
-}
+// .open-sidebar {
+//   position: fixed;
+//   right: 3px !important;
+// }
 
 html.ios {
   overflow-x: hidden;
