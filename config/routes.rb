@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'recruitments#index'
   resources :accounts, only: [] do
     member do
       get :profile
@@ -18,5 +19,5 @@ Rails.application.routes.draw do
   resources :recruitments do
     resources :messages, only: [:create]
   end
-  root 'recruitments#index'
+  get "service/inquiry"
 end
