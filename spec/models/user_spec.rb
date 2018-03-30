@@ -27,6 +27,16 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   context 'バリデーションテスト' do
     context 'name' do
+      context 'uniquenessチェック' do
+        it 'すでに同じ名前が使用されている場合はバリデーションに引っかかり 存在しない場合は引っかからない' do
+          aggregate_failures do
+            user = build(:user, name: "spider")
+            expect(user.valid?).to be_truthy
+            user.save
+            expect(build(:user, name: "spider").valid?).to be_falsy
+          end
+        end
+      end
       context 'presenceチェック' do
         it 'nameが 空文字 か nil ならバリデーションに引っかかる' do
           aggregate_failures do
