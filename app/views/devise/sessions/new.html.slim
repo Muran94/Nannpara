@@ -12,3 +12,8 @@
         = f.password_field :password, autocomplete: "off", placeholder: "********"
 
       = f.submit "ログイン", class: "ui fluid orange submit button"
+
+.ui.segment.basic.bg-white
+  .column
+    h3.ui.header.dividing 会員登録
+    = link_to "会員登録はこちら", new_user_registration_path, class: "ui button basic fluid orange"
