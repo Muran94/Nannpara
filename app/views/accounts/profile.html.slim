@@ -5,15 +5,12 @@
     .column
       .ui.segment.basic.bg-white
         .ui.grid.stackable
-          .column.sixteen.wide
+          .row.center.aligned
+            .column.sixteen.wide
               = image_tag(@user.format_image_url, class: "ui centered small circular image profile-image")
+              - if account_owner?(@user)
+                = link_to "プロフィール画像編集", edit_image_accounts_path, class: "ui button basic mini orange", style: "margin-top: 10px;"
               h2.ui.center.aligned.header= @user.name
-
-          - if account_owner?(@user)
-            .column.sixteen.wide.right.aligned
-              =link_to edit_accounts_path, class: "ui orange mini basic button", id: "account-edit-link"
-                = semantic_icon "edit"
-                | 編集
 
           .column.sixteen.wide
             h5.ui.header.dividing 自己紹介文
@@ -38,6 +35,12 @@
           .column.sixteen.wide
             div(style="color: #bbb; font-size: 12px; text-align: right; margin-top: 25px;")
               = %(#{@user.created_at}に更新)
+
+          - if account_owner?(@user)
+            .column.sixteen.wide
+              =link_to edit_accounts_path, class: "ui basic button orange fluid", id: "account-edit-link"
+                = semantic_icon "edit"
+                | 編集
 
   - if account_owner?(@user)
     .two.column.row

@@ -7,6 +7,9 @@ Rails.application.routes.draw do
     collection do
       get :edit
       patch :update
+      get :edit_image
+      patch :update_image
+      patch :destroy_image
       get :edit_password
       patch :update_password
     end
