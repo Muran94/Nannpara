@@ -11,7 +11,7 @@ ja:
       inactive: 'アカウントが有効化されていません。メールに記載された手順にしたがって、アカウントを有効化してください。'
       invalid: "%{authentication_keys} もしくはパスワードが不正です。"
       locked: 'あなたのアカウントは凍結されています。'
-      last_attempt: 'あなたのアカウントが凍結される前に、複数回の操作がおこなわれています。'
+      last_attempt: 'もう一度ログインに失敗するとアカウントが凍結されます。ご注意ください。'
       not_found_in_database: "%{authentication_keys} もしくはパスワードが不正です。"
       timeout: 'セッションがタイムアウトしました。もう一度ログインしてください。'
       unauthenticated: 'アカウント登録もしくはログインしてください。'

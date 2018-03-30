@@ -26,7 +26,7 @@ class User < ApplicationRecord
   include JpPrefecture
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :lockable,
          :recoverable, :rememberable, :trackable, :validatable, :timeoutable
 
   jp_prefecture :prefecture_code
