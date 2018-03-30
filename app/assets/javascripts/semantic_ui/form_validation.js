@@ -140,6 +140,14 @@ $(document).on('turbolinks:load', function() {
             prompt : '[ナンパ歴] 32文字以下で入力してください。'
           }
         ]
+      },
+      'user[image]': {
+        rules: [
+          {
+            type: 'empty',
+            prompt: '画像を選択してください。'
+          }
+        ]
       }
     }
   });

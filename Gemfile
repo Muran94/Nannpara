@@ -25,6 +25,7 @@ gem 'active_decorator-rspec'
 gem 'jp_prefecture'
 gem 'kaminari'
 gem 'carrierwave'
+gem 'fog', '1.42', group: [:production]
 gem 'rmagick'
 gem 'seedbank'
 

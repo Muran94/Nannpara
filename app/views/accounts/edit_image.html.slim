@@ -6,17 +6,34 @@
   / .ui.grid.center.aligned.stackable
   /   .row
   /     .column.sixteen.wide
-  = image_tag(@current_user.format_image_url, class: "ui image centered circular")
+  = image_tag(@current_user.format_image_url, class: "ui image small centered circular")
 
-  = form_for @current_user, url: update_image_accounts_path, class: "ui form centered" do |f|
+  = form_for @current_user, url: update_image_accounts_path, class: "ui form" do |f|
     p
       .field(style="text-align: center;")
-        = f.file_field :image, style: "text-align: center;"
+        = f.file_field :image, accept: 'image/jpeg,image/gif,image/png', style: "text-align: center;"
     p
       .field(style="text-align: center;")
-        = f.submit "画像アップロード", class: "ui submit button orange"
+        = f.submit "画像アップロード", class: "ui submit disabled button orange", id: "user_image_upload_button"
 
     - if @current_user.image.present?
       p(style="text-align: center;")
         = link_to destroy_image_accounts_path, method: :patch do
           | 画像を削除
+
+javascript:
+  $("#user_image").on('change', function() {
+    var submit_button = $("#user_image_upload_button");
+    submit_button.addClass("disabled");
+
+    var image = this.files[0]
+    var size_in_megabytes = image.size/1024/1024;
+    if (image === undefined) {
+      return;
+    }
+    if (size_in_megabytes > 5) {
+      alert("画像のファイルサイズが大きすぎます。5MB以下の画像を選択してください。");
+      return;
+    }
+    submit_button.removeClass("disabled");
+  });
