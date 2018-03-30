@@ -11,7 +11,7 @@
                 = semantic_icon("pencil alternate")
                 | 募集をかける
             .ui.simple.dropdown.item
-              = image_tag("no_user_image.png", class: "ui image mini circular")
+              = image_tag(current_user.thumb_image_url, class: "ui image mini circular")
               = semantic_icon("dropdown")
               .menu
                 = link_to profile_account_path(current_user), class: "item" do
