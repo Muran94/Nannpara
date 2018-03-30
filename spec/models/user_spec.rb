@@ -33,7 +33,7 @@ RSpec.describe User, type: :model do
             user = build(:user, name: "spider")
             expect(user.valid?).to be_truthy
             user.save
-            expect(build(:user, name: "spider").valid?).to be_falsy
+            expect(build_stubbed(:user, name: "spider").valid?).to be_falsy
           end
         end
       end
@@ -59,6 +59,17 @@ RSpec.describe User, type: :model do
               expect(build_stubbed(:user, name: '*' * User::MAXIMUM_NAME_LENGTH).valid?).to be_truthy
               expect(build_stubbed(:user, name: '*' * (User::MAXIMUM_NAME_LENGTH - 1)).valid?).to be_truthy
             end
+          end
+        end
+      end
+
+      context 'exclusionチェック' do
+        it '特定の値を持つ場合はバリデーションに引っかかること' do
+          aggregate_failures do
+            expect(build_stubbed(:user, name: "南原さん").valid?).to be_falsy
+            expect(build_stubbed(:user, name: "南原").valid?).to be_falsy
+            expect(build_stubbed(:user, name: "NANBARA管理人").valid?).to be_falsy
+            expect(build_stubbed(:user, name: "管理人").valid?).to be_falsy
           end
         end
       end
