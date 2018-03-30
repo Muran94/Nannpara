@@ -13,4 +13,4 @@
     .metadata
       span.data= message.created_at.strftime("%Y年%m月%d日 %H:%M")
     .text
-      = message.message
+      = simple_format(h(message.message))
