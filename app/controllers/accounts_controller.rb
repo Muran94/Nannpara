@@ -1,8 +1,7 @@
 class AccountsController < ApplicationController
   before_action :_set_user, only: [:profile, :recruitments]
-  before_action :_set_current_user, only: [:edit, :update, :edit_password, :update_password]
+  before_action :_set_current_user, only: [:edit, :update, :edit_image, :update_image, :destroy_image, :edit_password, :update_password]
   before_action :authenticate_user!, except: [:profile, :recruitments]
-  # before_action :_account_owner?, except: [:show]
 
   # GET /accounts/1/profile
   def profile; end
@@ -14,12 +13,10 @@ class AccountsController < ApplicationController
 
   # GET /accounts/edit
   def edit
-    @current_user = current_user
   end
 
   # PATCH/PUT /accounts
   def update
-    @current_user = current_user
     if @current_user.update(_user_profile_params)
       flash[:success] = 'プロフィール更新が完了しました。'
       redirect_to profile_account_path(@current_user)
@@ -29,14 +26,37 @@ class AccountsController < ApplicationController
     end
   end
 
-  # GET /accounts/edit_password
-  def edit_password
-    @current_user = current_user
+  # GET /accounts/edit_image
+  def edit_image
   end
 
-  # PATCH/PUT /accounts/update_password
+  # PATCH /accounts/update_image
+  def update_image
+    if @current_user.update(_user_image_params)
+      flash[:success] = "プロフィール画像の変更が完了しました。"
+    else
+      flash[:error] = "プロフィール画像の変更に失敗しました。"
+    end
+    redirect_to profile_account_path(@current_user)
+  end
+
+  # PATCH/PUT /accounts/destroy_image
+  def destroy_image
+    @current_user.remove_image!
+    if @current_user.save(validate: false)
+      flash[:success] = "プロフィール画像の削除が完了しました。"
+    else
+      flash[:error] = "プロフィール画像の削除に失敗しました。"
+    end
+    redirect_to profile_account_path(@current_user)
+  end
+
+  # GET /accounts/edit_password
+  def edit_password
+  end
+
+  # PATCH /accounts/update_password
   def update_password
-    @current_user = current_user
     if @current_user.update_with_password(_user_password_params)
       bypass_sign_in(@current_user)
       flash[:success] = %(パスワード変更が完了しました。)
@@ -59,6 +79,10 @@ class AccountsController < ApplicationController
 
   def _user_profile_params
     params.require(:user).permit(:name, :image, :introduction, :age, :prefecture_code, :experience)
+  end
+
+  def _user_image_params
+    params.require(:user).permit(:image)
   end
 
   def _user_password_params
