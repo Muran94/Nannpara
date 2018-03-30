@@ -68,9 +68,8 @@ RSpec.describe User, type: :model do
           aggregate_failures do
             expect(build_stubbed(:user, name: "南原さん").valid?).to be_falsy
             expect(build_stubbed(:user, name: "南原").valid?).to be_falsy
-            expect(build_stubbed(:user, name: "NANBARA管理人").valid?).to be_falsy
             expect(build_stubbed(:user, name: "管理人").valid?).to be_falsy
-            expect(build_stubbed(:user, name: "一般人").valid?).to be_falsy
+            expect(build_stubbed(:user, name: "一般人").valid?).to be_truthy
           end
         end
       end

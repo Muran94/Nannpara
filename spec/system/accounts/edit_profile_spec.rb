@@ -21,7 +21,6 @@ RSpec.describe 'EditPassword', type: :system do
         sleep 0.1
 
         # フォームを埋めていって
-        attach_file "プロフィール画像", File.join(Rails.root, 'spec/fixtures/image/sample_image.jpg')
         fill_in "user[introduction]", with: introduction
         select age, from: "user[age]"
         select prefecture, from: "user[prefecture_code]"
