@@ -14,7 +14,7 @@
 
           .column.sixteen.wide
             h5.ui.header.dividing 自己紹介文
-            p= @user.format_introduction
+            p= simple_format(h(@user.format_introduction))
 
           .three.column.row
             .column
