@@ -2,7 +2,8 @@
   .computer.tablet.only.row
     .ui.borderless.fixed.menu
       .ui.container
-        = link_to "南原", root_path, class: "ui brand item red header"
+        = link_to root_path do
+          = image_tag("site_logo.png", class: "site-logo")
         .right.menu
           - if current_user
             .item
@@ -30,9 +31,10 @@
                 | 会員登録（無料）
 
   .mobile.only.row
-    .ui.container
-      .ui.borderless.fixed.menu
-        = link_to "南原", root_path, class: "ui brand item red header"
+    .ui.borderless.fixed.menu(style="vertical-align: bottom;")
+      .ui.container
+        = link_to root_path do
+          = image_tag("site_logo.png", class: "site-logo")
         .right.menu
           - unless user_signed_in?
             .item
