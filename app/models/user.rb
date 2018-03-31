@@ -44,6 +44,7 @@ class User < ApplicationRecord
   validates :age, allow_blank: true, inclusion: { in: MINIMUM_AGE..MAXIMUM_AGE }
   MAXIMUM_EXPERIENCE_LENGTH = 32
   validates :experience, length: { maximum: MAXIMUM_EXPERIENCE_LENGTH }
+  validate :_valid_image_size?
 
 
   def thumb_image_url

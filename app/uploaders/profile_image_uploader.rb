@@ -1,7 +1,7 @@
 class ProfileImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
 
-  process resize_to_fill: [400, 400, ::Magick::CenterGravity]
+  process resize_to_fill: [400, 400, ::Magick::CenterGravity] unless Rails.env.test?
 
   if Rails.env.production?
     storage :fog

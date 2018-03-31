@@ -35,6 +35,8 @@ RSpec.describe 'ShowAccount', type: :system do
       expect(page).to have_content JpPrefecture::Prefecture.find(prefecture_code).name
       expect(page).to have_content experience
 
+      expect(page).to have_css "#edit-image-link" # プロフィール画像編集ボタン
+
       expect(page).to have_css "#account-edit-link"
 
       expect(page).to have_css "#email-container"
@@ -61,6 +63,8 @@ RSpec.describe 'ShowAccount', type: :system do
       expect(page).to have_content "#{age}歳"
       expect(page).to have_content JpPrefecture::Prefecture.find(prefecture_code).name
       expect(page).to have_content experience
+
+      expect(page).not_to have_css "#edit-image-link" # プロフィール画像編集ボタン
 
       expect(page).not_to have_css "#account-edit-link"
 
