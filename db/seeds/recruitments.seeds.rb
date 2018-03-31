@@ -23,14 +23,19 @@ after :users do
     池袋東口
     川崎).push(Faker::Lorem.characters(maximum_venue_length)).push('都')
 
-  200.times do
-    Recruitment.create(
+  100.times do
+    event_date = rand(-15..30).days.from_now
+    closed = event_date < Date.today
+
+    recruitment = Recruitment.new(
       title: TITLE_SAMPLES.sample,
       description: Faker::Lorem.paragraphs(rand(1..10)).join("\n\n")[0..maximum_description_length],
       prefecture_code: rand(1..47),
       venue: VENUE_SAMPLES.sample,
-      event_date: rand(1..30).days.from_now,
-      user_id: User.all.to_a.sample.id
+      event_date: event_date,
+      user_id: User.all.to_a.sample.id,
+      closed: closed
     )
+    recruitment.save(validate: false)
   end
 end
