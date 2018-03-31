@@ -36,7 +36,7 @@ RSpec.describe 'EditRecruitment', type: :system do
     expect(page).to have_field "recruitment[title]", with: title
     expect(page).to have_field "recruitment[description]", with: description
     expect(page).to have_field "recruitment[event_date]", with: event_date.strftime("%Y/%m/%d %H:%M")
-    expect(page).to have_select "recruitment[prefecture_code]", selected: JpPrefecture::Prefecture.find(13).name
+    expect(find("#recruitment_prefecture_code_select_box > .dropdown > .text")).to have_content JpPrefecture::Prefecture.find(13).name
     expect(page).to have_field "recruitment[venue]", with: venue
 
     # フォーム書き換え
@@ -72,7 +72,7 @@ RSpec.describe 'EditRecruitment', type: :system do
     expect(page).to have_field "recruitment[title]", with: title
     expect(page).to have_field "recruitment[description]", with: description
     expect(page).to have_field "recruitment[event_date]", with: event_date.strftime("%Y/%m/%d %H:%M")
-    expect(page).to have_select "recruitment[prefecture_code]", selected: JpPrefecture::Prefecture.find(13).name
+    expect(find("#recruitment_prefecture_code_select_box > .dropdown > .text")).to have_content JpPrefecture::Prefecture.find(13).name
     expect(page).to have_field "recruitment[venue]", with: venue
 
     # フォーム書き換え

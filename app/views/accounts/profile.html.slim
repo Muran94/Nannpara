@@ -9,7 +9,7 @@
             .column.sixteen.wide
               = image_tag(@user.format_image_url, class: "ui centered small circular image profile-image")
               - if account_owner?(@user)
-                = link_to "プロフィール画像編集", edit_image_accounts_path, class: "ui button basic mini orange", style: "margin-top: 10px;"
+                = link_to "プロフィール画像編集", edit_image_accounts_path, class: "ui button basic mini orange", id: "edit-image-link", style: "margin-top: 10px;"
               h2.ui.center.aligned.header= @user.name
 
           .column.sixteen.wide

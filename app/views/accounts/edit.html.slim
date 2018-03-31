@@ -17,11 +17,11 @@
       = f.text_area :introduction, placeholder: "主に新宿で活動しています！よろしくお願いします！"
 
     .three.fields
-      .field
+      .field#user_age_select_box
         = f.label :age, "年齢"
-        = f.select :age, User::MINIMUM_AGE..User::MAXIMUM_AGE, {include_blank: true}, {class: "ui fluid dropdown"}
+        = f.select :age, User::MINIMUM_AGE..User::MAXIMUM_AGE, {prompt: "選択してください"}, {class: "ui fluid dropdown"}
 
-      .field
+      .field#user_prefecture_code_select_box
         = f.label :prefecture_code, "活動範囲"
         = f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, {prompt: "選択してください"}, class: "ui fluid dropdown"
 

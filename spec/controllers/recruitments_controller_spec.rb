@@ -7,27 +7,66 @@ RSpec.describe RecruitmentsController, type: :controller do
   describe 'GET #index' do
     let(:title_1) { 'ナンパ仲間募集！今日新宿で！' }
     let(:title_2) { '本日の17時渋谷駅' }
+    let(:title_3) { 'あのねぇ〜ぼくねぇ〜'}
 
-    before do
-      create(:recruitment, title: title_1)
-      create(:recruitment, title: title_2)
-      get :index
-    end
+    context "都道府県指定の場合（paramありの場合）" do
+      before do
+        create(:recruitment, :without_validation, title: title_1, event_date: 1.days.ago, prefecture_code: 13)
+        create(:recruitment, title: title_2, event_date: 1.day.from_now, prefecture_code: 14)
+        create(:recruitment, title: title_3, event_date: 2.day.from_now, prefecture_code: 20)
+        get :index, params: params
+      end
 
-    context 'レスポンス' do
-      it 'ステータスコード200を返却 && :indexテンプレートがrenderされる' do
-        aggregate_failures do
-          expect(response).to have_http_status 200
-          expect(response).to render_template :index
+      let(:params) do
+        {
+          search: {
+            prefecture_code: ["13", "14", ""]
+          }
+        }
+      end
+
+      context 'レスポンス' do
+        it 'ステータスコード200を返却 && :indexテンプレートがrenderされる' do
+          aggregate_failures do
+            expect(response).to have_http_status 200
+            expect(response).to render_template :index
+          end
+        end
+      end
+
+      context 'インスタンス変数' do
+        it 'コレクションの個数が正しい && それぞれのタイトルが正しい' do
+          aggregate_failures do
+            expect(assigns(:recruitments).count).to eq 2
+            expect(assigns(:recruitments).pluck(:title)).to match_array [title_1, title_2]
+          end
         end
       end
     end
 
-    context 'インスタンス変数' do
-      it 'コレクションの個数が正しい && それぞれのタイトルが正しい' do
-        aggregate_failures do
-          expect(assigns(:recruitments).count).to eq 2
-          expect(assigns(:recruitments).pluck(:title)).to match_array [title_1, title_2]
+    context "都道府県指定なしの場合" do
+      before do
+        create(:recruitment, :without_validation, title: title_3, event_date: 1.days.ago)
+        create(:recruitment, title: title_1, event_date: 1.day.from_now)
+        create(:recruitment, title: title_2, event_date: 2.days.from_now)
+        get :index
+      end
+
+      context 'レスポンス' do
+        it 'ステータスコード200を返却 && :indexテンプレートがrenderされる' do
+          aggregate_failures do
+            expect(response).to have_http_status 200
+            expect(response).to render_template :index
+          end
+        end
+      end
+
+      context 'インスタンス変数' do
+        it 'コレクションの個数が正しい && それぞれのタイトルが正しい' do
+          aggregate_failures do
+            expect(assigns(:recruitments).count).to eq 3
+            expect(assigns(:recruitments).pluck(:title)).to match_array [title_1, title_2, title_3]
+          end
         end
       end
     end

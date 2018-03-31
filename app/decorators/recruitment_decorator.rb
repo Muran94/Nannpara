@@ -17,7 +17,7 @@ module RecruitmentDecorator
   end
 
   def format_short_created_at
-    _format_short_date_time(date_time)
+    _format_short_date_time(created_at)
   end
 
   def format_event_date

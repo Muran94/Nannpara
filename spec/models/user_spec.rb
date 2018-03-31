@@ -94,5 +94,19 @@ RSpec.describe User, type: :model do
         end
       end
     end
+
+    context "name" do
+      context "サイズチェック" do
+        let(:user) {build_stubbed(:user, image: nil)}
+        it "画像サイズが5MBを超えたらバリデーションに引っかかり、以下なら引っかからない" do
+          aggregate_failures do
+            user.image = Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/image/large_sample_image.jpg'))
+            expect(user.valid?).to be_falsy
+            user.image = Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/image/sample_image.jpg'))
+            expect(user.valid?).to be_truthy
+          end
+        end
+      end
+    end
   end
 end

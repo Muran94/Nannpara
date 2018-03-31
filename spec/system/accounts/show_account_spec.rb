@@ -11,7 +11,7 @@ RSpec.describe 'ShowAccount', type: :system do
       experience: experience
     )
   end
-  let(:name) {"南原さん"}
+  let(:name) {"ナンパ仙人"}
   let(:introduction) {"ナンパ歴3年です！新宿でよく活動しています！よろしくお願いします！"}
   let(:age) {28}
   let(:prefecture_code) {13} # 東京都
@@ -34,6 +34,8 @@ RSpec.describe 'ShowAccount', type: :system do
       expect(page).to have_content "#{age}歳"
       expect(page).to have_content JpPrefecture::Prefecture.find(prefecture_code).name
       expect(page).to have_content experience
+
+      expect(page).to have_css "#edit-image-link" # プロフィール画像編集ボタン
 
       expect(page).to have_css "#account-edit-link"
 
@@ -61,6 +63,8 @@ RSpec.describe 'ShowAccount', type: :system do
       expect(page).to have_content "#{age}歳"
       expect(page).to have_content JpPrefecture::Prefecture.find(prefecture_code).name
       expect(page).to have_content experience
+
+      expect(page).not_to have_css "#edit-image-link" # プロフィール画像編集ボタン
 
       expect(page).not_to have_css "#account-edit-link"
 

@@ -22,5 +22,9 @@ FactoryGirl.define do
     prefecture_code 13
     venue '新宿歌舞伎町'
     event_date 1.day.from_now.to_time
+
+    trait :without_validation do
+      to_create { |instance| instance.save(validate: false) }
+    end
   end
 end

@@ -16,7 +16,7 @@
         i.circular.calendar.icon
         = f.text_field :event_date, placeholder: %(#{Time.zone.now.strftime("%Y/%m/%d %H:%M")}), style: "cursor: pointer;"
 
-    .field.required
+    .field.required#recruitment_prefecture_code_select_box
       = f.label "都道府県"
       = f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, {prompt: "選択してください"}, class: "ui fluid dropdown"
 

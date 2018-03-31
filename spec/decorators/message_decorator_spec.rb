@@ -23,4 +23,33 @@ describe MessageDecorator do
       end
     end
   end
+
+  describe "#users_thumb_image_url" do
+    context "userを持つ場合" do
+      context "userがプロフィール画像を登録している場合" do
+        let(:user) {create(:user)}
+        let(:message) {build_stubbed(:message, user: user).extend MessageDecorator}
+
+        it "適切な画像を返すこと" do
+          expect(message.users_thumb_image_url).to eq message.user.image.thumb.url
+        end
+      end
+
+      context "userがプロフィール画像を登録していない場合" do
+        let(:user) {create(:user, image: nil)}
+        let(:message) {build_stubbed(:message, user: user).extend MessageDecorator}
+
+        it "no_user_image.pngを返す" do
+          expect(message.users_thumb_image_url).to eq "no_user_image.png"
+        end
+      end
+    end
+    context "userを持たない場合" do
+      let(:message) {build_stubbed(:message).extend MessageDecorator}
+
+      it "no_user_image.pngを返す" do
+        expect(message.users_thumb_image_url).to eq "no_user_image.png"
+      end
+    end
+  end
 end
