@@ -78,7 +78,7 @@ class AccountsController < ApplicationController
   end
 
   def _user_profile_params
-    params.require(:user).permit(:name, :image, :introduction, :age, :prefecture_code, :experience)
+    params.require(:user).permit(:name, :direct_mail, :image, :introduction, :age, :prefecture_code, :experience)
   end
 
   def _user_image_params
