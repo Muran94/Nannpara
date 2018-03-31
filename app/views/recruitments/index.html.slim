@@ -1,10 +1,18 @@
 .ui.segment.basic.bg-white
-  .ui.vertically.divided.padded.grid
-    .column.sixteen.wide
-      h3.ui.header
+  .ui.text.menu(style="margin-top: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0;")
+    .item
+      h4.ui.header
         = semantic_icon("rss")
         | 募集一覧
+    .ui.right.item#prefecture-select
+      = semantic_icon("search circular orange")
+
+  .ui.divider(style="margin-top: 0; padding-top: 0;")
+
+  .ui.vertically.divided.padded.grid
     = render @recruitments
 
 .ui.center.aligned.container
   = paginate @recruitments
+
+= render "search_modal"
