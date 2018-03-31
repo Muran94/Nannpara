@@ -28,6 +28,7 @@ gem 'carrierwave'
 gem 'fog', '1.42', group: [:production]
 gem 'rmagick'
 gem 'seedbank'
+gem 'google-analytics-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
