@@ -4,7 +4,11 @@ class RecruitmentsController < ApplicationController
   before_action :_redirect_unless_owner, only: [:edit, :update, :destroy]
 
   def index
-    @recruitments = Recruitment.all.order('event_date ASC').includes(:user).page(params[:page])
+    if params["search"].present? && params["search"]["prefecture_code"].present?
+      @recruitments = Recruitment.where(prefecture_code: params["search"]["prefecture_code"].map(&:to_i).compact).order('event_date ASC').includes(:user).page(params[:page])
+    else
+      @recruitments = Recruitment.all.order('event_date ASC').includes(:user).page(params[:page])
+    end
   end
 
   def show
