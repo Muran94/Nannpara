@@ -11,7 +11,7 @@ RSpec.describe 'ShowAccount', type: :system do
       experience: experience
     )
   end
-  let(:name) {"南原さん"}
+  let(:name) {"ナンパ仙人"}
   let(:introduction) {"ナンパ歴3年です！新宿でよく活動しています！よろしくお願いします！"}
   let(:age) {28}
   let(:prefecture_code) {13} # 東京都

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'EditPassword', type: :system do
+RSpec.describe 'EditProfile', type: :system do
   let(:user) {create(:user, :without_profile)}
   let(:introduction) {"ナンパ初心者です！よろしくおねがいいたします！"}
   let(:age) {"24"}
@@ -22,8 +22,11 @@ RSpec.describe 'EditPassword', type: :system do
 
         # フォームを埋めていって
         fill_in "user[introduction]", with: introduction
-        select age, from: "user[age]"
-        select prefecture, from: "user[prefecture_code]"
+        # 年齢を選択
+        select_from_dropdown("#user_age_select_box > .dropdown", age) # 年齢を選択
+        prefecture_select_box = find("#user_prefecture_code_select_box > .dropdown") # 活動地域を選択
+        prefecture_select_box.click
+        prefecture_select_box.find(".menu .item", text: prefecture).click
         fill_in "user[experience]", with: experience
         click_button "プロフィール更新"
         sleep 0.1

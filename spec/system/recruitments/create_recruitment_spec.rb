@@ -18,7 +18,7 @@ RSpec.describe 'CreateRecruitment', type: :system do
     fill_in "recruitment[title]", with: title
     fill_in "recruitment[description]", with: description
     fill_in "recruitment[event_date]", with: event_date.strftime("%Y/%m/%d %H:%M")
-    select prefecture, from: 'recruitment[prefecture_code]'
+    select_from_dropdown("#recruitment_prefecture_code_select_box > .dropdown", prefecture) # 都道府県を選択
     fill_in "recruitment[venue]", with: venue
     click_button "作成"
 
