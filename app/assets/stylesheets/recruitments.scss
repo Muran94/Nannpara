@@ -7,10 +7,10 @@
   color: #212121
 }
 .ui.modal > .close {
-  top: 1.0535rem;
-  right: 1rem;
-  color: rgba(0,0,0,.87);
+  top: 1.0535rem !important;
+  right: 1rem !important;
+  color: rgba(0,0,0,.87) !important;
 }
 .ui.dropdown > .menu {
-  min-height: 250px !important;
+  min-height: 150px !important;
 }

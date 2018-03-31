@@ -1,9 +1,9 @@
 .ui.modal
   = semantic_icon("close")
-  .header 都道府県で絞り込む
+  h3.ui.header 都道府県で絞り込む
   .content
     = form_tag recruitments_path, class: "ui form", method: :get do
-      .field(style="height: 300px;")
+      .field(style="height: 250px;")
         = collection_select :search, :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, {prompt: "選択してください"}, {class: "ui search selection dropdown", multiple: ""}
       .field
         = submit_tag "検索", class: "ui button orange basic fluid"
