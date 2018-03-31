@@ -27,7 +27,7 @@
           .column.sixteen.wide
             // 投稿タイトルと投稿本文
             h2.ui.header.dividing.break-word= @recruitment.title
-            p(style="min-height: 100px; margin-bottom: 30px;")= simple_format(h(@recruitment.description))
+            p= simple_format(h(@recruitment.description))
           .three.column.row
             .column
               // 開催日時
