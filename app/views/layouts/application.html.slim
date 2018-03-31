@@ -4,6 +4,7 @@ html
     title NANBARA | ナンパ師のSNS・仲間募集掲示板
     = csrf_meta_tags
     meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport"
+    = analytics_init if Rails.env.production?
     = favicon_link_tag("site_logo_favicon.png")
     = favicon_link_tag("site_logo_favicon.png", rel: "apple-touch-icon")
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
