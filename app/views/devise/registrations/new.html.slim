@@ -10,8 +10,16 @@
     .field.required
       = f.label :email, "メールアドレス"
       = f.email_field :email, autocomplete: "email", placeholder: "sample@gmail.com"
+    .field
+      .ui.checkbox
+        = f.label :direct_mail, "ダイレクトメールを受け付ける"
+        = f.check_box :direct_mail, {checked: true}, true, false
+    p(style="font-size: 11px; color: #6b6b6b;") ※ ダイレクトメールを受け付けると、あなたのメールアドレスに対してメールを直接送信できるリンクが表示されます。なお、プロフィール編集画面で、後から設定を変更することができます。
     .field.required
       = f.label :password, "パスワード"
       = f.password_field :password, autocomplete: "off", placeholder: "********"
 
     = f.submit "登録", class: "ui fluid largered submit button orange"
+
+javascript:
+  $('.ui.checkbox').checkbox();

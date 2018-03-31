@@ -47,10 +47,14 @@
                 = semantic_icon("map map outline")
                 .content 開催場所
               p.break-word= @recruitment.venue
+          - if @recruitment.user.direct_mail
+            .column.sixteen.wide
+              = mail_to @recruitment.user.email, "募集主にダイレクトメールを送る", class: "ui button orange basic fluid"
           .column.sixteen.wide
             // 右側に投稿の作成日時
             div(style="color: #bbb; font-size: 12px; text-align: right;")
               = %(#{@recruitment.format_created_at}に更新)
+
 
   .row
     .column
