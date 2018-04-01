@@ -34,6 +34,7 @@ class User < ApplicationRecord
 
   has_many :recruitments, dependent: :destroy
   has_many :messages, dependent: :destroy
+  has_many :tweets, dependent: :destroy
 
   MAXIMUM_NAME_LENGTH = 16
   validates :name, uniqueness: true, presence: true, length: { maximum: MAXIMUM_NAME_LENGTH }, exclusion: {in: %w(南原 南原さん 管理人)}

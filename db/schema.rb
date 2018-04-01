@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180331055520) do
+ActiveRecord::Schema.define(version: 20180331124928) do
 
   create_table "messages", force: :cascade do |t|
     t.text "message"
@@ -33,6 +33,14 @@ ActiveRecord::Schema.define(version: 20180331055520) do
     t.integer "prefecture_code"
     t.boolean "closed", default: false
     t.index ["user_id"], name: "index_recruitments_on_user_id"
+  end
+
+  create_table "tweets", force: :cascade do |t|
+    t.text "content"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_tweets_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

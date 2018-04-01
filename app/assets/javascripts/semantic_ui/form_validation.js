@@ -148,6 +148,18 @@ $(document).on('turbolinks:load', function() {
             prompt: '画像を選択してください。'
           }
         ]
+      },
+      'tweet[content]': {
+        rules: [
+          {
+            type: 'maxLength[512]',
+            prompt : '512文字以下で入力してください。'
+          },
+          {
+            type: 'empty',
+            prompt : '入力必須です。'
+          },
+        ]
       }
     }
   });

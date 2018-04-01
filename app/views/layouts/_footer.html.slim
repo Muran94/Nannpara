@@ -4,7 +4,7 @@ ruby:
   copyright_format_year = current_year == service_start_year ? service_start_year : %(#{service_start_year} - #{current_year})
 .ui.black.inverted.vertical.footer.segment
   .ui.center.aligned.container
-    p.ui.inverted =%(© #{copyright_format_year} NANBARA All rights reserved.)
     p
       | 問い合わせは
       = link_to "こちら", service_inquiry_path
+    p.ui.inverted =%(© #{copyright_format_year} NANBARA All rights reserved.)

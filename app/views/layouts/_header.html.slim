@@ -4,22 +4,23 @@
       .ui.container
         = link_to root_path do
           = image_tag("site_logo.png", class: "site-logo")
+        .item
+          = link_to recruitments_path do
+            = semantic_icon("rss")
+            | 募集一覧
+        .item
+          = link_to tweets_path do
+            = semantic_icon("comments")
+            | つぶやき一覧
         .right.menu
           - if current_user
             .item
               = link_to new_recruitment_path, class: "ui button orange" do
                 = semantic_icon("pencil alternate")
                 | 募集をかける
-            .ui.simple.dropdown.item
-              = image_tag(current_user.thumb_image_url, class: "ui image mini circular")
-              = semantic_icon("dropdown")
-              .menu
-                = link_to profile_account_path(current_user), class: "item" do
-                  = semantic_icon("user")
-                  | マイページ
-                = link_to destroy_user_session_path, method: :delete, class: "item" do
-                  = semantic_icon("sign out alternate")
-                  | ログアウト
+            .item
+              = link_to profile_account_path(current_user) do
+                = image_tag(current_user.thumb_image_url, class: "ui image mini circular")
           - else
             .item
               = link_to new_user_session_path do
