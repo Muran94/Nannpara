@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title NANBARA | ナンパ師のSNS・仲間募集掲示板
+    title= full_title(yield(:title))
     = csrf_meta_tags
     meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport"
     = analytics_init if Rails.env.production?

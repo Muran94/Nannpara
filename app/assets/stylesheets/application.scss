@@ -72,3 +72,13 @@ html.ios,
 html.ios body {
   height: initial !important;
 }
+#bottom-fixed-tweet-button {
+  display: inline-block;
+  z-index: 5;
+  position: fixed;
+  bottom: 15px;
+  right: 20px;
+}
+.comment + .comment {
+  border-top: 1px solid #eee !important;
+}

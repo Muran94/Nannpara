@@ -1,0 +1,32 @@
+.ui.segment.basic.bg-white
+  .ui.comments
+    - if current_user && @tweet.owner?(current_user)
+      .ui.dropdown.right.top.pointing#tweet-menu-dropdown
+        = semantic_icon("ellipsis horizontal", id: "tweet-menu")
+        .menu
+          = link_to tweet_path(@tweet), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "item", id: "tweet-delete-link"  do
+            = semantic_icon("trash alternate")
+            | 削除
+    .comment
+      = link_to profile_account_path(@tweet.user), class: "avatar" do
+        = image_tag(@tweet.format_image_url("thumb"))
+      .content
+        = link_to profile_account_path(@tweet.user), class: "author" do
+          = @tweet.user.name
+        .metadata
+          span.date= @tweet.created_at.strftime("%Y/%m/%d %M:%D")
+        .text= @tweet.content
+
+= link_to tweets_path, class: "ui button orange fluid" do
+  = semantic_icon("comments")
+  | つぶやき一覧に戻る
+
+scss:
+  #tweet-menu-dropdown {
+    z-index: 4;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+javascript:
+  $('.ui.dropdown').dropdown();

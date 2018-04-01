@@ -9,8 +9,11 @@
 
   .ui.divider(style="margin-top: 0; padding-top: 0;")
 
-  .ui.vertically.divided.padded.grid
-    = render @recruitments
+  - if @recruitments.present?
+    .ui.vertically.divided.padded.grid
+      = render @recruitments
+  - else
+    | まだ募集がありません。
 
 .ui.center.aligned.container
   = paginate @recruitments
