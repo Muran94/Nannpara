@@ -7,4 +7,4 @@
     = link_to tweet_path(tweet) do
       .metadata
         span.date= tweet.created_at.strftime("%Y/%m/%d %M:%D")
-      .text= tweet.content
+      .text= simple_format(h(tweet.content))
