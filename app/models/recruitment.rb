@@ -2,15 +2,18 @@
 #
 # Table name: recruitments
 #
-#  id              :integer          not null, primary key
-#  title           :string
-#  description     :text
-#  event_date      :datetime
-#  venue           :string
-#  user_id         :integer
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  prefecture_code :integer
+#  id                                   :integer          not null, primary key
+#  title                                :string
+#  description                          :text
+#  event_date                           :datetime
+#  venue                                :string
+#  user_id                              :integer
+#  created_at                           :datetime         not null
+#  updated_at                           :datetime         not null
+#  prefecture_code                      :integer
+#  closed                               :boolean          default(FALSE)
+#  linked_with_kanto_nanpa_messageboard :boolean
+#  kanto_nanpa_messageboard_delete_key  :string
 #
 
 class Recruitment < ApplicationRecord
@@ -27,8 +30,11 @@ class Recruitment < ApplicationRecord
   MAXIMUM_VENUE_LENGTH = 16
   validates :venue, presence: true, length: { maximum: MAXIMUM_VENUE_LENGTH }
   validate :_event_date_cannot_be_past
+  validates :kanto_nanpa_messageboard_delete_key, length: { maximum: 6 }
 
   jp_prefecture :prefecture_code
+
+  before_create :_prepare_kanto_nanpa_messageboard_delete_key
 
   def owner?(current_user)
     current_user.id == user_id
@@ -39,6 +45,12 @@ class Recruitment < ApplicationRecord
   def _event_date_cannot_be_past
     if event_date.present? && event_date < Time.zone.now
       errors.add(:event_date, '開催日時に過去の日時を指定することはできません。')
+    end
+  end
+
+  def _prepare_kanto_nanpa_messageboard_delete_key
+    if kanto_nanpa_messageboard_delete_key.empty? && linked_with_kanto_nanpa_messageboard?
+      self.kanto_nanpa_messageboard_delete_key = rand(100000..999999)
     end
   end
 end

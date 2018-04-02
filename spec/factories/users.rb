@@ -13,6 +13,8 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string
 #  last_sign_in_ip        :string
+#  failed_attempts        :integer          default(0), not null
+#  locked_at              :datetime
 #  name                   :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
@@ -20,6 +22,8 @@
 #  experience             :string
 #  age                    :integer
 #  prefecture_code        :integer
+#  image                  :string
+#  direct_mail            :boolean
 #
 
 FactoryGirl.define do
