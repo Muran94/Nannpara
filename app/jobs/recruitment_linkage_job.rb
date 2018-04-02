@@ -33,7 +33,7 @@ class RecruitmentLinkageJob < ApplicationJob
 
       session.find("/html/body/form/table/tbody/tr[6]/td[2]/input").click # 投稿ボタンをクリック
       sleep 2
-      session.driver.browser.switch_to.alert.accept # confirmダイアログのOKボタンをクリック
+      session.driver.switch_to.alert.accept # confirmダイアログのOKボタンをクリック
     end
   end
   private
