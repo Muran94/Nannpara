@@ -6,8 +6,6 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 5.1.5'
-gem 'sqlite3', group: [:development, :test]
-gem 'pg', group: :production
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -25,7 +23,6 @@ gem 'active_decorator-rspec'
 gem 'jp_prefecture'
 gem 'kaminari'
 gem 'carrierwave'
-gem 'fog', '1.42', group: [:production]
 gem 'rmagick'
 gem 'seedbank'
 gem 'google-analytics-rails'
@@ -34,6 +31,7 @@ gem 'selenium-webdriver'
 gem 'chromedriver-helper'
 
 group :development, :test do
+  gem 'sqlite3'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
   gem 'factory_girl_rails'
@@ -57,6 +55,11 @@ group :test do
   gem 'database_cleaner', '~> 1.3.0' # テスト実行後にDBをクリア
   gem 'simplecov', require: false # テストカバレッジ(テストカバー率)
   gem 'email_spec' # メール送信系のカスタムマッチャを提供
+end
+
+group :production do
+  gem 'pg'
+  gem 'fog', '1.42'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
