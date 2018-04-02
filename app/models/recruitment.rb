@@ -32,8 +32,9 @@ class Recruitment < ApplicationRecord
 
   MAXIMUM_VENUE_LENGTH = 16
   validates :venue, presence: true, length: { maximum: MAXIMUM_VENUE_LENGTH }
-  validate :_event_date_cannot_be_past
   validates :kanto_nanpa_messageboard_delete_key, length: { maximum: 6 }
+
+  validate :_event_date_cannot_be_past
 
   jp_prefecture :prefecture_code
 
