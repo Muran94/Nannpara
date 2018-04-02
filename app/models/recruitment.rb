@@ -36,6 +36,7 @@ class Recruitment < ApplicationRecord
 
   validate :_event_date_cannot_be_past
 
+
   jp_prefecture :prefecture_code
 
   before_create :_prepare_kanto_nanpa_messageboard_delete_key
