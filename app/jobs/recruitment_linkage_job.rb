@@ -1,5 +1,5 @@
-require 'nokogiri'
 require 'capybara'
+require 'selenium-webdriver'
 
 class RecruitmentLinkageJob < ApplicationJob
   queue_as :default
