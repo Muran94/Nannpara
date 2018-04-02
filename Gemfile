@@ -30,10 +30,11 @@ gem 'rmagick'
 gem 'seedbank'
 gem 'google-analytics-rails'
 gem 'capybara', '~> 2.13'
+gem 'selenium-webdriver'
+gem 'chromedriver-helper'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'selenium-webdriver'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'faker'
@@ -56,7 +57,6 @@ group :test do
   gem 'database_cleaner', '~> 1.3.0' # テスト実行後にDBをクリア
   gem 'simplecov', require: false # テストカバレッジ(テストカバー率)
   gem 'email_spec' # メール送信系のカスタムマッチャを提供
-  gem 'chromedriver-helper'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
