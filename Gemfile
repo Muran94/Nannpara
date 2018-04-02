@@ -29,10 +29,10 @@ gem 'fog', '1.42', group: [:production]
 gem 'rmagick'
 gem 'seedbank'
 gem 'google-analytics-rails'
+gem 'capybara', '~> 2.13'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
