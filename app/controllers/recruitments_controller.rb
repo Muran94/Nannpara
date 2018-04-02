@@ -24,6 +24,7 @@ class RecruitmentsController < ApplicationController
     @recruitment = current_user.recruitments.build(_recruitment_params)
     if @recruitment.save
       flash[:success] = '募集記事の作成が完了しました。'
+      RecruitmentLinkageJob.perform_later(@recruitment)
       redirect_to @recruitment
     else
       flash[:error] = '募集記事の作成に失敗しました。'
@@ -69,7 +70,9 @@ class RecruitmentsController < ApplicationController
       :description,
       :event_date,
       :prefecture_code,
-      :venue
+      :venue,
+      :linked_with_kanto_nanpa_messageboard,
+      :kanto_nanpa_messageboard_delete_key
     )
   end
 end

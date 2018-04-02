@@ -57,6 +57,14 @@
             div(style="color: #bbb; font-size: 12px; text-align: right;")
               = %(#{@recruitment.format_created_at}に更新)
 
+  - if current_user && @recruitment.owner?(current_user) && @recruitment.linked_with_kanto_nanpa_messageboard?
+    .row
+      .column
+        // 「関東ナンパ友募集掲示板」のコメントの削除キー
+        .ui.segment.basic.bg-white
+          h5.ui.header.dividing 「関東ナンパ友募集掲示板」コメント削除キー
+          p= @recruitment.kanto_nanpa_messageboard_delete_key
+
 
   .row
     .column

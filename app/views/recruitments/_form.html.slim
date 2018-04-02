@@ -24,4 +24,13 @@
       = f.label "開催場所"
       = f.text_field :venue, placeholder: "渋谷ハチ公前"
 
+  .field.hidden#linked-with-kanto-nanpa-messageboard-field
+    = f.check_box :linked_with_kanto_nanpa_messageboard, id: "recruitment_linked_with_kanto_nanpa_messageboard"
+    = f.label :linked_with_kanto_nanpa_messageboard, "「関東ナンパ友募集掲示板」にも掲載する", class: "check_css"
+    p(style="font-size: 11px; color: #6b6b6b;") ※ 登録している会員情報（メールアドレス、年齢、ナンパ歴）と、募集内容に応じて自動で「関東ナンパ友募集掲示板」にコメントを投稿します。）
+  .field.hidden#kanto-nanpa-messageboard-delete-key-field
+    = f.label :kanto_nanpa_messageboard_delete_key, "削除キー（6文字まで）"
+    = f.text_field :kanto_nanpa_messageboard_delete_key
+    p(style="font-size: 11px; color: #6b6b6b;") ※ コメントを削除する際に必要です。未入力の場合は自動生成されます。
+
   = f.submit class: "ui fluid orange submit button"
