@@ -7,10 +7,6 @@ class RecruitmentLinkageJob < ApplicationJob
   # 関東ナンパ友募集掲示板のURL
   KANTO_NANPA_MESSAGEBOARD_URL = "http://realnp.com/bbs/bbs.php".freeze
 
-  CHROMEDRIVER_PATH = "/app/vendor/bundle/bin/chromedriver"
-
-  Selenium::WebDriver::Chrome.driver_path = CHROMEDRIVER_PATH if Rails.env.production?
-
   def perform(recruitment)
     if recruitment.linked_with_kanto_nanpa_messageboard
       chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
