@@ -28,6 +28,13 @@ RSpec.describe 'ShowAccount', type: :system do
       visit profile_account_path user
       sleep 0.1
 
+      # タブの表示確認
+      within "#account-tab" do
+        expect(page).to have_content "プロフィール"
+        expect(page).to have_content "募集一覧"
+        expect(page).to have_content "つぶやき一覧"
+      end
+
       # アカウント情報が表示されているか
       expect(page).to have_content name
       expect(page).to have_content introduction
