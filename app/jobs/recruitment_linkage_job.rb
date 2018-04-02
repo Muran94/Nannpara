@@ -23,7 +23,7 @@ class RecruitmentLinkageJob < ApplicationJob
 
       Capybara.default_driver = :chrome
       Capybara.default_selector = :xpath
-      session = Capybara::Session.new(:selenium_chrome_headless)
+      session = Capybara::Session.new(:chrome)
       session.visit KANTO_NANPA_MESSAGEBOARD_URL
       session.fill_in "name", with: recruitment.user.name
       session.fill_in "mail", with: recruitment.user.email
