@@ -24,9 +24,12 @@ class Recruitment < ApplicationRecord
 
   MAXIMUM_TITLE_LENGTH = 64
   validates :title, presence: true, length: { maximum: MAXIMUM_TITLE_LENGTH }
+
   MAXIMUM_DESCRIPTION_LENGTH = 1024
   validates :description, presence: true, length: { maximum: MAXIMUM_DESCRIPTION_LENGTH }
+
   validates :prefecture_code, inclusion: { in: JpPrefecture::Prefecture.all.map(&:code) }
+
   MAXIMUM_VENUE_LENGTH = 16
   validates :venue, presence: true, length: { maximum: MAXIMUM_VENUE_LENGTH }
   validate :_event_date_cannot_be_past
