@@ -1,0 +1,28 @@
+.ui.three.item.secondary.menu
+  = link_to "１日", new_counter_path(period: "day"), class: "ui item orange #{activate_tab_if_period('day')}"
+  = link_to "1週間", new_counter_path(period: "week"), class: "ui item orange #{activate_tab_if_period('week')}"
+  = link_to "１ヶ月", new_counter_path(period: "month"), class: "ui item orange #{activate_tab_if_period('month')}"
+
+.ui.segment.basic.bg-white
+  h4.ui.header.dividing.center.aligned 声かけ
+  .count = @speak_count
+  = link_to "1UP", counters_path(counter_type: "声かけ", period: params["period"]), method: :post, class: "ui button fluid large yellow"
+
+.ui.segment.basic.bg-white
+  h4.ui.header.dividing.center.aligned バンゲ
+  .count = @tel_count
+  = link_to "1UP", counters_path(counter_type: "バンゲ", period: params["period"]), method: :post, class: "ui button fluid large orange"
+
+.ui.segment.basic.bg-white
+  h4.ui.header.dividing.center.aligned 即
+  .count= @sex_count
+  = link_to "1UP", counters_path(counter_type: "即", period: params["period"]), method: :post, class: "ui button fluid large red"
+
+scss:
+  .count {
+    font-size: 32px;
+    font-weight: bold;
+    color: #303030;
+    text-align: center;
+    padding: 15px 0;
+  }

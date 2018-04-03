@@ -54,7 +54,7 @@ class Recruitment < ApplicationRecord
   end
 
   def _prepare_kanto_nanpa_messageboard_delete_key
-    if kanto_nanpa_messageboard_delete_key.empty? && linked_with_kanto_nanpa_messageboard?
+    if kanto_nanpa_messageboard_delete_key.blank? && linked_with_kanto_nanpa_messageboard?
       self.kanto_nanpa_messageboard_delete_key = rand(100000..999999)
     end
   end

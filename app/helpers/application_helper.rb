@@ -8,4 +8,8 @@ module ApplicationHelper
       page_title + " | " + base_title
     end
   end
+
+  def activate_tab_if_correct_page(action_name)
+    'active' if controller.action_name == action_name
+  end
 end

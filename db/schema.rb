@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180402073140) do
+ActiveRecord::Schema.define(version: 20180402151552) do
+
+  create_table "counters", force: :cascade do |t|
+    t.string "counter_type"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_counters_on_user_id"
+  end
 
   create_table "messages", force: :cascade do |t|
     t.text "message"

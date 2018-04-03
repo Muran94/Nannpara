@@ -34,7 +34,9 @@ after :users do
       venue: VENUE_SAMPLES.sample,
       event_date: event_date,
       user_id: User.all.to_a.sample.id,
-      closed: closed
+      closed: closed,
+      linked_with_kanto_nanpa_messageboard: false,
+      kanto_nanpa_messageboard_delete_key: nil
     )
     recruitment.save(validate: false)
   end
