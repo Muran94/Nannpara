@@ -27,6 +27,10 @@
       = semantic_icon("comments")
       | つぶやき一覧
   .item
+    = link_to new_counter_path, class: "no-default-link-style" do
+      = semantic_icon("plus")
+      | カウンター
+  .item
     = link_to service_inquiry_path, class: "no-default-link-style" do
       = semantic_icon("mail")
       | 問い合わせ

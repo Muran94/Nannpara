@@ -12,6 +12,10 @@
           = link_to tweets_path do
             = semantic_icon("comments")
             | つぶやき一覧
+        .item
+          = link_to new_counter_path do
+            = semantic_icon("plus")
+            | カウンター
         .right.menu
           - if current_user
             .item
