@@ -32,7 +32,7 @@ FactoryGirl.define do
     password 'password'
     password_confirmation 'password'
 
-    sequence(:name) {|n| "ナンパ師#{n}号"}
+    sequence(:name) { |n| "ナンパ師#{n}号" }
     introduction 'ナンパ初心者です！よろしくお願いします！'
     experience '3年'
     age 33
@@ -50,6 +50,12 @@ FactoryGirl.define do
     trait :with_recruitments do
       after(:create) do |user|
         create_list(:recruitment, 3, user: user)
+      end
+    end
+
+    trait :with_tweets do
+      after(:create) do |user|
+        create_list(:tweet, 3, user: user)
       end
     end
   end

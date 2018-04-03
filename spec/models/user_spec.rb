@@ -34,10 +34,10 @@ RSpec.describe User, type: :model do
       context 'uniquenessチェック' do
         it 'すでに同じ名前が使用されている場合はバリデーションに引っかかり 存在しない場合は引っかからない' do
           aggregate_failures do
-            user = build(:user, name: "spider")
+            user = build(:user, name: 'spider')
             expect(user.valid?).to be_truthy
             user.save
-            expect(build_stubbed(:user, name: "spider").valid?).to be_falsy
+            expect(build_stubbed(:user, name: 'spider').valid?).to be_falsy
           end
         end
       end
@@ -70,10 +70,10 @@ RSpec.describe User, type: :model do
       context 'exclusionチェック' do
         it '特定の値を持つ場合はバリデーションに引っかかること 持たない場合はバリデーションに引っかからない' do
           aggregate_failures do
-            expect(build_stubbed(:user, name: "南原さん").valid?).to be_falsy
-            expect(build_stubbed(:user, name: "南原").valid?).to be_falsy
-            expect(build_stubbed(:user, name: "管理人").valid?).to be_falsy
-            expect(build_stubbed(:user, name: "一般人").valid?).to be_truthy
+            expect(build_stubbed(:user, name: '南原さん').valid?).to be_falsy
+            expect(build_stubbed(:user, name: '南原').valid?).to be_falsy
+            expect(build_stubbed(:user, name: '管理人').valid?).to be_falsy
+            expect(build_stubbed(:user, name: '一般人').valid?).to be_truthy
           end
         end
       end
@@ -87,28 +87,47 @@ RSpec.describe User, type: :model do
             expect(build(:user, age: User::MAXIMUM_AGE + 1).valid?).to be_falsy
           end
         end
-        it "ageが #{User::MINIMUM_AGE}歳以上、#{User::MAXIMUM_AGE}歳以下、または、空（"" or nil) であればバリデーションに引っかからない" do
+        it "ageが #{User::MINIMUM_AGE}歳以上、#{User::MAXIMUM_AGE}歳以下、または、空（"' or nil) であればバリデーションに引っかからない' do
           aggregate_failures do
             expect(build(:user, age: User::MINIMUM_AGE).valid?).to be_truthy
             expect(build(:user, age: User::MINIMUM_AGE + 10).valid?).to be_truthy
             expect(build(:user, age: User::MAXIMUM_AGE).valid?).to be_truthy
-            expect(build(:user, age: "").valid?).to be_truthy
+            expect(build(:user, age: '').valid?).to be_truthy
             expect(build(:user, age: nil).valid?).to be_truthy
           end
         end
       end
     end
 
-    context "name" do
-      context "サイズチェック" do
-        let(:user) {build_stubbed(:user, image: nil)}
-        it "画像サイズが5MBを超えたらバリデーションに引っかかり、以下なら引っかからない" do
+    context 'name' do
+      context 'サイズチェック' do
+        let(:user) { build_stubbed(:user, image: nil) }
+        it '画像サイズが5MBを超えたらバリデーションに引っかかり、以下なら引っかからない' do
           aggregate_failures do
             user.image = Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/image/large_sample_image.jpg'))
             expect(user.valid?).to be_falsy
             user.image = Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/image/sample_image.jpg'))
             expect(user.valid?).to be_truthy
           end
+        end
+      end
+    end
+  end
+
+  context "メソッドテスト" do
+    describe "#thumb_image_url" do
+      context "ユーザーがプロフィール画像を設定していない場合" do
+        let(:user) {build_stubbed(:user, image: nil)}
+
+        it "no_user_image.pngを返す" do
+         expect(user.thumb_image_url).to eq "no_user_image.png"
+        end
+      end
+      context "ユーザーガプロフィール画像を設定している場合" do
+        let(:user) {build_stubbed(:user)}
+
+        it "サムネールサイズの画像URLを返す" do
+         expect(user.thumb_image_url).to eq user.image.thumb.url
         end
       end
     end

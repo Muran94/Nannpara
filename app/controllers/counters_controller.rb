@@ -3,17 +3,15 @@ class CountersController < ApplicationController
 
   def new
     period = _convert_period_to_date_object
-    @speak_count = current_user.counters.where(counter_type: "声かけ").where('created_at >= ?', period).count
-    @tel_count = current_user.counters.where(counter_type: "バンゲ").where('created_at >= ?', period).count
-    @sex_count = current_user.counters.where(counter_type: "即").where('created_at >= ?', period).count
+    @speak_count = current_user.counters.where(counter_type: '声かけ').where('created_at >= ?', period).count
+    @tel_count = current_user.counters.where(counter_type: 'バンゲ').where('created_at >= ?', period).count
+    @sex_count = current_user.counters.where(counter_type: '即').where('created_at >= ?', period).count
   end
 
   def create
     @counter = current_user.counters.build(_counters_params)
-    unless @counter.save
-      flash[:error] = "不正な操作です。もう一度やり直してください。"
-    end
-    redirect_to new_counter_path(period: params["period"])
+    flash[:error] = '不正な操作です。もう一度やり直してください。' unless @counter.save
+    redirect_to new_counter_path(period: params['period'])
   end
 
   private
@@ -23,15 +21,15 @@ class CountersController < ApplicationController
   end
 
   def _convert_period_to_date_object
-    case params["period"]
-    when "day"
+    case params['period']
+    when 'day'
       1.day.ago
-    when "week"
+    when 'week'
       1.week.ago
-    when "month"
+    when 'month'
       1.month.ago
     else
-      params["period"] = "day"
+      params['period'] = 'day'
       1.day.ago
     end
   end

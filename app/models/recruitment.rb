@@ -36,7 +36,6 @@ class Recruitment < ApplicationRecord
 
   validate :_event_date_cannot_be_past
 
-
   jp_prefecture :prefecture_code
 
   before_create :_prepare_kanto_nanpa_messageboard_delete_key
@@ -55,7 +54,7 @@ class Recruitment < ApplicationRecord
 
   def _prepare_kanto_nanpa_messageboard_delete_key
     if kanto_nanpa_messageboard_delete_key.blank? && linked_with_kanto_nanpa_messageboard?
-      self.kanto_nanpa_messageboard_delete_key = rand(100000..999999)
+      self.kanto_nanpa_messageboard_delete_key = rand(100_000..999_999)
     end
   end
 end
