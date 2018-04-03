@@ -104,11 +104,11 @@ RSpec.describe Recruitment, type: :model do
     context 'venue' do
       context 'lengthチェック' do
         it 'venueの長さが 17文字以上 ならバリデーションに引っかかる' do
-          expect(build_stubbed(:recruitment, venue: '*' * (Recruitment::MAXIMUM_VENUE_LENGTH  + 1)).valid?).to be_falsy
+          expect(build_stubbed(:recruitment, venue: '*' * (Recruitment::MAXIMUM_VENUE_LENGTH + 1)).valid?).to be_falsy
         end
         it 'venueの長さが 16文字以下 ならバリデーションに引っかからない' do
           expect(build_stubbed(:recruitment, venue: '*' * Recruitment::MAXIMUM_VENUE_LENGTH).valid?).to be_truthy
-          expect(build_stubbed(:recruitment, venue: '*' * (Recruitment::MAXIMUM_VENUE_LENGTH  - 1)).valid?).to be_truthy
+          expect(build_stubbed(:recruitment, venue: '*' * (Recruitment::MAXIMUM_VENUE_LENGTH - 1)).valid?).to be_truthy
         end
       end
     end
@@ -128,6 +128,20 @@ RSpec.describe Recruitment, type: :model do
         end
         it 'event_dateの日時が 未来 の場合、バリデーションに引っかからない' do
           expect(build_stubbed(:recruitment, event_date: 1.day.from_now).valid?).to be_truthy
+        end
+      end
+    end
+  end
+
+  context "コールバックテスト" do
+    describe "#_prepare_kanto_nanpa_messageboard_delete_key" do
+      let(:recruitment) {build(:recruitment, kanto_nanpa_messageboard_delete_key: "", linked_with_kanto_nanpa_messageboard: true)}
+
+      it "kanto_nanpa_messageboard_delete_keyが空のまま入力された場合は、６桁の整数値を自動で生成し補完する" do
+        aggregate_failures do
+          expect(recruitment.kanto_nanpa_messageboard_delete_key).to eq ""
+          recruitment.save(validate: false)
+          expect(recruitment.kanto_nanpa_messageboard_delete_key).to match(/^\d{6}$/)
         end
       end
     end

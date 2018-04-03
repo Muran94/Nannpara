@@ -152,8 +152,8 @@ $(document).on('turbolinks:load', function() {
       'tweet[content]': {
         rules: [
           {
-            type: 'maxLength[512]',
-            prompt : '512文字以下で入力してください。'
+            type: 'maxLength[140]',
+            prompt : '140文字以下で入力してください。'
           },
           {
             type: 'empty',

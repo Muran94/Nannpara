@@ -1,5 +1,5 @@
 Rails.application.configure do
-  GA.tracker = "UA-116675254-1"
+  GA.tracker = 'UA-116675254-1'
 
   # Settings specified here will take precedence over those in config/application.rb.
 

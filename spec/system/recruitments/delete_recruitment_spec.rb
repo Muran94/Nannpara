@@ -1,17 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe 'DeleteRecruitment', type: :system do
-  let(:user) {create(:user)}
-  let(:other_user) {create(:user)}
+  let(:user) { create(:user) }
+  let(:other_user) { create(:user) }
 
-  let(:recruitment) {create(:recruitment, user: user)}
+  let(:recruitment) { create(:recruitment, user: user) }
 
   it %(オーナーによる募集記事削除テスト - 正常系) do
     # 募集記事編集ページに遷移
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
     visit recruitment_path(recruitment)
-    find("#recruitment-menu").click # 募集記事の設定メニューを開く
-    find("#recruitment-delete-link").click # 削除リンクをクリック
+    find('#recruitment-menu').click # 募集記事の設定メニューを開く
+    find('#recruitment-delete-link').click # 削除リンクをクリック
     page.driver.browser.switch_to.alert.accept # confirmダイアログのOKボタンをクリック
 
     # 削除されたことを確認
@@ -23,6 +23,6 @@ RSpec.describe 'DeleteRecruitment', type: :system do
     expect(current_path).to eq root_path
 
     # flashメッセージが表示されていることを確認
-    expect(page).to have_content "募集記事の削除が完了しました。"
+    expect(page).to have_content '募集記事の削除が完了しました。'
   end
 end

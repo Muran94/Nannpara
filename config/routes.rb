@@ -22,5 +22,5 @@ Rails.application.routes.draw do
   end
   resources :tweets, only: [:index, :show, :new, :create, :destroy]
   resources :counters, only: [:new, :create]
-  get "service/inquiry"
+  get 'service/inquiry'
 end

@@ -4,8 +4,8 @@ class RecruitmentsController < ApplicationController
   before_action :_redirect_unless_owner, only: [:edit, :update, :destroy]
 
   def index
-    if params["search"].present? && params["search"]["prefecture_code"].present?
-      @recruitments = Recruitment.where(prefecture_code: params["search"]["prefecture_code"].map(&:to_i).compact).order(:closed, :event_date).includes(:user).page(params[:page])
+    if params['search'].present? && params['search']['prefecture_code'].present?
+      @recruitments = Recruitment.where(prefecture_code: params['search']['prefecture_code'].map(&:to_i).compact).order(:closed, :event_date).includes(:user).page(params[:page])
     else
       @recruitments = Recruitment.order(:closed, :event_date).includes(:user).page(params[:page])
     end
@@ -32,8 +32,7 @@ class RecruitmentsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @recruitment.update(_recruitment_params)
@@ -59,7 +58,7 @@ class RecruitmentsController < ApplicationController
 
   def _redirect_unless_owner
     unless @recruitment.user == current_user
-      flash[:error] = "不正な操作です。もう一度最初からやり直してください。"
+      flash[:error] = '不正な操作です。もう一度最初からやり直してください。'
       redirect_to root_path
     end
   end

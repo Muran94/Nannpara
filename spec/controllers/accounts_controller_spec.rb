@@ -47,7 +47,7 @@ RSpec.describe AccountsController, type: :controller do
     end
   end
 
-  describe %(GET #profile) do
+  describe %(GET #recruitments) do
     before { get :recruitments, params: params }
 
     context '自分のマイページを確認' do
@@ -88,6 +88,31 @@ RSpec.describe AccountsController, type: :controller do
 
         it '@userの値が正しいこと' do
           expect(assigns(:recruitments)).to match_array other_user.recruitments
+        end
+      end
+    end
+  end
+
+  describe "#tweets" do
+    let(:user) {create(:user, :with_tweets)}
+    let(:params) {{id: user.id}}
+    before {get :tweets, params: params}
+
+    context "レスポンス" do
+      it "レスンポンスコード200を返却 && tweetsテンプレートをrender" do
+        aggregate_failures do
+          expect(response).to have_http_status 200
+          expect(response).to render_template :tweets
+        end
+      end
+    end
+
+    context "インスタンス変数" do
+      it "userのインスタンス変数とtweetsのインタンス変数がセットされており、tweetsの数が3である" do
+        aggregate_failures do
+          expect(assigns(:user)).to eq user
+          expect(assigns(:tweets)).to eq user.tweets.order('created_at DESC')
+          expect(assigns(:tweets).count).to eq 3
         end
       end
     end
@@ -141,7 +166,7 @@ RSpec.describe AccountsController, type: :controller do
         }
       end
 
-      context "正常系" do
+      context '正常系' do
         it 'プロフィールの更新が完了する && flash[:sucess]の値が正しい && マイページにリダイレクト' do
           aggregate_failures do
             expect(user.age).to eq User::MINIMUM_AGE # 更新前の値を検証
@@ -157,8 +182,8 @@ RSpec.describe AccountsController, type: :controller do
         end
       end
 
-      context "異常系" do
-        let(:new_experience) {"あ" * (User::MAXIMUM_INTRODUCTION_LENGTH + 1)}
+      context '異常系' do
+        let(:new_experience) { 'あ' * (User::MAXIMUM_INTRODUCTION_LENGTH + 1) }
         it 'プロフィールの更新に失敗する && flash[:error]の値が正しい && editがrenderされる' do
           aggregate_failures do
             expect(user.age).to eq User::MINIMUM_AGE # 更新前の値を検証

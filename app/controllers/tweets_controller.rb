@@ -4,11 +4,10 @@ class TweetsController < ApplicationController
   before_action :_tweet_owner?, only: [:destroy]
 
   def index
-    @tweets = Tweet.all.order("tweets.created_at DESC").includes(:user).page(params[:page])
+    @tweets = Tweet.all.order('tweets.created_at DESC').includes(:user).page(params[:page])
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @tweet = current_user.tweets.build
@@ -17,10 +16,10 @@ class TweetsController < ApplicationController
   def create
     @tweet = current_user.tweets.build(_tweet_params)
     if @tweet.save
-      flash[:success] = "つぶやきが完了しました。"
+      flash[:success] = 'つぶやきが完了しました。'
       redirect_to tweets_path
     else
-      flash[:error] = "つぶやけませんでした。"
+      flash[:error] = 'つぶやけませんでした。'
       render :new
     end
   end
@@ -43,7 +42,7 @@ class TweetsController < ApplicationController
 
   def _tweet_owner?
     unless @tweet.user == current_user
-      flash[:error] = "不正な操作です。もう一度最初からやり直してください。"
+      flash[:error] = '不正な操作です。もう一度最初からやり直してください。'
       redirect_to tweets_path
     end
   end

@@ -5,7 +5,6 @@ after :users do
   maximum_description_length = Recruitment::MAXIMUM_DESCRIPTION_LENGTH
   maximum_venue_length = Recruitment::MAXIMUM_VENUE_LENGTH
 
-
   TITLE_SAMPLES = %w(
     今日の１９時から出撃予定！仲間募集中！
     新宿歌舞伎町でソロナンパします！５名募集中
@@ -21,7 +20,8 @@ after :users do
     新宿歌舞伎町
     新橋
     池袋東口
-    川崎).push(Faker::Lorem.characters(maximum_venue_length)).push('都')
+    川崎
+  ).push(Faker::Lorem.characters(maximum_venue_length)).push('都')
 
   100.times do
     event_date = rand(-15..30).days.from_now

@@ -11,16 +11,16 @@ RSpec.describe 'ShowAccount', type: :system do
       experience: experience
     )
   end
-  let(:name) {"ナンパ仙人"}
-  let(:introduction) {"ナンパ歴3年です！新宿でよく活動しています！よろしくお願いします！"}
-  let(:age) {28}
-  let(:prefecture_code) {13} # 東京都
-  let(:experience) {"３年"}
+  let(:name) { 'ナンパ仙人' }
+  let(:introduction) { 'ナンパ歴3年です！新宿でよく活動しています！よろしくお願いします！' }
+  let(:age) { 28 }
+  let(:prefecture_code) { 13 } # 東京都
+  let(:experience) { '３年' }
 
-  let(:other_user) {create(:user)}
+  let(:other_user) { create(:user) }
 
-  context "自分のアカウントページを確認" do
-    it "アカウント情報が表示されており、自分にしか見えていないはずの項目が表示されていること" do
+  context '自分のアカウントページを確認' do
+    it 'アカウント情報が表示されており、自分にしか見えていないはずの項目が表示されていること' do
       # アカウントログイン
       login_as user, scope: :user
 
@@ -29,10 +29,10 @@ RSpec.describe 'ShowAccount', type: :system do
       sleep 0.1
 
       # タブの表示確認
-      within "#account-tab" do
-        expect(page).to have_content "プロフィール"
-        expect(page).to have_content "募集一覧"
-        expect(page).to have_content "つぶやき一覧"
+      within '#account-tab' do
+        expect(page).to have_content 'プロフィール'
+        expect(page).to have_content '募集一覧'
+        expect(page).to have_content 'つぶやき一覧'
       end
 
       # アカウント情報が表示されているか
@@ -42,23 +42,23 @@ RSpec.describe 'ShowAccount', type: :system do
       expect(page).to have_content JpPrefecture::Prefecture.find(prefecture_code).name
       expect(page).to have_content experience
 
-      expect(page).to have_css "#edit-image-link" # プロフィール画像編集ボタン
+      expect(page).to have_css '#edit-image-link' # プロフィール画像編集ボタン
 
-      expect(page).to have_css "#account-edit-link"
+      expect(page).to have_css '#account-edit-link'
 
-      expect(page).to have_css "#email-container"
+      expect(page).to have_css '#email-container'
       expect(page).to have_content user.email
-      expect(page).to have_css "#edit-email-link"
+      expect(page).to have_css '#edit-email-link'
 
-      expect(page).to have_css "#password-container"
-      expect(page).to have_css "#edit-password-link"
+      expect(page).to have_css '#password-container'
+      expect(page).to have_css '#edit-password-link'
 
-      expect(page).to have_css "#resign-account-link"
+      expect(page).to have_css '#resign-account-link'
     end
   end
 
-  context "他人のアカウントページを確認" do
-    it "アカウント情報は表示されるが、アカウント編集リンクは表示されないこと" do
+  context '他人のアカウントページを確認' do
+    it 'アカウント情報は表示されるが、アカウント編集リンクは表示されないこと' do
       # まずは未ログインユーザーが人のアカウントページを開いた時を想定
       # 他人のアカウントページに遷移
       visit profile_account_path user
@@ -71,17 +71,17 @@ RSpec.describe 'ShowAccount', type: :system do
       expect(page).to have_content JpPrefecture::Prefecture.find(prefecture_code).name
       expect(page).to have_content experience
 
-      expect(page).not_to have_css "#edit-image-link" # プロフィール画像編集ボタン
+      expect(page).not_to have_css '#edit-image-link' # プロフィール画像編集ボタン
 
-      expect(page).not_to have_css "#account-edit-link"
+      expect(page).not_to have_css '#account-edit-link'
 
-      expect(page).not_to have_css "#email-container"
+      expect(page).not_to have_css '#email-container'
       expect(page).not_to have_content user.email
-      expect(page).not_to have_css "#edit-email-link"
+      expect(page).not_to have_css '#edit-email-link'
 
-      expect(page).not_to have_css "#password-container"
-      expect(page).not_to have_css "#edit-password-link"
-      expect(page).not_to have_css "#resign-account-link"
+      expect(page).not_to have_css '#password-container'
+      expect(page).not_to have_css '#edit-password-link'
+      expect(page).not_to have_css '#resign-account-link'
 
       # 次にログインユーザーが人のアカウントページを開いた時を想定
       login_as other_user, user: :scope
@@ -96,15 +96,15 @@ RSpec.describe 'ShowAccount', type: :system do
       expect(page).to have_content JpPrefecture::Prefecture.find(prefecture_code).name
       expect(page).to have_content experience
 
-      expect(page).not_to have_css "#account-edit-link"
+      expect(page).not_to have_css '#account-edit-link'
 
-      expect(page).not_to have_css "#email-container"
+      expect(page).not_to have_css '#email-container'
       expect(page).not_to have_content user.email
-      expect(page).not_to have_css "#edit-email-link"
+      expect(page).not_to have_css '#edit-email-link'
 
-      expect(page).not_to have_css "#password-container"
-      expect(page).not_to have_css "#edit-password-link"
-      expect(page).not_to have_css "#resign-account-link"
+      expect(page).not_to have_css '#password-container'
+      expect(page).not_to have_css '#edit-password-link'
+      expect(page).not_to have_css '#resign-account-link'
     end
   end
 end

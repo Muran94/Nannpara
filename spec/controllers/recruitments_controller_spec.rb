@@ -1,15 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe RecruitmentsController, type: :controller do
-  let(:user) {create(:user)}
-  let(:other_user) {create(:user)}
+  let(:user) { create(:user) }
+  let(:other_user) { create(:user) }
 
   describe 'GET #index' do
     let(:title_1) { 'ナンパ仲間募集！今日新宿で！' }
     let(:title_2) { '本日の17時渋谷駅' }
-    let(:title_3) { 'あのねぇ〜ぼくねぇ〜'}
+    let(:title_3) { 'あのねぇ〜ぼくねぇ〜' }
 
-    context "都道府県指定の場合（paramありの場合）" do
+    context '都道府県指定の場合（paramありの場合）' do
       before do
         create(:recruitment, :without_validation, title: title_1, event_date: 1.days.ago, prefecture_code: 13)
         create(:recruitment, title: title_2, event_date: 1.day.from_now, prefecture_code: 14)
@@ -20,7 +20,7 @@ RSpec.describe RecruitmentsController, type: :controller do
       let(:params) do
         {
           search: {
-            prefecture_code: ["13", "14", ""]
+            prefecture_code: ['13', '14', '']
           }
         }
       end
@@ -44,7 +44,7 @@ RSpec.describe RecruitmentsController, type: :controller do
       end
     end
 
-    context "都道府県指定なしの場合" do
+    context '都道府県指定なしの場合' do
       before do
         create(:recruitment, :without_validation, title: title_3, event_date: 1.days.ago)
         create(:recruitment, title: title_1, event_date: 1.day.from_now)
@@ -98,7 +98,7 @@ RSpec.describe RecruitmentsController, type: :controller do
   end
 
   describe 'GET #new' do
-    context "ログインユーザーの場合" do
+    context 'ログインユーザーの場合' do
       before do
         sign_in user
         get :new
@@ -120,8 +120,8 @@ RSpec.describe RecruitmentsController, type: :controller do
       end
     end
 
-    context "未ログインユーザーの場合" do
-      before {get :new}
+    context '未ログインユーザーの場合' do
+      before { get :new }
 
       context 'レスポンス' do
         it 'ステータスコード200を返却 && newテンプレートがをender' do
@@ -135,8 +135,8 @@ RSpec.describe RecruitmentsController, type: :controller do
   end
 
   describe 'POST #create' do
-    context "ログインユーザー" do
-      before {sign_in user}
+    context 'ログインユーザー' do
+      before { sign_in user }
 
       context '正常系' do
         let(:params) { { recruitment: attributes_for(:recruitment) } }
@@ -174,12 +174,12 @@ RSpec.describe RecruitmentsController, type: :controller do
       end
     end
 
-    context "未ログインユーザー" do
-      before {post :create, params: params}
+    context '未ログインユーザー' do
+      before { post :create, params: params }
 
       let(:params) { { recruitment: attributes_for(:recruitment) } }
 
-      context "レスポンス" do
+      context 'レスポンス' do
         it 'ログインページにリダイレクトされる' do
           expect(response).to redirect_to new_user_session_path
         end
@@ -188,12 +188,12 @@ RSpec.describe RecruitmentsController, type: :controller do
   end
 
   describe 'GET #edit' do
-    let(:params) {{ id: recruitment.id }}
+    let(:params) { { id: recruitment.id } }
     let(:recruitment) { create(:recruitment, user: user) }
 
-    context "ログインユーザー && " do
-      context "オーナー && " do
-        let(:params) {{ id: recruitment.id }}
+    context 'ログインユーザー && ' do
+      context 'オーナー && ' do
+        let(:params) { { id: recruitment.id } }
 
         before do
           sign_in user
@@ -216,7 +216,7 @@ RSpec.describe RecruitmentsController, type: :controller do
         end
       end
 
-      context "オーナーでない && " do
+      context 'オーナーでない && ' do
         before do
           sign_in other_user
           get :edit, params: params
@@ -227,15 +227,15 @@ RSpec.describe RecruitmentsController, type: :controller do
             aggregate_failures do
               expect(response).to have_http_status 302
               expect(response).to redirect_to root_path
-              expect(flash[:error]).to eq "不正な操作です。もう一度最初からやり直してください。"
+              expect(flash[:error]).to eq '不正な操作です。もう一度最初からやり直してください。'
             end
           end
         end
       end
     end
 
-    context "未ログインユーザーの場合" do
-      before {get :edit, params: params}
+    context '未ログインユーザーの場合' do
+      before { get :edit, params: params }
 
       context 'レスポンス' do
         it 'ステータスコード200を返却 && editテンプレートをrender' do
@@ -256,9 +256,9 @@ RSpec.describe RecruitmentsController, type: :controller do
       recruitment_params
     end
 
-    context "ログインユーザー && " do
-      context "オーナー && " do
-        before {sign_in user}
+    context 'ログインユーザー && ' do
+      context 'オーナー && ' do
+        before { sign_in user }
 
         context 'データ更新テスト' do
           context '正常系' do
@@ -295,7 +295,7 @@ RSpec.describe RecruitmentsController, type: :controller do
         end
       end
 
-      context "オーナーでない && " do
+      context 'オーナーでない && ' do
         before do
           sign_in other_user
           patch :update, params: { id: recruitment.id, recruitment: recruitment_params }
@@ -306,14 +306,14 @@ RSpec.describe RecruitmentsController, type: :controller do
             aggregate_failures do
               expect(response).to have_http_status 302
               expect(response).to redirect_to root_path
-              expect(flash[:error]).to eq "不正な操作です。もう一度最初からやり直してください。"
+              expect(flash[:error]).to eq '不正な操作です。もう一度最初からやり直してください。'
             end
           end
         end
       end
     end
 
-    context "未ログインユーザー && " do
+    context '未ログインユーザー && ' do
       before do
         patch :update, params: { id: recruitment.id, recruitment: recruitment_params }
       end
@@ -331,11 +331,11 @@ RSpec.describe RecruitmentsController, type: :controller do
 
   describe 'DELETE #destroy' do
     let!(:recruitment) { create(:recruitment, user: user) }
-    let(:params) {{ id: recruitment.id }}
+    let(:params) { { id: recruitment.id } }
 
-    context "ログインユーザー && " do
-      context "オーナー &&" do
-        before {sign_in user}
+    context 'ログインユーザー && ' do
+      context 'オーナー &&' do
+        before { sign_in user }
 
         it 'レコードが削除されている && flash[:success]の値が正しい && リダイレクト先が正しい' do
           aggregate_failures do
@@ -347,7 +347,7 @@ RSpec.describe RecruitmentsController, type: :controller do
         end
       end
 
-      context "オーナーでない &&" do
+      context 'オーナーでない &&' do
         before do
           sign_in other_user
           delete :destroy, params: params
@@ -357,14 +357,14 @@ RSpec.describe RecruitmentsController, type: :controller do
           aggregate_failures do
             expect(response).to have_http_status 302
             expect(response).to redirect_to root_path
-            expect(flash[:error]).to eq "不正な操作です。もう一度最初からやり直してください。"
+            expect(flash[:error]).to eq '不正な操作です。もう一度最初からやり直してください。'
           end
         end
       end
     end
 
-    context "未ログインユーザー" do
-      before {delete :destroy, params: params}
+    context '未ログインユーザー' do
+      before { delete :destroy, params: params }
 
       it 'ログインページにリダイレクトされる' do
         aggregate_failures do

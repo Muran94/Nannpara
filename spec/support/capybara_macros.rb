@@ -3,7 +3,7 @@ module CapybaraMacros
   def select_from_dropdown(dropdown_selector, item_text)
     dropdown = find(dropdown_selector)
     dropdown.click
-    dropdown.find(".menu .item", :text => item_text).click
+    dropdown.find('.menu .item', text: item_text).click
   end
 
   def selected_value_from_dropdown(dropdown_selector, selected_value)

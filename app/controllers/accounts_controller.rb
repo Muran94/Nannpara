@@ -13,12 +13,11 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1/tweets
   def tweets
-    @tweets = @user.tweets.order("created_at DESC").page(params[:page])
+    @tweets = @user.tweets.order('created_at DESC').page(params[:page])
   end
 
   # GET /accounts/edit
-  def edit
-  end
+  def edit; end
 
   # PATCH/PUT /accounts
   def update
@@ -32,15 +31,14 @@ class AccountsController < ApplicationController
   end
 
   # GET /accounts/edit_image
-  def edit_image
-  end
+  def edit_image; end
 
   # PATCH /accounts/update_image
   def update_image
     if @current_user.update(_user_image_params)
-      flash[:success] = "プロフィール画像の変更が完了しました。"
+      flash[:success] = 'プロフィール画像の変更が完了しました。'
     else
-      flash[:error] = "プロフィール画像の変更に失敗しました。"
+      flash[:error] = 'プロフィール画像の変更に失敗しました。'
     end
     redirect_to profile_account_path(@current_user)
   end
@@ -49,16 +47,15 @@ class AccountsController < ApplicationController
   def destroy_image
     @current_user.remove_image!
     if @current_user.save(validate: false)
-      flash[:success] = "プロフィール画像の削除が完了しました。"
+      flash[:success] = 'プロフィール画像の削除が完了しました。'
     else
-      flash[:error] = "プロフィール画像の削除に失敗しました。"
+      flash[:error] = 'プロフィール画像の削除に失敗しました。'
     end
     redirect_to profile_account_path(@current_user)
   end
 
   # GET /accounts/edit_password
-  def edit_password
-  end
+  def edit_password; end
 
   # PATCH /accounts/update_password
   def update_password

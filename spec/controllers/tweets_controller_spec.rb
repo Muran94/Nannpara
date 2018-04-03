@@ -1,11 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe TweetsController, type: :controller do
-
-  describe "GET #index" do
-    let(:first_tweet_content) {"first tweet"}
-    let(:second_tweet_content) {"second tweet"}
-    let(:third_tweet_content) {"third tweet"}
+  describe 'GET #index' do
+    let(:first_tweet_content) { 'first tweet' }
+    let(:second_tweet_content) { 'second tweet' }
+    let(:third_tweet_content) { 'third tweet' }
 
     before do
       create(:tweet, content: first_tweet_content, created_at: 1.day.ago)
@@ -14,8 +13,8 @@ RSpec.describe TweetsController, type: :controller do
       get :index
     end
 
-    context "レスポンス" do
-      it "ステータスコード200を返し、indexテンプレードをrenderすること" do
+    context 'レスポンス' do
+      it 'ステータスコード200を返し、indexテンプレードをrenderすること' do
         aggregate_failures do
           expect(response).to have_http_status 200
           expect(response).to render_template :index
@@ -23,8 +22,8 @@ RSpec.describe TweetsController, type: :controller do
       end
     end
 
-    context "インスタンス変数" do
-      it "インスタンス変数の数と、順番が正しいこと" do
+    context 'インスタンス変数' do
+      it 'インスタンス変数の数と、順番が正しいこと' do
         aggregate_failures do
           expect(assigns(:tweets).count).to eq 3
           expect(assigns(:tweets).pluck(:content)).to match_array [first_tweet_content, second_tweet_content, third_tweet_content]
@@ -33,14 +32,14 @@ RSpec.describe TweetsController, type: :controller do
     end
   end
 
-  describe "GET #show" do
-    let(:tweet) {create(:tweet)}
-    let(:params) {{id: tweet.id}}
+  describe 'GET #show' do
+    let(:tweet) { create(:tweet) }
+    let(:params) { { id: tweet.id } }
 
-    before {get :show, params: params}
+    before { get :show, params: params }
 
-    context "レスポンス" do
-      it "ステータスコード200を返し、showテンプレートがrenderされること" do
+    context 'レスポンス' do
+      it 'ステータスコード200を返し、showテンプレートがrenderされること' do
         aggregate_failures do
           expect(response).to have_http_status 200
           expect(response).to render_template :show
@@ -48,24 +47,24 @@ RSpec.describe TweetsController, type: :controller do
       end
     end
 
-    context "インスタンス変数" do
-      it "正しいインスタンス変数が定義されること" do
+    context 'インスタンス変数' do
+      it '正しいインスタンス変数が定義されること' do
         expect(assigns(:tweet)).to eq Tweet.find(tweet.id)
       end
     end
   end
 
-  describe "GET #new" do
-    context "ログインユーザー" do
-      let(:user) {create(:user)}
+  describe 'GET #new' do
+    context 'ログインユーザー' do
+      let(:user) { create(:user) }
 
       before do
         sign_in user
         get :new
       end
 
-      context "レスポンス" do
-        it "ステータスコード200が返ってくる && newテンプレートをrenderすること" do
+      context 'レスポンス' do
+        it 'ステータスコード200が返ってくる && newテンプレートをrenderすること' do
           aggregate_failures do
             expect(response).to have_http_status 200
             expect(response).to render_template :new
@@ -73,18 +72,18 @@ RSpec.describe TweetsController, type: :controller do
         end
       end
 
-      context "インスタンス変数" do
-        it "新しいTweetがインスタンス化されること" do
+      context 'インスタンス変数' do
+        it '新しいTweetがインスタンス化されること' do
           expect(assigns(:tweet)).to be_a_new Tweet
         end
       end
     end
 
-    context "未ログインユーザー" do
-      before {get :new}
+    context '未ログインユーザー' do
+      before { get :new }
 
-      context "レスポンス" do
-        it "ステータスコード302 && ログインページにリダイレクトされる" do
+      context 'レスポンス' do
+        it 'ステータスコード302 && ログインページにリダイレクトされる' do
           aggregate_failures do
             expect(response).to have_http_status 302
             expect(response).to redirect_to new_user_session_path
@@ -94,12 +93,12 @@ RSpec.describe TweetsController, type: :controller do
     end
   end
 
-  describe "GET #create" do
-    context "ログインユーザー" do
-      let(:user) {create(:user)}
-      before {sign_in user}
+  describe 'GET #create' do
+    context 'ログインユーザー' do
+      let(:user) { create(:user) }
+      before { sign_in user }
 
-      context "正常系" do
+      context '正常系' do
         let(:params) do
           {
             tweet: {
@@ -107,14 +106,14 @@ RSpec.describe TweetsController, type: :controller do
             }
           }
         end
-        let(:content) {"今日中に50人声かけする。"}
+        let(:content) { '今日中に50人声かけする。' }
 
-        context "データ作成とレスポンス" do
-          it "データが１つ増え、flash[:success]に適切な値が代入され、tweetのshowページにリダイレクトされること" do
+        context 'データ作成とレスポンス' do
+          it 'データが１つ増え、flash[:success]に適切な値が代入され、tweetのshowページにリダイレクトされること' do
             aggregate_failures do
-              expect {post :create, params: params}.to change(Tweet, :count).by(1)
+              expect { post :create, params: params }.to change(Tweet, :count).by(1)
               expect(Tweet.first.content).to eq content
-              expect(flash[:success]).to eq "つぶやきが完了しました。"
+              expect(flash[:success]).to eq 'つぶやきが完了しました。'
               expect(response).to have_http_status 302
               expect(response).to redirect_to tweets_path
             end
@@ -122,22 +121,22 @@ RSpec.describe TweetsController, type: :controller do
         end
       end
 
-      context "異常系" do
+      context '異常系' do
         let(:params) do
           {
             tweet: {
-              content: "あ" * (Tweet::MAXIMUM_CONTENT_LENGTH + 1)
+              content: 'あ' * (Tweet::MAXIMUM_CONTENT_LENGTH + 1)
             }
           }
         end
-        let(:content) {"今日中に50人声かけする。"}
+        let(:content) { '今日中に50人声かけする。' }
 
-        context "バリデーションテストとレスポンス" do
-          it "データが増えず、flash[:error]に適切な値が代入され、:newテンプレートがrenderされること" do
+        context 'バリデーションテストとレスポンス' do
+          it 'データが増えず、flash[:error]に適切な値が代入され、:newテンプレートがrenderされること' do
             aggregate_failures do
-              expect {post :create, params: params}.not_to change(Tweet, :count)
+              expect { post :create, params: params }.not_to change(Tweet, :count)
               expect(Tweet.count).to eq 0
-              expect(flash[:error]).to eq "つぶやけませんでした。"
+              expect(flash[:error]).to eq 'つぶやけませんでした。'
               expect(response).to render_template :new
             end
           end
@@ -145,17 +144,17 @@ RSpec.describe TweetsController, type: :controller do
       end
     end
 
-    context "未ログインユーザー" do
+    context '未ログインユーザー' do
       let(:params) do
         {
           tweet: {
-            content: "今日中に50人声かけする。"
+            content: '今日中に50人声かけする。'
           }
         }
       end
 
-      context "レスポンス" do
-        it "ステータスコード302 && ログインページにリダイレクトされる" do
+      context 'レスポンス' do
+        it 'ステータスコード302 && ログインページにリダイレクトされる' do
           aggregate_failures do
             post :create, params: params
             expect(response).to have_http_status 302
@@ -166,48 +165,48 @@ RSpec.describe TweetsController, type: :controller do
     end
   end
 
-  describe "GET #destroy" do
-    context "ログインユーザー" do
-      let(:user) {create(:user)}
-      let(:other_user) {create(:user)}
-      before {sign_in user}
+  describe 'DELETE #destroy' do
+    context 'ログインユーザー' do
+      let(:user) { create(:user) }
+      let(:other_user) { create(:user) }
+      before { sign_in user }
 
-      context "Tweet主とログインユーザーが一致している場合" do
-        context "つぶやきの削除とレスポンス" do
-          let!(:tweet) {create(:tweet, user: user)}
-          let(:params) {{id: tweet.id}}
+      context 'Tweet主とログインユーザーが一致している場合' do
+        context 'つぶやきの削除とレスポンス' do
+          let!(:tweet) { create(:tweet, user: user) }
+          let(:params) { { id: tweet.id } }
 
-          it "Tweetが削除され、flash[:success]に適切な値が代入され、つぶやき一覧ページにリダイレクトされる" do
+          it 'Tweetが削除され、flash[:success]に適切な値が代入され、つぶやき一覧ページにリダイレクトされる' do
             aggregate_failures do
-              expect {delete :destroy, params: params}.to change(Tweet, :count).by(-1)
-              expect(flash[:success]).to eq "つぶやきの削除が完了しました。"
+              expect { delete :destroy, params: params }.to change(Tweet, :count).by(-1)
+              expect(flash[:success]).to eq 'つぶやきの削除が完了しました。'
               expect(response).to redirect_to tweets_path
             end
           end
         end
       end
 
-      context "Tweet主とログインユーザーが一致していない場合" do
-        context "つぶやきの削除とレスポンス" do
-          let!(:tweet) {create(:tweet, user: other_user)}
-          let(:params) {{id: tweet.id}}
+      context 'Tweet主とログインユーザーが一致していない場合' do
+        context 'つぶやきの削除とレスポンス' do
+          let!(:tweet) { create(:tweet, user: other_user) }
+          let(:params) { { id: tweet.id } }
 
-          it "Tweetが削除され、flash[:success]に適切な値が代入され、つぶやき一覧ページにリダイレクトされる" do
+          it 'Tweetが削除され、flash[:success]に適切な値が代入され、つぶやき一覧ページにリダイレクトされる' do
             aggregate_failures do
-              expect {delete :destroy, params: params}.not_to change(Tweet, :count)
-              expect(flash[:error]).to eq "不正な操作です。もう一度最初からやり直してください。"
+              expect { delete :destroy, params: params }.not_to change(Tweet, :count)
+              expect(flash[:error]).to eq '不正な操作です。もう一度最初からやり直してください。'
               expect(response).to redirect_to tweets_path
             end
           end
         end
       end
     end
-    context "未ログインユーザー" do
-      let(:tweet) {create(:tweet)}
-      let(:params) {{id: tweet.id}}
+    context '未ログインユーザー' do
+      let(:tweet) { create(:tweet) }
+      let(:params) { { id: tweet.id } }
 
-      context "レスポンス" do
-        it "ステータスコード302 && ログインページにリダイレクトされる" do
+      context 'レスポンス' do
+        it 'ステータスコード302 && ログインページにリダイレクトされる' do
           aggregate_failures do
             delete :destroy, params: params
             expect(response).to have_http_status 302
