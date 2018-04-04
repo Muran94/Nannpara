@@ -12,6 +12,12 @@ RSpec.describe 'CreateRecruitment', type: :system do
     login_as(user, scope: :user)
     visit new_recruitment_path
 
+    # デフォルトの開催日と都道府県がセットされている
+    # 開催日に関しては、現在日がデフォルトでセットされている
+    # 都道府県に関しては、ユーザーが活動範囲をセットしている場合はデフォルトでセットされている
+    expect(page).to have_field "recruitment[event_date]", with: Date.today.strftime("%Y/%m/%d")
+    expect(find("#recruitment_prefecture_code_select_box > .ui.dropdown > .text").text).to eq user.prefecture.name
+
     # フォームの入力
     sleep 0.1
     fill_in 'recruitment[title]', with: title
@@ -29,7 +35,6 @@ RSpec.describe 'CreateRecruitment', type: :system do
 
     # 遷移先のページが正しいか確認
     expect(current_path).to eq recruitment_path(recruitment)
-
     # 遷移先のページに期待する値が表示されているか
     expect(page).to have_content '募集記事の作成が完了しました。'
     expect(page).to have_content recruitment.title
@@ -48,15 +53,14 @@ RSpec.describe 'CreateRecruitment', type: :system do
 
     # フォームを入力せずに作成ボタンをクリック
     sleep 0.1
+    # 開催日と都道府県はデフォルトでセットされているので一旦空にする    # ※ 開催日に関してはデフォルトにする方法がわからないので放置
     click_button '作成'
-
     # 遷移先のページが正しいか確認
     expect(current_path).to eq new_recruitment_path
 
     # エラーメッセージが表示されていることを確認
     expect(page).to have_content '[タイトル] 入力必須です。'
     expect(page).to have_content '[募集内容] 入力必須です。'
-    expect(page).to have_content '[都道府県] 入力必須です。'
 
     # Recruitmentが作成されていないことを確認
     expect(Recruitment.count).to eq 0
