@@ -16,6 +16,14 @@ module RecruitmentDecorator
     event_date.present? ? event_date.strftime("%Y/%m/%d") : Time.zone.now.strftime("%Y/%m/%d")
   end
 
+  def default_input_option_for_prefecture_code
+    if current_user.prefecture_code.present?
+      {selected: current_user.prefecture_code}
+    else
+      {prompt: "選択してください。"}
+    end
+  end
+
   def format_created_at
     _format_date_time(created_at)
   end
