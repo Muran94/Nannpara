@@ -36,25 +36,33 @@
             div(style="color: #bbb; font-size: 12px; text-align: right;")
               = %(#{@blog_article.format_created_at}に更新)
 
+  .row
+    .column
+      // メッセージ一覧
+      .ui.segment.basic.bg-white
+        .ui.comments
+          h3.ui.dividing.header
+            | コメント一覧
+          - if @blog_comments.present?
+              = render @blog_comments, blog_article: @blog_article
+          - else
+            p まだコメントがありません。
 
-
-
-  / .row
-  /   .column
-  /     // メッセージ一覧
-  /     .ui.segment.basic.bg-white
-  /       = render "messages/messages", messages: @messages
-  /
-  / .row
-  /   .column
-  /     // メッセージページネーション
-  /     .ui.center.aligned.container
-  /       = paginate @messages
-  / .row
-  /   .column
-  /     // メッセージフォーム
-  /     .ui.segment.basic.bg-white
-  /       = render "messages/form"
+  .row
+    .column
+      // コメントページネーション
+      .ui.center.aligned.container
+        = paginate @blog_comments
+  .row
+    .column
+      .ui.segment.basic.bg-white
+        - if user_signed_in?
+          // メッセージフォーム
+          = render "blog_comments/form", blog_article: @blog_article, new_blog_comment: @new_blog_comment
+        - else
+          | コメントをするには
+          = link_to "ログイン", new_user_session_path
+          | が必要です。
 
 
 javascript:

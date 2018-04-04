@@ -9,7 +9,10 @@ class BlogArticlesController < ApplicationController
   end
 
   # GET /blog_articles/1
-  def show; end
+  def show
+    @new_blog_comment = BlogComment.new
+    @blog_comments = @blog_article.blog_comments.order("created_at DESC").includes(:user).page(params[:page])
+  end
 
   # GET /blog_articles/new
   def new

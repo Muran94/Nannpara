@@ -185,6 +185,18 @@ $(document).on('turbolinks:load', function() {
           },
         ]
       },
+      'blog_comment[content]': {
+        rules: [
+          {
+            type: 'maxLength[512]',
+            prompt : '[本文] 512文字以下で入力してください。'
+          },
+          {
+            type: 'empty',
+            prompt : '[本文] 入力必須です。'
+          },
+        ]
+      },
     }
   });
 });
