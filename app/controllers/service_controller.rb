@@ -1,4 +1,3 @@
 class ServiceController < ApplicationController
-  def inquiry
-  end
+  def inquiry; end
 end

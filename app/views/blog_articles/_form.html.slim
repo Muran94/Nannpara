@@ -1,0 +1,12 @@
+= form_with model: @blog_article, html: {class: "ui form"} do |f|
+  .ui.error.message
+
+  .field.required
+    = f.label :title, "タイトル"
+    = f.text_field :title, placeholder: "タイトル"
+
+  .field.required
+    = f.label :content, "本文"
+    = f.text_area :content, placeholder: "本文"
+
+  = f.submit class: "ui fluid orange submit button"

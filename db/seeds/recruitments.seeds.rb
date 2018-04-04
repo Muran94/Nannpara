@@ -23,7 +23,7 @@ after :users do
     川崎
   ).push(Faker::Lorem.characters(maximum_venue_length)).push('都')
 
-  100.times do
+  51.times do
     event_date = rand(-15..30).days.from_now
     closed = event_date < Date.today
 

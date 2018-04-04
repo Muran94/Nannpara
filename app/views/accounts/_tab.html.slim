@@ -1,4 +1,10 @@
-.ui.secondary.menu#account-tab
+.ui.four.item.secondary.menu#account-tab
   = link_to "プロフィール", profile_account_path(user), class: %(item orange #{activate_tab_if_correct_page("profile")})
-  = link_to "募集一覧", recruitments_account_path(user), class: %(item orange #{activate_tab_if_correct_page("recruitments")})
-  = link_to "つぶやき一覧", tweets_account_path(user), class: %(item orange #{activate_tab_if_correct_page("tweets")})
+  = link_to "募集", recruitments_account_path(user), class: %(item orange #{activate_tab_if_correct_page("recruitments")})
+  = link_to "ブログ記事", blog_articles_account_path(user), class: %(item orange #{activate_tab_if_correct_page("blog_articles")})
+  = link_to "つぶやき", tweets_account_path(user), class: %(item orange #{activate_tab_if_correct_page("tweets")})
+
+scss:
+  .secondary.menu > .item {
+    font-size: 10px;
+  }

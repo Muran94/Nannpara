@@ -1,0 +1,24 @@
+- provide(:title, "ブログ記事一覧")
+
+.ui.segment.basic.bg-white
+  .ui.text.menu(style="margin-top: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0;")
+    .item
+      h4.ui.header
+        = semantic_icon("book")
+        | ブログ記事一覧
+
+  .ui.divider(style="margin-top: 0; padding-top: 0;")
+
+  - if @blog_articles.present?
+    .ui.vertically.divided.padded.grid
+      = render @blog_articles
+  - else
+    | まだブログ記事がありません。
+
+.ui.center.aligned.container
+  = paginate @blog_articles
+
+= link_to new_blog_article_path, class: "ui button orange", id: "bottom-fixed-button", style: "text-decoration: none; color: #fff" do
+  i.icons.large
+    = semantic_icon("book")
+    = semantic_icon("corner add orange outline")

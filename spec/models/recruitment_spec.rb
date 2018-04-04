@@ -133,13 +133,13 @@ RSpec.describe Recruitment, type: :model do
     end
   end
 
-  context "コールバックテスト" do
-    describe "#_prepare_kanto_nanpa_messageboard_delete_key" do
-      let(:recruitment) {build(:recruitment, kanto_nanpa_messageboard_delete_key: "", linked_with_kanto_nanpa_messageboard: true)}
+  context 'コールバックテスト' do
+    describe '#_prepare_kanto_nanpa_messageboard_delete_key' do
+      let(:recruitment) { build(:recruitment, kanto_nanpa_messageboard_delete_key: '', linked_with_kanto_nanpa_messageboard: true) }
 
-      it "kanto_nanpa_messageboard_delete_keyが空のまま入力された場合は、６桁の整数値を自動で生成し補完する" do
+      it 'kanto_nanpa_messageboard_delete_keyが空のまま入力された場合は、６桁の整数値を自動で生成し補完する' do
         aggregate_failures do
-          expect(recruitment.kanto_nanpa_messageboard_delete_key).to eq ""
+          expect(recruitment.kanto_nanpa_messageboard_delete_key).to eq ''
           recruitment.save(validate: false)
           expect(recruitment.kanto_nanpa_messageboard_delete_key).to match(/^\d{6}$/)
         end

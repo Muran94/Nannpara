@@ -93,13 +93,38 @@ RSpec.describe AccountsController, type: :controller do
     end
   end
 
-  describe "#tweets" do
-    let(:user) {create(:user, :with_tweets)}
-    let(:params) {{id: user.id}}
-    before {get :tweets, params: params}
+  describe '#blog_articles' do
+    let(:user) { create(:user, :with_blog_articles) }
+    let(:params) { { id: user.id } }
+    before { get :blog_articles, params: params }
 
-    context "レスポンス" do
-      it "レスンポンスコード200を返却 && tweetsテンプレートをrender" do
+    context 'レスポンス' do
+      it 'レスンポンスコード200を返却 && tweetsテンプレートをrender' do
+        aggregate_failures do
+          expect(response).to have_http_status 200
+          expect(response).to render_template :blog_articles
+        end
+      end
+    end
+
+    context 'インスタンス変数' do
+      it 'userのインスタンス変数とtweetsのインタンス変数がセットされており、tweetsの数が3である' do
+        aggregate_failures do
+          expect(assigns(:user)).to eq user
+          expect(assigns(:blog_articles)).to eq user.blog_articles.order('created_at DESC')
+          expect(assigns(:blog_articles).count).to eq 3
+        end
+      end
+    end
+  end
+
+  describe '#tweets' do
+    let(:user) { create(:user, :with_tweets) }
+    let(:params) { { id: user.id } }
+    before { get :tweets, params: params }
+
+    context 'レスポンス' do
+      it 'レスンポンスコード200を返却 && tweetsテンプレートをrender' do
         aggregate_failures do
           expect(response).to have_http_status 200
           expect(response).to render_template :tweets
@@ -107,8 +132,8 @@ RSpec.describe AccountsController, type: :controller do
       end
     end
 
-    context "インスタンス変数" do
-      it "userのインスタンス変数とtweetsのインタンス変数がセットされており、tweetsの数が3である" do
+    context 'インスタンス変数' do
+      it 'userのインスタンス変数とtweetsのインタンス変数がセットされており、tweetsの数が3である' do
         aggregate_failures do
           expect(assigns(:user)).to eq user
           expect(assigns(:tweets)).to eq user.tweets.order('created_at DESC')
@@ -201,14 +226,14 @@ RSpec.describe AccountsController, type: :controller do
     end
   end
 
-  describe "GET #edit_image" do
-    context "ログイン済み" do
+  describe 'GET #edit_image' do
+    context 'ログイン済み' do
       before do
         sign_in user
         get :edit_image
       end
-      context "レスポンス" do
-        it "ステータスコード200を返却 && edit_imageテンプレートをrender" do
+      context 'レスポンス' do
+        it 'ステータスコード200を返却 && edit_imageテンプレートをrender' do
           aggregate_failures do
             expect(response).to have_http_status 200
             expect(response).to render_template :edit_image
@@ -216,16 +241,16 @@ RSpec.describe AccountsController, type: :controller do
         end
       end
 
-      context "インスタンス変数" do
-        it "@current_userにログインユーザーがセットされている" do
+      context 'インスタンス変数' do
+        it '@current_userにログインユーザーがセットされている' do
           expect(assigns(:current_user)).to eq user
         end
       end
     end
   end
 
-  describe "PATCH #update_image" do
-    let(:user) {create(:user, image: nil)}
+  describe 'PATCH #update_image' do
+    let(:user) { create(:user, image: nil) }
     let(:params) do
       {
         user: {
@@ -239,50 +264,50 @@ RSpec.describe AccountsController, type: :controller do
       patch :update_image, params: params
     end
 
-    context "正常系" do
-      let(:image) {Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/image/sample_image.jpg'))}
+    context '正常系' do
+      let(:image) { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/image/sample_image.jpg')) }
 
-      it "プロフィール画像のアップロードに成功し、適切なflash[:success]メッセージとともにプロフィールページにリダイレクトされる" do
+      it 'プロフィール画像のアップロードに成功し、適切なflash[:success]メッセージとともにプロフィールページにリダイレクトされる' do
         aggregate_failures do
           user.reload
           expect(user.image_url).not_to be_nil
-          expect(flash[:success]).to eq "プロフィール画像の変更が完了しました。"
+          expect(flash[:success]).to eq 'プロフィール画像の変更が完了しました。'
           expect(response).to redirect_to profile_account_path(user)
         end
       end
     end
 
-    context "異常系" do
-      let(:image) {Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/image/large_sample_image.jpg'))}
+    context '異常系' do
+      let(:image) { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/image/large_sample_image.jpg')) }
 
-      it "バリデーションに引っかかった場合は、flash[:error]とともにプロフィールページにリダイレクト" do
+      it 'バリデーションに引っかかった場合は、flash[:error]とともにプロフィールページにリダイレクト' do
         aggregate_failures do
           user.reload
           expect(user.image_url).to be_nil
-          expect(flash[:error]).to eq "プロフィール画像の変更に失敗しました。"
+          expect(flash[:error]).to eq 'プロフィール画像の変更に失敗しました。'
           expect(response).to redirect_to profile_account_path(user)
         end
       end
     end
   end
 
-  describe "PATCH #destroy_image" do
-    context "正常系" do
-      it "プロフィール画像の削除に成功し、適切なflash[:success]と共に、自分のプロフィールページにリダイレクトされる" do
+  describe 'PATCH #destroy_image' do
+    context '正常系' do
+      it 'プロフィール画像の削除に成功し、適切なflash[:success]と共に、自分のプロフィールページにリダイレクトされる' do
         aggregate_failures do
           sign_in user
           expect(user.image_url).not_to be_nil
           patch :destroy_image
           user.reload
           expect(user.image_url).to be_nil
-          expect(flash[:success]).to eq "プロフィール画像の削除が完了しました。"
+          expect(flash[:success]).to eq 'プロフィール画像の削除が完了しました。'
           expect(response).to redirect_to profile_account_path(user)
         end
       end
     end
 
-    context "異常系" do
-      it "プロフィール画像の削除に失敗し、適切なflash[:error]と共に、自分のプロフィールページにリダイレクトされる" do
+    context '異常系' do
+      it 'プロフィール画像の削除に失敗し、適切なflash[:error]と共に、自分のプロフィールページにリダイレクトされる' do
         allow_any_instance_of(User).to receive(:save).and_return(false)
         aggregate_failures do
           sign_in user
@@ -290,7 +315,7 @@ RSpec.describe AccountsController, type: :controller do
           patch :destroy_image
           user.reload
           expect(user.image_url).not_to be_nil
-          expect(flash[:error]).to eq "プロフィール画像の削除に失敗しました。"
+          expect(flash[:error]).to eq 'プロフィール画像の削除に失敗しました。'
           expect(response).to redirect_to profile_account_path(user)
         end
       end

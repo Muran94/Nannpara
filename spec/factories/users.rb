@@ -53,6 +53,12 @@ FactoryGirl.define do
       end
     end
 
+    trait :with_blog_articles do
+      after(:create) do |user|
+        create_list(:blog_article, 3, user: user)
+      end
+    end
+
     trait :with_tweets do
       after(:create) do |user|
         create_list(:tweet, 3, user: user)

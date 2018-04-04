@@ -1,0 +1,13 @@
+- provide(:title, "#{@user.name}のブログ記事一覧")
+
+= render "tab", user: @user
+
+.ui.segment.basic.bg-white
+  - if @blog_articles.present?
+    .ui.vertically.padded.vertically.divided.grid
+      = render partial: "blog_articles/blog_article", collection: @blog_articles
+  - else
+    | まだブログ記事がありません。
+
+.ui.center.aligned.container
+  = paginate @blog_articles

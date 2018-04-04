@@ -1,0 +1,36 @@
+.row
+  .column.sixteen.wide
+    .ui.grid.omit-overflow
+      .column.without-right-padding.three.wide.mobile.only.two.wide.computer.tablet.only
+        = link_to profile_account_path(blog_article.user), class: "ui circular image" do
+          = image_tag(blog_article.format_image_url)
+      // スマホ
+      .column.thirteen.wide.mobile.only
+        = link_to blog_article, class: "ui header" do
+          div
+            = blog_article.title
+            / .extra(style="font-size: 11px;")
+            /   p(style="padding: 0; margin: 0;")
+            /     = semantic_icon("calendar alternate outline")
+            /     = blog_article.format_event_date
+            /   p(style="padding: 0; margin: 0;")
+            /     = semantic_icon("map marker alternate")
+            /     = blog_article.format_event_venue
+
+      // コンピューター & タブレット
+      .column.fourteen.wide.computer.tablet.only
+        = link_to blog_article, style: "text-decoration: none; color: #212121" do
+          div
+            .ui.grid
+              .column.ten.wide
+                // タイトルと本文の一部
+                h3.ui.header= blog_article.title
+              / .column.six.wide
+              /   // その他の情報
+              /   .extra
+              /     p
+              /       = semantic_icon("calendar alternate outline")
+              /       = blog_article.format_event_date
+              /     p
+              /       = semantic_icon("map marker alternate")
+              /       = blog_article.format_event_venue
