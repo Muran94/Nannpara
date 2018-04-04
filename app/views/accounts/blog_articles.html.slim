@@ -3,11 +3,16 @@
 = render "tab", user: @user
 
 .ui.segment.basic.bg-white
-  - if @blog_articles.present?
-    .ui.vertically.padded.vertically.divided.grid
-      = render partial: "blog_articles/blog_article", collection: @blog_articles
-  - else
-    | まだブログ記事がありません。
+  .ui.comments
+    - if @blog_articles.present?
+      = render @blog_articles
+    - else
+      | まだブログ記事がありません。
 
 .ui.center.aligned.container
   = paginate @blog_articles
+
+= link_to new_blog_article_path, class: "ui button orange", id: "bottom-fixed-button", style: "text-decoration: none; color: #fff" do
+  i.icons.large
+    = semantic_icon("book")
+    = semantic_icon("corner add orange outline")

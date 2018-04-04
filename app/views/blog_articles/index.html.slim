@@ -3,17 +3,15 @@
 .ui.segment.basic.bg-white
   .ui.text.menu(style="margin-top: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0;")
     .item
-      h4.ui.header
+      h4.ui.header.dividing
         = semantic_icon("book")
         | ブログ記事一覧
 
-  .ui.divider(style="margin-top: 0; padding-top: 0;")
-
-  - if @blog_articles.present?
-    .ui.vertically.divided.padded.grid
-      = render @blog_articles
-  - else
-    | まだブログ記事がありません。
+  .ui.comments
+    - if @blog_articles.present?
+        = render @blog_articles
+    - else
+      | まだブログ記事がありません。
 
 .ui.center.aligned.container
   = paginate @blog_articles

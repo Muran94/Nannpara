@@ -68,7 +68,7 @@ RSpec.describe 'CreateRecruitment', type: :system do
     expect(Recruitment.count).to eq 0
   end
 
-  it %(募集記事作成テスト - 異常系1: バリデーションに引っかかる) do
+  it %(募集記事作成テスト - 異常系2: 未ログインユーザーはログインページに島流し) do
     # 募集作成ページに遷移
     visit new_recruitment_path
 

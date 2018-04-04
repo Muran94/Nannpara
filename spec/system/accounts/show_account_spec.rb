@@ -35,28 +35,28 @@ RSpec.describe 'ShowAccount', type: :system do
       # タブの表示確認
       within '#account-tab' do
         click_link '募集'
-        sleep 0.3
+        sleep 0.1
       end
       expect(current_path).to eq recruitments_account_path user.id
       expect(page).to have_content recruitment.title
 
       within '#account-tab' do
         click_link 'ブログ記事'
-        sleep 0.3
+        sleep 0.1
       end
       expect(current_path).to eq blog_articles_account_path user.id
       expect(page).to have_content blog_article.title
 
       within '#account-tab' do
         click_link 'つぶやき'
-        sleep 0.3
+        sleep 0.1
       end
       expect(current_path).to eq tweets_account_path user.id
       expect(page).to have_content tweet.content
 
       within '#account-tab' do
         click_link 'プロフィール'
-        sleep 0.3
+        sleep 0.1
       end
 
       # アカウント情報が表示されているか
