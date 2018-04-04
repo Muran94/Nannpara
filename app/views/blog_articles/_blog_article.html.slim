@@ -1,0 +1,10 @@
+.comment
+  = link_to profile_account_path(blog_article.user), class: "avatar" do
+    = image_tag(blog_article.format_image_url("thumb"))
+  .content
+    = link_to profile_account_path(blog_article.user), class: "author", style: "font-size: 12px;" do
+      = blog_article.user.name
+    = link_to blog_article do
+      .metadata
+        span.date= blog_article.created_at.strftime("%Y/%m/%d %H:%M")
+      h2.ui.header.text.break-word= blog_article.title

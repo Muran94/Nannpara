@@ -11,13 +11,17 @@ RSpec.describe 'ShowAccount', type: :system do
       experience: experience
     )
   end
+  let(:other_user) { create(:user) }
+
   let(:name) { 'ナンパ仙人' }
   let(:introduction) { 'ナンパ歴3年です！新宿でよく活動しています！よろしくお願いします！' }
   let(:age) { 28 }
   let(:prefecture_code) { 13 } # 東京都
   let(:experience) { '３年' }
 
-  let(:other_user) { create(:user) }
+  let!(:recruitment) { create(:recruitment, user: user) }
+  let!(:blog_article) { create(:blog_article, user: user) }
+  let!(:tweet) { create(:tweet, user: user) }
 
   context '自分のアカウントページを確認' do
     it 'アカウント情報が表示されており、自分にしか見えていないはずの項目が表示されていること' do
@@ -30,9 +34,29 @@ RSpec.describe 'ShowAccount', type: :system do
 
       # タブの表示確認
       within '#account-tab' do
-        expect(page).to have_content 'プロフィール'
-        expect(page).to have_content '募集一覧'
-        expect(page).to have_content 'つぶやき一覧'
+        click_link '募集'
+        sleep 0.1
+      end
+      expect(current_path).to eq recruitments_account_path user.id
+      expect(page).to have_content recruitment.title
+
+      within '#account-tab' do
+        click_link 'ブログ記事'
+        sleep 0.1
+      end
+      expect(current_path).to eq blog_articles_account_path user.id
+      expect(page).to have_content blog_article.title
+
+      within '#account-tab' do
+        click_link 'つぶやき'
+        sleep 0.1
+      end
+      expect(current_path).to eq tweets_account_path user.id
+      expect(page).to have_content tweet.content
+
+      within '#account-tab' do
+        click_link 'プロフィール'
+        sleep 0.1
       end
 
       # アカウント情報が表示されているか

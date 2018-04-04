@@ -160,7 +160,31 @@ $(document).on('turbolinks:load', function() {
             prompt : '入力必須です。'
           },
         ]
-      }
+      },
+      'blog_article[title]': {
+        rules: [
+          {
+            type: 'maxLength[128]',
+            prompt : '[タイトル] 128文字以下で入力してください。'
+          },
+          {
+            type: 'empty',
+            prompt : '[タイトル] 入力必須です。'
+          },
+        ]
+      },
+      'blog_article[content]': {
+        rules: [
+          {
+            type: 'maxLength[4096]',
+            prompt : '[本文] 4096文字以下で入力してください。'
+          },
+          {
+            type: 'empty',
+            prompt : '[本文] 入力必須です。'
+          },
+        ]
+      },
     }
   });
 });

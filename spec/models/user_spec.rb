@@ -114,20 +114,20 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context "メソッドテスト" do
-    describe "#thumb_image_url" do
-      context "ユーザーがプロフィール画像を設定していない場合" do
-        let(:user) {build_stubbed(:user, image: nil)}
+  context 'メソッドテスト' do
+    describe '#thumb_image_url' do
+      context 'ユーザーがプロフィール画像を設定していない場合' do
+        let(:user) { build_stubbed(:user, image: nil) }
 
-        it "no_user_image.pngを返す" do
-         expect(user.thumb_image_url).to eq "no_user_image.png"
+        it 'no_user_image.pngを返す' do
+          expect(user.thumb_image_url).to eq 'no_user_image.png'
         end
       end
-      context "ユーザーガプロフィール画像を設定している場合" do
-        let(:user) {build_stubbed(:user)}
+      context 'ユーザーガプロフィール画像を設定している場合' do
+        let(:user) { build_stubbed(:user) }
 
-        it "サムネールサイズの画像URLを返す" do
-         expect(user.thumb_image_url).to eq user.image.thumb.url
+        it 'サムネールサイズの画像URLを返す' do
+          expect(user.thumb_image_url).to eq user.image.thumb.url
         end
       end
     end

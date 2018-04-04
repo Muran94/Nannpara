@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     member do
       get :profile
       get :recruitments
+      get :blog_articles
       get :tweets
     end
     collection do
@@ -22,5 +23,6 @@ Rails.application.routes.draw do
   end
   resources :tweets, only: [:index, :show, :new, :create, :destroy]
   resources :counters, only: [:new, :create]
+  resources :blog_articles
   get 'service/inquiry'
 end

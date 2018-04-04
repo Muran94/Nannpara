@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_180_402_151_552) do
+ActiveRecord::Schema.define(version: 20_180_404_010_138) do
+  create_table 'blog_articles', force: :cascade do |t|
+    t.string 'title'
+    t.text 'content'
+    t.integer 'user_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['user_id'], name: 'index_blog_articles_on_user_id'
+  end
+
   create_table 'counters', force: :cascade do |t|
     t.string 'counter_type'
     t.integer 'user_id'
