@@ -36,23 +36,11 @@ $(document).on('turbolinks:load', function() {
           }
         ]
       },
-      'recruitment[venue]': {
-        rules: [
-          {
-            type: 'maxLength[32]',
-            prompt: '[開催場所] 32文字以下で入力してください。'
-          },
-          {
-            type: 'empty',
-            prompt: '[開催場所] 入力必須です。'
-          }
-        ]
-      },
       'recruitment[event_date]': {
         rules: [
           {
             type: 'empty',
-            prompt: '[開催日時] 入力必須です。'
+            prompt: '[開催日] 入力必須です。'
           }
         ]
       },

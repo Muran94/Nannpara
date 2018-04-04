@@ -69,7 +69,6 @@ class RecruitmentsController < ApplicationController
       :description,
       :event_date,
       :prefecture_code,
-      :venue,
       :linked_with_kanto_nanpa_messageboard,
       :kanto_nanpa_messageboard_delete_key
     )

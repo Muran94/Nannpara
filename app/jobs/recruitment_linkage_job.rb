@@ -43,9 +43,9 @@ class RecruitmentLinkageJob < ApplicationJob
     body = []
     body << %(【年齢】#{recruitment.user.age}\n) if recruitment.user.age.present?
     body << %(【ナンパ歴】#{recruitment.user.experience}\n) if recruitment.user.experience.present?
-    body << %(【開催日時】#{recruitment.event_date.strftime('%Y/%m/%d %H時%M分')}\n)
-    body << %(【開催場所】#{recruitment.prefecture.name} #{recruitment.venue}\n)
-    body << %(【募集内容】#{recruitment.description}\n\n)
+    body << %(【開催日】#{recruitment.event_date.strftime('%Y/%m/%d')}\n)
+    body << %(【都道府県】#{recruitment.prefecture.name}\n\n)
+    body << %(\n#{recruitment.description}\n\n)
     body << %(掲載元 : NANBARA | ナンパ師のSNS・仲間募集掲示板)
     body.join('')
   end

@@ -6,7 +6,6 @@
 #  title                                :string
 #  description                          :text
 #  event_date                           :datetime
-#  venue                                :string
 #  user_id                              :integer
 #  created_at                           :datetime         not null
 #  updated_at                           :datetime         not null
@@ -97,18 +96,6 @@ RSpec.describe Recruitment, type: :model do
             expect(build_stubbed(:recruitment, prefecture_code: 13).valid?).to be_truthy
             expect(build_stubbed(:recruitment, prefecture_code: '13').valid?).to be_truthy
           end
-        end
-      end
-    end
-
-    context 'venue' do
-      context 'lengthチェック' do
-        it 'venueの長さが 17文字以上 ならバリデーションに引っかかる' do
-          expect(build_stubbed(:recruitment, venue: '*' * (Recruitment::MAXIMUM_VENUE_LENGTH + 1)).valid?).to be_falsy
-        end
-        it 'venueの長さが 16文字以下 ならバリデーションに引っかからない' do
-          expect(build_stubbed(:recruitment, venue: '*' * Recruitment::MAXIMUM_VENUE_LENGTH).valid?).to be_truthy
-          expect(build_stubbed(:recruitment, venue: '*' * (Recruitment::MAXIMUM_VENUE_LENGTH - 1)).valid?).to be_truthy
         end
       end
     end

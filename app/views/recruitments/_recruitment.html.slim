@@ -11,11 +11,12 @@
             = recruitment.title
             .extra(style="font-size: 11px;")
               p(style="padding: 0; margin: 0;")
+                = semantic_icon("map marker alternate")
+                = recruitment.prefecture.name
+            .extra(style="font-size: 11px;")
+              p(style="padding: 0; margin: 0;")
                 = semantic_icon("calendar alternate outline")
                 = recruitment.format_event_date
-              p(style="padding: 0; margin: 0;")
-                = semantic_icon("map marker alternate")
-                = recruitment.format_event_venue
 
       // コンピューター & タブレット
       .column.fourteen.wide.computer.tablet.only
@@ -30,8 +31,8 @@
                 // その他の情報
                 .extra
                   p
+                    = semantic_icon("map marker alternate")
+                    = recruitment.prefecture.name
+                  p
                     = semantic_icon("calendar alternate outline")
                     = recruitment.format_event_date
-                  p
-                    = semantic_icon("map marker alternate")
-                    = recruitment.format_event_venue

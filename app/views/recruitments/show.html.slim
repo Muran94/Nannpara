@@ -30,12 +30,12 @@
             // 投稿タイトルと投稿本文
             h2.ui.header.dividing.break-word= @recruitment.title
             p= simple_format(h(@recruitment.description))
-          .three.column.row
+          .two.column.row
             .column
               // 開催日時
               h5.ui.header.dividing
                 = semantic_icon("calendar alternate outline")
-                .content 開催日時
+                .content 開催日
               p= @recruitment.format_event_date
             .column
               // 都道府県
@@ -43,12 +43,7 @@
                 = semantic_icon("map marker alternate")
                 .content 都道府県
               p= @recruitment.prefecture.name
-            .column
-              // 開催場所
-              h5.ui.header.dividing
-                = semantic_icon("map map outline")
-                .content 開催場所
-              p.break-word= @recruitment.venue
+
           - if @recruitment.user.direct_mail
             .column.sixteen.wide
               = mail_to @recruitment.user.email, "募集主にダイレクトメールを送る", class: "ui button orange basic fluid"
