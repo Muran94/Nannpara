@@ -7,7 +7,7 @@ after :users, :recruitments do
     next if rand(1..100) <= 30 # 30%の確率でメッセージなし
     rand(1..51).times do
       recruitment.messages.create(
-        message: Faker::Lorem.paragraphs(1..10).join("\n\n")[0..1024],
+        message: Faker::Lorem.paragraphs(1..10).join("\n\n")[0..Message::MAXIMUM_MESSAGE_LENGTH],
         user_id: USER_SAMPLES.sample&.id
       )
     end
