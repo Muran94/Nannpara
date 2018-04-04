@@ -1,0 +1,8 @@
+= form_with model: new_blog_comment, url: blog_article_blog_comments_path(blog_article, new_blog_comment), html: {class: "ui form"} do |f|
+  .ui.error.message
+
+  .field.required
+    = f.label :content, "コメント"
+    = f.text_area :content, placeholder: "例）参考になりました！"
+
+  = f.submit "コメント送信", class: "ui fluid orange largered submit button"

@@ -40,6 +40,13 @@ RSpec.describe BlogArticlesController, type: :controller do
 
   describe 'GET #show' do
     let(:blog_article) { create(:blog_article) }
+    let(:blog_comments) do
+      [
+        create(:blog_comment, blog_article: blog_article, created_at: 1.day.ago),
+        create(:blog_comment, blog_article: blog_article, created_at: 2.day.ago),
+        create(:blog_comment, blog_article: blog_article, created_at: 3.day.ago)
+      ]
+    end
     let(:params) { { id: blog_article.id } }
 
     before { get :show, params: params }
@@ -56,6 +63,8 @@ RSpec.describe BlogArticlesController, type: :controller do
     context 'インスタンス変数' do
       it '@blog_articleに正しい値がセットされている' do
         expect(assigns(:blog_article)).to eq blog_article
+        expect(assigns(:blog_comments)).to eq blog_comments
+        expect(assigns(:new_blog_comment)).to be_a_new(BlogComment)
       end
     end
   end

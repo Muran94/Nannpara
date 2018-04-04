@@ -70,7 +70,13 @@
     .column
       // メッセージ一覧
       .ui.segment.basic.bg-white
-        = render "messages/messages", messages: @messages
+        .ui.comments
+          h3.ui.dividing.header
+            | メッセージ一覧
+          - if @messages.present?
+              = render @messages
+          - else
+            p まだメッセージがありません。
 
   .row
     .column
@@ -81,7 +87,7 @@
     .column
       // メッセージフォーム
       .ui.segment.basic.bg-white
-        = render "messages/form"
+        = render "messages/form", recruitment: @recruitment, new_message: @new_message
 
 
 javascript:

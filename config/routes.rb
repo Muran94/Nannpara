@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'blog_comments/create'
+
+  get 'blog_comments/destroy'
+
+  get 'comments/create'
+
+  get 'comments/destroy'
+
   root 'recruitments#index'
   devise_for :users, controllers: { registrations: 'registrations' }
   resources :accounts, only: [] do
@@ -23,6 +31,8 @@ Rails.application.routes.draw do
   end
   resources :tweets, only: [:index, :show, :new, :create, :destroy]
   resources :counters, only: [:new, :create]
-  resources :blog_articles
+  resources :blog_articles do
+    resources :blog_comments, only: [:create, :destroy]
+  end
   get 'service/inquiry'
 end
