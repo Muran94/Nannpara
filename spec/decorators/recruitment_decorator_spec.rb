@@ -27,7 +27,7 @@ describe RecruitmentDecorator do
     it %(整形された値が返ってくること) do
       aggregate_failures do
         expect(recruitment.format_created_at).to eq recruitment.created_at.strftime('%Y年%m月%d日 %H時%M分')
-        expect(recruitment.format_event_date).to eq recruitment.event_date.strftime('%Y年%m月%d日 %H時%M分')
+        expect(recruitment.format_event_date).to eq recruitment.event_date.strftime('%Y年%m月%d日')
       end
     end
   end
@@ -36,14 +36,8 @@ describe RecruitmentDecorator do
     it '整形された値が返ってくること' do
       aggregate_failures do
         expect(recruitment.format_short_created_at).to eq recruitment.created_at.strftime('%m/%d %H:%M')
-        expect(recruitment.format_short_event_date).to eq recruitment.event_date.strftime('%m/%d %H:%M')
+        expect(recruitment.format_short_event_date).to eq recruitment.event_date.strftime('%m/%d')
       end
-    end
-  end
-
-  describe '#format_event_venue' do
-    it '都道府県と開催場所を繋げた形で返すこと' do
-      expect(recruitment.format_event_venue). to eq %(#{recruitment.prefecture.name} > #{recruitment.venue})
     end
   end
 

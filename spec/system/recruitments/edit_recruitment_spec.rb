@@ -8,7 +8,6 @@ RSpec.describe 'EditRecruitment', type: :system do
   let(:description) { 'これから募集記事の編集をテストしたいと思います。' }
   let(:event_date) { 5.days.from_now }
   let(:prefecture_code) { 13 } # 東京
-  let(:venue) { '新宿歌舞伎町' }
 
   let(:new_title) { '（更新済み）募集記事編集テスト' }
 
@@ -19,7 +18,6 @@ RSpec.describe 'EditRecruitment', type: :system do
       description: description,
       event_date: 5.days.from_now,
       prefecture_code: prefecture_code,
-      venue: venue,
       user: user
     )
   end
@@ -35,9 +33,8 @@ RSpec.describe 'EditRecruitment', type: :system do
     sleep 0.1
     expect(page).to have_field 'recruitment[title]', with: title
     expect(page).to have_field 'recruitment[description]', with: description
-    expect(page).to have_field 'recruitment[event_date]', with: event_date.strftime('%Y/%m/%d %H:%M')
+    expect(page).to have_field 'recruitment[event_date]', with: event_date.strftime('%Y/%m/%d')
     expect(find('#recruitment_prefecture_code_select_box > .dropdown > .text')).to have_content JpPrefecture::Prefecture.find(13).name
-    expect(page).to have_field 'recruitment[venue]', with: venue
 
     # フォーム書き換え
     fill_in 'recruitment[title]', with: new_title # タイトル書き換え
@@ -53,9 +50,8 @@ RSpec.describe 'EditRecruitment', type: :system do
     expect(page).to have_content new_title
     expect(page).to have_content recruitment.description
     expect(page).to have_content %(#{recruitment.created_at.strftime('%Y年%m月%d日 %H時%M分')}に更新)
-    expect(page).to have_content recruitment.event_date.strftime('%Y年%m月%d日 %H時%M分')
+    expect(page).to have_content recruitment.event_date.strftime('%Y年%m月%d日')
     expect(page).to have_content recruitment.prefecture.name
-    expect(page).to have_content recruitment.venue
     expect(page).to have_content 'メッセージ一覧'
     expect(page).to have_field 'message[message]'
   end
@@ -71,9 +67,8 @@ RSpec.describe 'EditRecruitment', type: :system do
     sleep 0.1
     expect(page).to have_field 'recruitment[title]', with: title
     expect(page).to have_field 'recruitment[description]', with: description
-    expect(page).to have_field 'recruitment[event_date]', with: event_date.strftime('%Y/%m/%d %H:%M')
+    expect(page).to have_field 'recruitment[event_date]', with: event_date.strftime('%Y/%m/%d')
     expect(find('#recruitment_prefecture_code_select_box > .dropdown > .text')).to have_content JpPrefecture::Prefecture.find(13).name
-    expect(page).to have_field 'recruitment[venue]', with: venue
 
     # フォーム書き換え
     fill_in 'recruitment[title]', with: ''

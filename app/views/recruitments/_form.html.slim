@@ -3,26 +3,22 @@
 
   .field.required
     = f.label :title, "タイトル"
-    = f.text_field :title, placeholder: "渋谷ハチ公前。本日の18時開始。定員なし。"
+    = f.text_field :title
 
   .field.required
     = f.label :description, "募集内容"
-    = f.text_area :description, placeholder: "よろしくお願い致します。"
+    = f.text_area :description
 
-  .three.fields
+  .two.fields
     .field.ui.calendar.required
-      = f.label :event_date, "開催日時"
+      = f.label :event_date, "開催日"
       .ui.input.right.icon
         i.circular.calendar.icon
-        = f.text_field :event_date, placeholder: %(#{Time.zone.now.strftime("%Y/%m/%d %H:%M")}), style: "cursor: pointer;"
+        = f.text_field :event_date, value: @recruitment.default_input_value_for_event_date, style: "cursor: pointer;"
 
     .field.required#recruitment_prefecture_code_select_box
       = f.label "都道府県"
       = f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, {prompt: "選択してください"}, class: "ui fluid dropdown"
-
-    .field.required
-      = f.label "開催場所"
-      = f.text_field :venue, placeholder: "渋谷ハチ公前"
 
   .field.hidden#linked-with-kanto-nanpa-messageboard-field
     = f.check_box :linked_with_kanto_nanpa_messageboard, id: "recruitment_linked_with_kanto_nanpa_messageboard"

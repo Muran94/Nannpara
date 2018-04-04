@@ -2,7 +2,7 @@
 
 $(document).on('turbolinks:load', function() {
   $('.ui.calendar').calendar({
-    type: 'datetime',
+    type: 'date',
     minDate: new Date(),
     ampm: false,
     text: {

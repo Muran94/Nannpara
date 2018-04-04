@@ -12,6 +12,10 @@ module RecruitmentDecorator
     end
   end
 
+  def default_input_value_for_event_date
+    event_date.present? ? event_date.strftime("%Y/%m/%d") : Time.zone.now.strftime("%Y/%m/%d")
+  end
+
   def format_created_at
     _format_date_time(created_at)
   end
@@ -21,15 +25,11 @@ module RecruitmentDecorator
   end
 
   def format_event_date
-    _format_date_time(event_date)
+    _format_date(event_date)
   end
 
   def format_short_event_date
-    _format_short_date_time(event_date)
-  end
-
-  def format_event_venue
-    %(#{prefecture.name} > #{venue})
+    _format_shot_date(event_date)
   end
 
   def shortened_description
@@ -41,6 +41,14 @@ module RecruitmentDecorator
   end
 
   private
+
+  def _format_date(date)
+    date.strftime('%Y年%m月%d日')
+  end
+
+  def _format_shot_date(date)
+    date.strftime('%m/%d')
+  end
 
   def _format_date_time(date_time)
     date_time.strftime('%Y年%m月%d日 %H時%M分')
