@@ -2,7 +2,7 @@
   - if current_user
     .item
       = link_to profile_account_path(current_user), class: "no-default-link-style" do
-        = image_tag(current_user.thumb_image_url, class: "ui image middle aligned avatar", style: "margin-right: 5px;")
+        = image_tag(current_user.thumb_image_url, class: "ui image middle aligned rounded", style: "margin-right: 5px;")
         | マイページ
   - else
     .item

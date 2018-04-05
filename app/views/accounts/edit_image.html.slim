@@ -6,7 +6,7 @@
   / .ui.grid.center.aligned.stackable
   /   .row
   /     .column.sixteen.wide
-  = image_tag(@current_user.format_image_url, class: "ui image small centered circular")
+  = image_tag(@current_user.format_image_url, class: "ui image small centered rounded")
 
   = form_for @current_user, url: update_image_accounts_path, class: "ui form" do |f|
     p

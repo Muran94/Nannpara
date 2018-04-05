@@ -1,6 +1,6 @@
 .comment
   = link_to profile_account_path(blog_article.user), class: "avatar" do
-    = image_tag(blog_article.format_image_url("thumb"))
+    = image_tag(blog_article.format_image_url("thumb"), class: "ui image rounded mini")
   .content
     = link_to profile_account_path(blog_article.user), class: "author", style: "font-size: 12px;" do
       = blog_article.user.name

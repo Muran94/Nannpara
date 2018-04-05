@@ -9,7 +9,7 @@
             | 削除
     .comment
       = link_to profile_account_path(@tweet.user), class: "avatar" do
-        = image_tag(@tweet.format_image_url("thumb"))
+        = image_tag(@tweet.format_image_url("thumb"), class: "ui image rounded mini")
       .content
         = link_to profile_account_path(@tweet.user), class: "author" do
           = @tweet.user.name

@@ -10,7 +10,7 @@
             // 右側に投稿の編集・削除メニュー
             .column.without-right-padding.one.wide.computer.tablet.only.two.wide.mobile.only
               = link_to profile_account_path(@blog_article.user), id: "blog-article-owner-profile-image" do
-                  = image_tag(@blog_article.user.format_image_url("thumb"), class: "ui circular image")
+                = image_tag @blog_article.user.format_image_url("thumb"), class: "ui rounded image"
             .column.ten.wide
               = link_to profile_account_path(@blog_article.user), id: "blog-article-owner-profile-name" do
                 b= @blog_article.user.name
