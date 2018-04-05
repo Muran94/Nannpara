@@ -29,6 +29,7 @@ gem 'google-analytics-rails'
 gem 'capybara', '~> 2.13'
 gem 'selenium-webdriver'
 gem 'chromedriver-helper'
+gem 'counter_culture'
 
 group :development, :test do
   gem 'sqlite3'

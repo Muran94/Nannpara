@@ -8,3 +8,5 @@
       .metadata
         span.date= tweet.created_at.strftime("%Y/%m/%d %H:%M")
       .text= simple_format(h(tweet.content))
+      .actions
+        = render "tweet_nices/tweet_nice_button", tweet: tweet

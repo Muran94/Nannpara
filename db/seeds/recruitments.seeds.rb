@@ -18,7 +18,7 @@ after :users do
 
     recruitment = Recruitment.new(
       title: TITLE_SAMPLES.sample,
-      description: Faker::Lorem.paragraphs(rand(1..10)).join("\n\n")[0..Recruitment::MAXIMUM_DESCRIPTION_LENGTH],
+      description: Faker::Lorem.paragraphs(rand(1..10)).join("\n\n")[0...Recruitment::MAXIMUM_DESCRIPTION_LENGTH],
       prefecture_code: rand(1..47),
       event_date: event_date,
       user_id: User.all.to_a.sample.id,
