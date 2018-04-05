@@ -1,10 +1,18 @@
-.comment
-  = link_to profile_account_path(blog_article.user), class: "avatar" do
-    = image_tag(blog_article.format_image_url("thumb"), class: "ui image rounded mini")
-  .content
-    = link_to profile_account_path(blog_article.user), class: "author", style: "font-size: 12px;" do
-      = blog_article.user.name
-    = link_to blog_article do
-      .metadata
-        span.date= blog_article.created_at.strftime("%Y/%m/%d %H:%M")
-      h2.ui.header.text.break-word= blog_article.title
+.row
+  .column.sixteen.wide
+    .ui.grid.omit-overflow
+      .column.without-right-padding.three.wide.mobile.only.two.wide.computer.tablet.only
+        = link_to profile_account_path(blog_article.user), class: "ui rounded image" do
+          = image_tag(blog_article.format_image_url)
+      // スマホ
+      .column.thirteen.wide.mobile.only
+        = link_to blog_article, class: "ui header" do
+          div
+            = blog_article.title
+
+      // コンピューター & タブレット
+      .column.fourteen.wide.computer.tablet.only
+        = link_to blog_article, class: "no-default-link-style" do
+            // タイトルと本文の一部
+            h3.ui.header= blog_article.title
+            p.break-word= blog_article.shortened_description
