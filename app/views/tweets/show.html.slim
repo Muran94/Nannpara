@@ -16,6 +16,8 @@
         .metadata
           span.date= @tweet.created_at.strftime("%Y/%m/%d %M:%D")
         .text= simple_format(h(@tweet.content))
+        .actions
+          a href="#" ナイス
 
 = link_to tweets_path, class: "ui button orange fluid" do
   = semantic_icon("comments")

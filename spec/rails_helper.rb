@@ -39,6 +39,9 @@ RSpec.configure do |config|
     end
   end
 
+  config.include WaitForAjax, type: :system
+  config.after(:each, js: :true) { wait_for_ajax }
+
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.

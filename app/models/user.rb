@@ -59,6 +59,10 @@ class User < ApplicationRecord
     image.thumb.url
   end
 
+  def already_clicked_this_tweet_nice_button?(tweet)
+    TweetNice.where(user_id: id, tweet_id: tweet.id).any?
+  end
+
   private
 
   def _valid_image_size?
