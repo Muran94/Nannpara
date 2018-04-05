@@ -29,7 +29,7 @@
                 | 募集をかける
             .item
               = link_to profile_account_path(current_user) do
-                = image_tag(current_user.thumb_image_url, class: "ui image mini circular")
+                = image_tag(current_user.thumb_image_url, class: "ui image mini rounded")
           - else
             .item
               = link_to new_user_session_path do

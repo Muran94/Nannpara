@@ -1,7 +1,7 @@
 .comment
   - if blog_comment.user
-    = link_to profile_account_path(blog_comment.user), class: "ui image avatar circular" do
-      = image_tag blog_comment.user.format_image_url("thumb")
+    = link_to profile_account_path(blog_comment.user), class: "avatar" do
+      = image_tag blog_comment.user.format_image_url("thumb"), class: "ui image rounded mini"
   .content
     - if blog_comment.user
       = link_to blog_comment.user.name, profile_account_path(blog_comment.user), class: "author"
