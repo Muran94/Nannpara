@@ -5,11 +5,11 @@
     = semantic_icon("book")
     | ブログ記事一覧
 
-  .ui.comments
-    - if @blog_articles.present?
-        = render @blog_articles
-    - else
-      | まだブログ記事がありません。
+  - if @blog_articles.present?
+    .ui.vertically.divided.padded.grid
+      = render @blog_articles
+  - else
+    | まだブログ記事がありません。
 
 .ui.center.aligned.container
   = paginate @blog_articles

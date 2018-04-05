@@ -12,7 +12,7 @@
               = link_to profile_account_path(@recruitment.user), id: "recruitment-owner-profile-image" do
                 = image_tag(@recruitment.user.format_image_url("thumb"), class: "ui rounded image")
             .column.ten.wide
-              = link_to profile_account_path(@recruitment.user), id: "recruitment-owner-profile-name" do
+              = link_to profile_account_path(@recruitment.user), class: "no-default-link-style", id: "recruitment-owner-profile-name" do
                 b= @recruitment.user.name
             .right.floated.right.aligned.column.one.wide.computer.tablet.two.wide.mobile
               - if current_user && @recruitment.owner?(current_user)

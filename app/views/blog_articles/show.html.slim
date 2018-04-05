@@ -12,7 +12,7 @@
               = link_to profile_account_path(@blog_article.user), id: "blog-article-owner-profile-image" do
                 = image_tag @blog_article.user.format_image_url("thumb"), class: "ui rounded image"
             .column.ten.wide
-              = link_to profile_account_path(@blog_article.user), id: "blog-article-owner-profile-name" do
+              = link_to profile_account_path(@blog_article.user), class: "no-default-link-style", id: "blog-article-owner-profile-name" do
                 b= @blog_article.user.name
             .right.floated.right.aligned.column.one.wide.computer.tablet.two.wide.mobile
               - if current_user && @blog_article.owner?(current_user)
