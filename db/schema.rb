@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180404111124) do
+ActiveRecord::Schema.define(version: 20180405005107) do
 
   create_table "blog_articles", force: :cascade do |t|
     t.string "title"
@@ -60,6 +60,9 @@ ActiveRecord::Schema.define(version: 20180404111124) do
     t.boolean "closed", default: false
     t.boolean "linked_with_kanto_nanpa_messageboard"
     t.string "kanto_nanpa_messageboard_delete_key"
+    t.index ["closed"], name: "index_recruitments_on_closed"
+    t.index ["event_date"], name: "index_recruitments_on_event_date"
+    t.index ["prefecture_code"], name: "index_recruitments_on_prefecture_code"
     t.index ["user_id"], name: "index_recruitments_on_user_id"
   end
 
