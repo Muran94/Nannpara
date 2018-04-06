@@ -137,18 +137,6 @@ $(document).on('turbolinks:load', function() {
           }
         ]
       },
-      'tweet[content]': {
-        rules: [
-          {
-            type: 'maxLength[140]',
-            prompt : '140文字以下で入力してください。'
-          },
-          {
-            type: 'empty',
-            prompt : '入力必須です。'
-          },
-        ]
-      },
       'blog_article[title]': {
         rules: [
           {

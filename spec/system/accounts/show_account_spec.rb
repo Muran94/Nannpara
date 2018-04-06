@@ -21,7 +21,6 @@ RSpec.describe 'ShowAccount', type: :system do
 
   let!(:recruitment) { create(:recruitment, user: user) }
   let!(:blog_article) { create(:blog_article, user: user) }
-  let!(:tweet) { create(:tweet, user: user) }
 
   context '自分のアカウントページを確認' do
     it 'アカウント情報が表示されており、自分にしか見えていないはずの項目が表示されていること' do
@@ -46,13 +45,6 @@ RSpec.describe 'ShowAccount', type: :system do
       end
       expect(current_path).to eq blog_articles_account_path user.id
       expect(page).to have_content blog_article.title
-
-      within '#account-tab' do
-        click_link 'つぶやき'
-        sleep 0.1
-      end
-      expect(current_path).to eq tweets_account_path user.id
-      expect(page).to have_content tweet.content
 
       within '#account-tab' do
         click_link 'プロフィール'

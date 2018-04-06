@@ -99,7 +99,7 @@ RSpec.describe AccountsController, type: :controller do
     before { get :blog_articles, params: params }
 
     context 'レスポンス' do
-      it 'レスンポンスコード200を返却 && tweetsテンプレートをrender' do
+      it 'レスンポンスコード200を返却 && blog_articleテンプレートをrender' do
         aggregate_failures do
           expect(response).to have_http_status 200
           expect(response).to render_template :blog_articles
@@ -108,36 +108,11 @@ RSpec.describe AccountsController, type: :controller do
     end
 
     context 'インスタンス変数' do
-      it 'userのインスタンス変数とtweetsのインタンス変数がセットされており、tweetsの数が3である' do
+      it 'userのインスタンス変数とblog_articlesのインタンス変数がセットされており、blog_articlesの数が3である' do
         aggregate_failures do
           expect(assigns(:user)).to eq user
           expect(assigns(:blog_articles)).to eq user.blog_articles.order('created_at DESC')
           expect(assigns(:blog_articles).count).to eq 3
-        end
-      end
-    end
-  end
-
-  describe '#tweets' do
-    let(:user) { create(:user, :with_tweets) }
-    let(:params) { { id: user.id } }
-    before { get :tweets, params: params }
-
-    context 'レスポンス' do
-      it 'レスンポンスコード200を返却 && tweetsテンプレートをrender' do
-        aggregate_failures do
-          expect(response).to have_http_status 200
-          expect(response).to render_template :tweets
-        end
-      end
-    end
-
-    context 'インスタンス変数' do
-      it 'userのインスタンス変数とtweetsのインタンス変数がセットされており、tweetsの数が3である' do
-        aggregate_failures do
-          expect(assigns(:user)).to eq user
-          expect(assigns(:tweets)).to eq user.tweets.order('created_at DESC')
-          expect(assigns(:tweets).count).to eq 3
         end
       end
     end

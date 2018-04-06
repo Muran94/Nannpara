@@ -1,9 +1,0 @@
-- if current_user
-  - if current_user.already_clicked_this_tweet_nice_button?(tweet)
-    = link_to tweet_tweet_nices_path(tweet), method: :delete, remote: true, class: "js-tweet-nice-button" do
-      = semantic_icon "thumbs up orange"
-      span.nice-count= tweet.tweet_nices_count
-  - else
-    = link_to tweet_tweet_nices_path(tweet), method: :post, remote: true, class: "js-tweet-nice-button" do
-      = semantic_icon "thumbs up"
-      span.nice-count= tweet.tweet_nices_count
