@@ -1,3 +1,5 @@
+- provide(:title, "カウンター")
+
 .ui.three.item.secondary.menu
   = link_to "１日", new_counter_path(period: "day"), class: "ui item orange #{activate_tab_if_period('day')}", id: "day-period-button"
   = link_to "1週間", new_counter_path(period: "week"), class: "ui item orange #{activate_tab_if_period('week')}", id: "week-period-button"
