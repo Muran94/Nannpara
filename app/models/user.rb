@@ -38,7 +38,6 @@ class User < ApplicationRecord
 
   has_many :recruitments, dependent: :destroy
   has_many :messages, dependent: :destroy
-  has_many :tweets, dependent: :destroy
   has_many :counters, dependent: :destroy
   has_many :blog_articles, dependent: :destroy
   has_many :blog_comments, dependent: :destroy
@@ -57,10 +56,6 @@ class User < ApplicationRecord
   def thumb_image_url
     return 'no_user_image.png' if image.blank?
     image.thumb.url
-  end
-
-  def already_clicked_this_tweet_nice_button?(tweet)
-    TweetNice.where(user_id: id, tweet_id: tweet.id).any?
   end
 
   private

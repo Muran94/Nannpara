@@ -6,7 +6,6 @@ Rails.application.routes.draw do
       get :profile
       get :recruitments
       get :blog_articles
-      get :tweets
     end
     collection do
       get :edit
@@ -20,13 +19,6 @@ Rails.application.routes.draw do
   end
   resources :recruitments do
     resources :messages, only: [:create]
-  end
-  resources :tweets, only: [:index, :show, :new, :create, :destroy] do
-    resources :tweet_nices, only: [:create] do
-      collection do
-        delete :destroy
-      end
-    end
   end
   resources :counters, only: [:new, :create]
   resources :blog_articles do
