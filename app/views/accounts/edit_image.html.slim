@@ -1,25 +1,18 @@
 - provide(:title, "プロフィール画像編集")
 
 .ui.segment.basic.bg-white
-  h3.ui.header.dividing
-    = semantic_icon "image"
-    | プロフィール画像編集
+  h1.ui.center.aligned.medium.dividing.header プロフィール画像編集
 
-  / .ui.grid.center.aligned.stackable
-  /   .row
-  /     .column.sixteen.wide
   = image_tag(@current_user.format_image_url, class: "ui image small centered rounded")
 
   = form_for @current_user, url: update_image_accounts_path, class: "ui form" do |f|
-    p
-      .field(style="text-align: center;")
-        = f.file_field :image, accept: 'image/jpeg,image/gif,image/png', style: "text-align: center;"
-    p
-      .field(style="text-align: center;")
-        = f.submit "画像アップロード", class: "ui submit disabled button orange", id: "user_image_upload_button"
+    .field.text-align-center.medium-font
+      = f.file_field :image, accept: 'image/jpeg,image/gif,image/png'
+    .field.text-align-center
+      = f.submit "画像アップロード", class: "ui submit disabled button orange", id: "user_image_upload_button"
 
     - if @current_user.image.present?
-      p(style="text-align: center;")
+      .text-align-center
         = link_to destroy_image_accounts_path, method: :patch do
           | 画像を削除
 

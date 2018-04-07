@@ -2,8 +2,8 @@
   - if current_user
     .item
       = link_to profile_account_path(current_user), class: "no-default-link-style" do
-        = image_tag(current_user.thumb_image_url, class: "ui mini image middle aligned rounded", style: "margin-right: 5px;")
-        | マイページ
+        = image_tag(current_user.thumb_image_url, class: "ui mini image middle aligned rounded", style: "margin-right: 10px;")
+        span style="vertical-align: middle;" マイページ
   - else
     .item
       = link_to new_user_registration_path, class: "no-default-link-style" do
@@ -17,7 +17,7 @@
   .item
     = link_to recruitments_path, class: "no-default-link-style" do
       = semantic_icon("users")
-      | 募集一覧
+      | 募集記事一覧
   .item
     = link_to blog_articles_path, class: "no-default-link-style" do
       = semantic_icon("rss")

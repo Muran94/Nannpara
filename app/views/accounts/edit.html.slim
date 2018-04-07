@@ -1,9 +1,7 @@
 - provide(:title, "プロフィール編集")
 
 .ui.segment.basic.bg-white
-  h3.ui.header.dividing
-    = semantic_icon "user"
-    | プロフィール
+  h1.ui.center.aligned.medium.dividing.header プロフィール編集
   = form_for(@current_user, url: accounts_path, html: {method: :patch, class: "ui form"}) do |f|
     .ui.error.message
 

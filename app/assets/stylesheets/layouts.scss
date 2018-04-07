@@ -6,6 +6,15 @@ header {
         padding: 0 !important;
     }
 }
+.sidebar {
+  .item {
+    font-size: 15px;
+    font-weight: bolder;
+    letter-spacing: 1px;
+  }
+
+  i.icon { margin-right: 15px !important; }
+}
 .open-sidebar  {
     i { margin-right: 0 !important; }
 }
