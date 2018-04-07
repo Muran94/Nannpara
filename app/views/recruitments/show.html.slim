@@ -5,6 +5,7 @@ article.ui.grid.stackable
   .row: .column
     .ui.segment.basic.bg-white
       .ui.grid
+
         // 投稿者画像と投稿者ユーザー名
         // 右側に投稿の編集・削除メニュー
         .row.middle.aligned
@@ -33,43 +34,38 @@ article.ui.grid.stackable
       
       .ui.grid.stackable
         // 募集記事タイトル
-        .row
-          .column
-            h1.ui.dividing.large.header.break-word= @recruitment.title
+        .row: .column
+          h1.ui.dividing.large.header.break-word= @recruitment.title
         
         = render "recruitment_information", recruitment: @recruitment
 
   - if current_user && @recruitment.owner?(current_user) && @recruitment.linked_with_kanto_nanpa_messageboard?
     // 「関東ナンパ友募集掲示板」のコメントの削除キー
-    .row
-      .column
-        .ui.segment.basic.bg-white
-          h5.ui.header.dividing 「関東ナンパ友募集掲示板」コメント削除キー
-          p= @recruitment.kanto_nanpa_messageboard_delete_key
-
-
-  .row
-    .column
-      // メッセージ一覧
+    .row: .column
       .ui.segment.basic.bg-white
-        .ui.comments
-          h3.ui.dividing.header
-            | メッセージ一覧
-          - if @messages.present?
-              = render @messages
-          - else
-            p まだメッセージがありません。
+        h3.ui.dividing.small.header 「関東ナンパ友募集掲示板」コメント削除キー
+        p= @recruitment.kanto_nanpa_messageboard_delete_key
 
-  .row
-    .column
-      // メッセージページネーション
-      .ui.center.aligned.container
-        = paginate @messages
-  .row
-    .column
-      // メッセージフォーム
-      .ui.segment.basic.bg-white
-        = render "messages/form", recruitment: @recruitment, new_message: @new_message
+  // メッセージ一覧
+  .row: .column
+    .ui.segment.basic.bg-white
+      .ui.comments
+        h3.ui.dividing.small.header
+          | メッセージ一覧
+        - if @messages.present?
+            = render @messages
+        - else
+          p まだメッセージがありません。
+
+  // メッセージページネーション
+  .row: .column
+    .ui.center.aligned.container
+      = paginate @messages
+
+  // メッセージフォーム
+  .row: .column
+    .ui.segment.basic.bg-white
+      = render "messages/form", recruitment: @recruitment, new_message: @new_message
 
 = render "create_recruitment_button"
 

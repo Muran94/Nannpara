@@ -30,6 +30,5 @@ article.row.recruitment-list
           = render "/recruitments/recruitment_information", recruitment: recruitment
 
           // 詳細ページへのリンク
-          .row
-            .column
-              =link_to "詳細", recruitment, class: "ui button orange fluid"
+          .row: .column
+            =link_to "詳細", recruitment, class: "ui button orange fluid"

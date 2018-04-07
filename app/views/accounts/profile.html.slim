@@ -7,40 +7,48 @@
     .column
       .ui.segment.basic.bg-white
         .ui.grid.stackable
-          .row.center.aligned
-            .column.sixteen.wide
-              = image_tag(@user.format_image_url, class: "ui centered small rounded image profile-image")
-              - if account_owner?(@user)
-                = link_to "プロフィール画像編集", edit_image_accounts_path, class: "ui button basic mini orange", id: "edit-image-link", style: "margin-top: 10px;"
-              h2.ui.center.aligned.header= @user.name
 
-          .column.sixteen.wide
-            h5.ui.header.dividing 自己紹介文
-            p= simple_format(h(@user.format_introduction))
+          // プロフィール画像
+          .row: .column
+              = image_tag(@user.format_image_url, class: "ui centered small rounded image profile-image")
+
+          // プロフィール画像編集のリンク
+          - if account_owner?(@user)
+              .row: .column.center.aligned
+                  = link_to "プロフィール画像編集", edit_image_accounts_path, class: "ui button basic mini orange", id: "edit-image-link"
+          
+          // ユーザー名
+          .row: .column
+              h1.ui.center.aligned.large.header= @user.name
+
+          // 自己紹介ぶん
+          .row: .column
+              h2.ui.small.dividing.header 自己紹介文
+              p= simple_format(h(@user.format_introduction))
 
           .three.column.row
-            .column
-              h5.ui.header.dividing
-                = semantic_icon("calendar alternate outline")
-                .content 年齢
-              p= @user.format_age
-            .column
-              h5.ui.header.dividing
-                = semantic_icon("map marker alternate")
-                .content 活動地域
-              p= @user.format_prefecture
-            .column
-              h5.ui.header.dividing
-                = semantic_icon("map map outline")
-                .content ナンパ歴
-              p.break-word= @user.format_experience
-          .column.sixteen.wide
-            div(style="color: #bbb; font-size: 12px; text-align: right; margin-top: 25px;")
-              = %(#{@user.created_at}に更新)
+              // 年齢
+              .column
+                  h2.ui.small.dividing.header 年齢
+                  p= @user.format_age
+
+              // 活動地域
+              .column
+                  h2.ui.small.dividing.header 活動地域
+                  p= @user.format_prefecture
+
+              // ナンパ歴
+              .column
+                h2.ui.small.dividing.header ナンパ歴
+                .break-word= @user.format_experience
+
+          // 最終更新日    
+          .row: .column.updated-at-container
+            = %(#{@user.updated_at}に更新)
 
           - if account_owner?(@user)
-            .column.sixteen.wide
-              =link_to edit_accounts_path, class: "ui basic button orange fluid", id: "account-edit-link"
+              .row: .column
+                =link_to edit_accounts_path, class: "ui basic button orange fluid", id: "account-edit-link"
                 = semantic_icon "edit"
                 | 編集
 

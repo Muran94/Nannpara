@@ -1,7 +1,6 @@
 // 募集内容
-.row
-    .column
-        =simple_format(h(recruitment.description))
+.row: .column
+    =simple_format(h(recruitment.description))
     
 // 開催日と都道府県
 .two.column.row
@@ -21,11 +20,9 @@
 
 // ダイレクトメッセージ
 - if recruitment.user.direct_mail
-    .row
-        .column
-            = mail_to recruitment.user.email, "募集主にダイレクトメールを送る", class: "ui button orange basic fluid"
+    .row: .column
+        = mail_to recruitment.user.email, "募集主にダイレクトメールを送る", class: "ui button orange basic fluid"
 
 // 募集の更新日時
-.row
-    .column.recruitment-updated-at
-        = %(#{recruitment.format_created_at}に更新)
+.row: .column.updated-at-container
+    = %(#{recruitment.format_created_at}に更新)
