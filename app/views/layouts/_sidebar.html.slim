@@ -16,19 +16,15 @@
 
   .item
     = link_to recruitments_path, class: "no-default-link-style" do
-      = semantic_icon("rss")
+      = semantic_icon("users")
       | 募集一覧
   .item
-    = link_to new_recruitment_path, class: "no-default-link-style" do
-      = semantic_icon("pencil alternate")
-      | 募集をかける
-  .item
     = link_to blog_articles_path, class: "no-default-link-style" do
-      = semantic_icon("book")
+      = semantic_icon("rss")
       | ブログ記事一覧
   .item
     = link_to new_counter_path, class: "no-default-link-style" do
-      = semantic_icon("plus")
+      = semantic_icon("tachometer alternate")
       | カウンター
   .item
     = link_to service_inquiry_path, class: "no-default-link-style" do
