@@ -71,13 +71,7 @@ article.ui.grid.stackable
       .ui.segment.basic.bg-white
         = render "messages/form", recruitment: @recruitment, new_message: @new_message
 
+= render "create_recruitment_button"
 
 javascript:
   $('.ui.dropdown').dropdown();
-
-scss:
-  .recruitment-updated-at-display {
-    color: #bbb;
-    font-size: 12px;
-    text-align: right;
-  }

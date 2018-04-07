@@ -49,23 +49,6 @@ ActiveRecord::Schema.define(version: 20180405005107) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
-  create_table "miniblog_mutters", force: :cascade do |t|
-    t.text "content"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_miniblog_mutters_on_user_id"
-  end
-
-  create_table "miniblog_nices", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "miniblog_mutter_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["miniblog_mutter_id"], name: "index_miniblog_nices_on_miniblog_mutter_id"
-    t.index ["user_id"], name: "index_miniblog_nices_on_user_id"
-  end
-
   create_table "recruitments", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -81,17 +64,6 @@ ActiveRecord::Schema.define(version: 20180405005107) do
     t.index ["event_date"], name: "index_recruitments_on_event_date"
     t.index ["prefecture_code"], name: "index_recruitments_on_prefecture_code"
     t.index ["user_id"], name: "index_recruitments_on_user_id"
-  end
-
-  create_table "tweet_comments", force: :cascade do |t|
-    t.text "content"
-    t.integer "user_id"
-    t.integer "tweet_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "tweet_nices", default: 0, null: false
-    t.index ["tweet_id"], name: "index_tweet_comments_on_tweet_id"
-    t.index ["user_id"], name: "index_tweet_comments_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -20,6 +20,7 @@ body {
   background: #F5F4F5;
 }
 nav.bottom-right-create-nav-button {
+    z-index: 5;
     display: block;
     position: fixed;
     right: 10px;

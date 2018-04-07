@@ -2,16 +2,6 @@
 
 = render "tab", user: @user
 
-/ .ui.segment.basic.bg-white
-/   - if @recruitments.present?
-/     .ui.vertically.padded.vertically.divided.grid
-/       = render partial: "recruitments/recruitment", collection: @recruitments
-/   - else
-/     | まだ募集がありません。
-
-/ .ui.center.aligned.container
-/   = paginate @recruitments
-
 .ui.basic.segment.no-horizontal-padding.bg-white
     .ui.grid.stackable
         .row.recruitment-list
@@ -27,3 +17,6 @@
 
 .ui.center.aligned.container
   = paginate @recruitments
+
+- if current_user == @user
+  = render "create_recruitment_button"
