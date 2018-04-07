@@ -1,0 +1,56 @@
+// Padding 
+
+$lessSegmentPadding: 0.5em;
+$noSegmentPadding: 0;
+
+.ui.segment {
+    // less padding styles
+    &.less-padding {
+        padding: $lessSegmentPadding !important;
+    }
+    &.less-vertical-padding {
+        padding-top: $lessSegmentPadding !important;
+        padding-bottom: $lessSegmentPadding !important;
+    }
+    &.less-horizontal-padding {
+        padding-left: $lessSegmentPadding !important;
+        padding-right: $lessSegmentPadding !important;
+    }
+    &.less-padding-top {
+        padding-top: $lessSegmentPadding !important;
+    }
+    &.less-padding-bottom {
+        padding-bottom: $lessSegmentPadding !important;
+    }
+    &.less-padding-left {
+        padding-left: $lessSegmentPadding !important;
+    }
+    &.less-padding-right {
+        padding-right: $lessSegmentPadding !important;
+    }
+
+    // no padding styles
+    &.no-padding {
+        padding: $noSegmentPadding !important;
+    }
+    &.no-vertical-padding {
+        padding-top: $noSegmentPadding !important;
+        padding-bottom: $noSegmentPadding !important;
+    }
+    &.no-horizontal-padding {
+        padding-left: $noSegmentPadding !important;
+        padding-right: $noSegmentPadding !important;
+    }
+    &.no-padding-top {
+        padding-top: $noSegmentPadding !important;
+    }
+    &.no-padding-bottom {
+        padding-bottom: $noSegmentPadding !important;
+    }
+    &.no-padding-left {
+        padding-left: $noSegmentPadding !important;
+    }
+    &.no-padding-right {
+        padding-right: $noSegmentPadding !important;
+    }
+}

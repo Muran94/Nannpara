@@ -1,0 +1,29 @@
+// columns
+$lessColumnPadding: 0.5rem;
+
+.ui.grid > .column:not(.row),
+.ui.grid > .row > .column {
+    // less padding styles
+    &.less-horizontal-padding {
+        padding-right: $lessColumnPadding;
+        padding-left: $lessColumnPadding;
+    }
+    &.less-padding-left {
+        padding-left: $lessColumnPadding;
+    }
+    &.less-padding-right {
+        padding-right: $lessColumnPadding;
+    }
+
+    // no padding styles
+    &.no-horizontal-padding {
+        padding-right: 0;
+        padding-left: 0;
+    }
+    &.no-padding-left {
+        padding-left: 0;
+    }
+    &.no-padding-right {
+        padding-right: 0;
+    }
+}

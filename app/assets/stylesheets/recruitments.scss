@@ -2,6 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+// common styles
+.no-padding {
+  padding: 0;
+}
+.no-margin {
+  margin: 0;
+}
+.small-font {
+    font-size: 10px;
+}
+
+nav.bottom-right-create-nav-button#create-recruitment-button {
+  background: #F2711C;
+}
+
+// styles for index page
 .ui.modal {
     position: relative !important;
     top: auto;
@@ -10,3 +27,44 @@
 #search-modal > .menu {
   min-height: 150px !important;
 }
+.recruitment-information-container {
+  display: none;
+}
+.recruitment-list {
+    &:hover {
+        opacity: .8;
+    }
+    + .recruitment-list {
+        border-top: 1px solid #e0e0e0;
+    }
+}
+.sub-info {
+  @extend .small-font;
+  margin-top: 5px;
+  color: #888;
+
+  span + span {
+    margin-left: 10px;
+  }
+
+  i {
+    margin-right: 2px !important;
+  }
+}
+.go-to-icon {
+  position: absolute;
+  top: 40%;
+  right: 5px;
+  color: #888;
+}
+
+// styles for show page
+.recruitment-updated-at {
+    color: #bbb;
+    font-size: 12px;
+    text-align: right;
+}
+
+// styles for new page
+
+// styles for edit page

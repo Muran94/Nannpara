@@ -18,3 +18,17 @@
 //= require semantic-ui
 
 //= require_tree .
+
+$(document).on('turbolinks:load', function () {
+    $(window).scroll(function () {
+        var footerHeight = parseInt($('footer').css('height'));
+        var scrollHeight = $(document).height() - footerHeight;
+        var scrollPosition = $(window).height() + $(window).scrollTop();
+
+        if ((scrollHeight - scrollPosition) / scrollHeight <= 0) {
+            $('.bottom-right-create-nav-button').fadeOut();
+        } else {
+            $('.bottom-right-create-nav-button').fadeIn();
+        }
+    });
+});

@@ -1,23 +1,21 @@
 - provide(:title, "募集記事一覧")
 
-.ui.segment.basic.bg-white
-  .ui.text.menu(style="margin-top: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0;")
-    .item
-      h4.ui.header
-        = semantic_icon("rss")
-        | 募集一覧
-    .ui.right.item#prefecture-select
-      = semantic_icon("search circular orange", style: "cursor: pointer;")
+.ui.basic.segment.no-horizontal-padding.bg-white
+    .ui.grid.stackable
+        .row.recruitment-list
+            .column
+                h1.ui.aligned.small.header(style="color: #555;")
+                    = semantic_icon "rss"
+                    | 募集記事一覧
 
-  .ui.divider(style="margin-top: 0; padding-top: 0;")
-
-  - if @recruitments.present?
-    .ui.vertically.divided.padded.grid
-      = render @recruitments
-  - else
-    | まだ募集がありません。
+        - if @recruitments.present?
+          = render @recruitments
+        - else
+          | まだ募集記事がありません。
 
 .ui.center.aligned.container
   = paginate @recruitments
 
 = render "search_modal"
+
+= render "create_recruitment_button"
