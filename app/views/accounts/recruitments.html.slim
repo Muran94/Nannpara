@@ -18,5 +18,5 @@
 .ui.center.aligned.container
   = paginate @recruitments
 
-- if current_user == @user
+- if account_owner?(@user)
   = render "create_recruitment_button"
