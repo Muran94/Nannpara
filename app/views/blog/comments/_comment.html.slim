@@ -1,0 +1,14 @@
+.comment
+  - if comment.user
+    = link_to profile_account_path(comment.user), class: "avatar" do
+      = image_tag comment.user.format_image_url("thumb"), class: "ui image rounded mini"
+  .content
+    - if comment.user
+      = link_to comment.user.name, profile_account_path(comment.user), class: "author"
+    .metadata
+      span.data= comment.created_at.strftime("%Y年%m月%d日 %H:%M")
+    .text
+      = simple_format(h(comment.content))
+    - if current_user && (comment.owner?(current_user) || blog_article.owner?(current_user))
+      .actions
+        = link_to "削除", blog_article_blog_comment_path(blog_article, comment), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "delete-blog-comment-button"

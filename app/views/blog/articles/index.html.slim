@@ -1,6 +1,4 @@
-- provide(:title, "#{@user.name}のブログ記事一覧")
-
-= render "tab", user: @user
+- provide(:title, "ブログ記事一覧")
 
 .ui.basic.segment.no-horizontal-padding.bg-white
     .ui.grid.stackable
@@ -18,4 +16,4 @@
 .ui.center.aligned.container
   = paginate @blog_articles
 
-= render "blog/articles/create_article_button"
+= render "create_article_button"

@@ -1,0 +1,21 @@
+article.row.blog-article-list
+  .column.omit-overflow
+    .row
+      .column
+        .go-to-icon
+          = semantic_icon "chevron right"
+
+        .ui.grid
+          .column.no-padding-right.four.wide
+            = link_to profile_account_path(article.user), class: "ui rounded image" do
+              = image_tag(article.format_image_url)
+
+          .column.twelve.wide
+            = link_to blog_article_path article, class: "no-default-link-style" do
+              h1.ui.header.small
+                = article.title
+
+            .sub-info
+              span
+                = semantic_icon("calendar alternate outline")
+                = article.format_short_created_at

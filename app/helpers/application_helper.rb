@@ -9,7 +9,15 @@ module ApplicationHelper
     end
   end
 
-  def activate_tab_if_correct_page(action_name)
-    'active' if controller.action_name == action_name
+  def activate_tab(tab_controller_name)
+    if controller_name == tab_controller_name
+      "active"
+    end
+  end
+
+  def activate_tab_for_account_page(tab_action_name)
+    if controller.action_name == tab_action_name
+      "active"
+    end
   end
 end
