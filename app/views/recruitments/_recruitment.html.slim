@@ -1,38 +1,35 @@
-.row
-  .column.sixteen.wide
-    .ui.grid.omit-overflow
-      .column.without-right-padding.three.wide.mobile.only.two.wide.computer.tablet.only
-        = link_to profile_account_path(recruitment.user), class: "ui rounded image" do
-          = image_tag(recruitment.format_image_url)
-      // スマホ
-      .column.thirteen.wide.mobile.only
-        = link_to recruitment, class: "ui header" do
-          div
-            = recruitment.title
-            .extra(style="font-size: 11px;")
-              p(style="padding: 0; margin: 0;")
+article.row.recruitment-list
+  .column.omit-overflow
+    .row.recruitment-title-container
+      .column
+        .go-to-icon
+          = semantic_icon "chevron right"
+
+        .ui.grid
+          .column.no-padding-right.four.wide
+            = link_to profile_account_path(recruitment.user), class: "ui rounded image" do
+              = image_tag(recruitment.format_image_url)
+
+          .column.twelve.wide.recruitment-information-open-territory
+            .ui.header.small
+              = recruitment.title
+
+            .sub-info
+              span
                 = semantic_icon("map marker alternate")
                 = recruitment.prefecture.name
-            .extra(style="font-size: 11px;")
-              p(style="padding: 0; margin: 0;")
+              span
                 = semantic_icon("calendar alternate outline")
                 = recruitment.format_event_date
+    
+    // デフォルトで非表示状態の募集記事詳細情報
+    .row.recruitment-information-container
+      .column
+        .ui.grid.stackable
+          // 募集についての詳細情報
+          = render "/recruitments/recruitment_information", recruitment: recruitment
 
-      // コンピューター & タブレット
-      .column.fourteen.wide.computer.tablet.only
-        = link_to recruitment, class: "no-default-link-style" do
-          div
-            .ui.grid
-              .column.ten.wide
-                // タイトルと本文の一部
-                h3.ui.header= recruitment.title
-                p.break-word= recruitment.shortened_description
-              .column.six.wide
-                // その他の情報
-                .extra
-                  p
-                    = semantic_icon("map marker alternate")
-                    = recruitment.prefecture.name
-                  p
-                    = semantic_icon("calendar alternate outline")
-                    = recruitment.format_event_date
+          // 詳細ページへのリンク
+          .row
+            .column
+              =link_to "詳細", recruitment, class: "ui button orange fluid"

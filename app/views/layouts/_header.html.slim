@@ -1,62 +1,32 @@
-.ui.grid
-  .computer.tablet.only.row
-    .ui.borderless.fixed.menu
-      .ui.container
-        = link_to root_path do
-          = image_tag("site_logo.png", class: "site-logo")
-        .item
-          = link_to recruitments_path do
-            = semantic_icon("rss")
-            | 募集一覧
-        .item
-          = link_to blog_articles_path do
-            = semantic_icon("book")
-            | ブログ記事一覧
-        .item
-          = link_to new_counter_path do
-            = semantic_icon("plus")
-            | カウンター
+header.ui.borderless.fixed.fluid.menu
+  .ui.container
+    = link_to root_path do
+      = image_tag("site_logo.png", class: "site-logo-for-mobile")
 
-        .right.menu
-          - if current_user
-            .item
-              = link_to new_recruitment_path, class: "ui button orange" do
-                = semantic_icon("pencil alternate")
-                | 募集をかける
-            .item
-              = link_to profile_account_path(current_user) do
-                = image_tag(current_user.thumb_image_url, class: "ui image mini rounded")
-          - else
-            .item
-              = link_to new_user_session_path do
-                = semantic_icon("sign in alternate")
-                | ログイン
-            .item
-              = link_to new_user_registration_path, class: "ui button orange" do
-                = semantic_icon("edit")
-                | 会員登録（無料）
+    nav.right.item.menu
+      - unless user_signed_in?
+        .item
+          = link_to new_user_session_path do
+            = semantic_icon("sign in alternate")
+            | ログイン
 
-  .mobile.only.row
-    .ui.borderless.fixed.menu(style="vertical-align: bottom;")
-      .ui.container
-        = link_to root_path do
-          = image_tag("site_logo.png", class: "site-logo-for-mobile")
-        .right.menu
-          - if user_signed_in?
-            .item
-              = link_to new_recruitment_path, class: "ui button basic mini orange", style: "font-size: 12px;" do
-                = semantic_icon("pencil alternate")
-                | 募集
-          - else
-            .item
-              = link_to new_user_session_path do
-                = semantic_icon("sign in alternate")
-                | ログイン
-
-          a.menu.item.open-sidebar
-            = semantic_icon("content large")
+      a.item.menu.open-sidebar
+        = semantic_icon("content large")
 
 javascript:
   $('.open-sidebar').click(function() {
     $('.ui.sidebar').sidebar('toggle');
   });
+
+scss:
+  header {
+    vertical-align: bottom;
+
+    nav {
+      display: inline;
+      padding: 0 !important;
+    }
+  }
+  .content.large {
+    margin-right: 0 !important;
+  }

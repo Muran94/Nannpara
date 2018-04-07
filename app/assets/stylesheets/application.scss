@@ -19,6 +19,24 @@
 body {
   background: #F5F4F5;
 }
+nav.bottom-right-create-nav-button {
+    display: block;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 80px;
+    color: #fff;
+
+    i {
+        color: #fff;
+        padding: 0 0 0 3px;
+        margin: 0;
+    }
+}
 .no-default-link-style {
   text-decoration: none;
   color: #212121
@@ -40,7 +58,7 @@ body {
 .pusher > .footer {
   flex: 1;
 }
-.main.container {
+section.main {
   background: #F5F4F5;
   margin: 4.7em 0 3em 0;
 }

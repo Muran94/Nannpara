@@ -2,12 +2,28 @@
 
 = render "tab", user: @user
 
-.ui.segment.basic.bg-white
-  - if @recruitments.present?
-    .ui.vertically.padded.vertically.divided.grid
-      = render partial: "recruitments/recruitment", collection: @recruitments
-  - else
-    | まだ募集がありません。
+/ .ui.segment.basic.bg-white
+/   - if @recruitments.present?
+/     .ui.vertically.padded.vertically.divided.grid
+/       = render partial: "recruitments/recruitment", collection: @recruitments
+/   - else
+/     | まだ募集がありません。
+
+/ .ui.center.aligned.container
+/   = paginate @recruitments
+
+.ui.basic.segment.no-horizontal-padding.bg-white
+    .ui.grid.stackable
+        .row.recruitment-list
+            .column
+                h1.ui.aligned.small.header(style="color: #555;")
+                    = semantic_icon "rss"
+                    | 募集記事一覧
+
+        - if @recruitments.present?
+          = render @recruitments
+        - else
+          | まだ募集記事がありません。
 
 .ui.center.aligned.container
   = paginate @recruitments
