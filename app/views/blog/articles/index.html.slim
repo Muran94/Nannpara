@@ -11,7 +11,8 @@
         - if @blog_articles.present?
           = render @blog_articles
         - else
-          | まだブログ記事がありません。
+          .row.blog-article-list: .column
+            .nothing-yet まだブログ記事がありません。
 
 .ui.center.aligned.container
   = paginate @blog_articles

@@ -13,7 +13,8 @@
         - if @recruitments.present?
           = render @recruitments
         - else
-          | まだ募集記事がありません。
+          .row.recruitment-list: .column
+            .nothing-yet まだ募集記事がありません。
 
 .ui.center.aligned.container
   = paginate @recruitments

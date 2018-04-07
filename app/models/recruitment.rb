@@ -40,7 +40,7 @@ class Recruitment < ApplicationRecord
   private
 
   def _event_date_cannot_be_past
-    if event_date.present? && event_date < Time.zone.now
+    if event_date.present? && event_date < Date.today
       errors.add(:event_date, '開催日時に過去の日時を指定することはできません。')
     end
   end
