@@ -1,0 +1,73 @@
+- provide(:title, @blog_article.title)
+
+article.ui.grid.stackable
+  .row: .column
+    .ui.segment.basic.bg-white
+      .ui.grid
+
+        // 投稿者画像と投稿者ユーザー名
+          // 右側に投稿の編集・削除メニュー
+        .row.middle.aligned
+          // プロフィール画像
+          .column.three.wide.no-padding-right
+            = link_to profile_account_path(@blog_article.user), id: "blog-article-owner-profile-image" do
+              = image_tag @blog_article.user.format_image_url("thumb"), class: "ui rounded image"
+
+          .column.ten.wide
+            = link_to profile_account_path(@blog_article.user), class: "no-default-link-style", id: "blog-article-owner-profile-name" do
+              b= @blog_article.user.name
+
+          .right.floated.right.aligned.column.three.wide
+            - if current_user && @blog_article.owner?(current_user)
+              .ui.dropdown
+                = semantic_icon("ellipsis horizontal", id: "blog-article-menu")
+                .menu
+                  = link_to edit_blog_article_path(@blog_article), class: "item", id: "blog-article-edit-link" do
+                    = semantic_icon("edit")
+                    | 編集
+                  = link_to blog_article_path(@blog_article), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "item", id: "blog-article-delete-link"  do
+                    = semantic_icon("trash alternate")
+                    | 削除
+
+      .ui.grid.stackable
+        // ブログ記事のタイトル
+        .row: .column
+          h2.ui.header.dividing.break-word= @blog_article.title
+        // ブログ記事の本文
+        .row: .column
+          = simple_format(h(@blog_article.content))
+        // ブログ記事の更新日時
+        .row: .column.updated-at-container
+          = %(#{@blog_article.format_created_at}に更新)
+
+  // メッセージ一覧
+  .row: .column
+    // メッセージ一覧
+    .ui.segment.basic.bg-white
+      .ui.comments
+        h3.ui.dividing.small.header
+          | コメント一覧
+        - if @blog_comments.present?
+            = render @blog_comments, blog_article: @blog_article
+        - else
+          p まだコメントがありません。
+
+  // コメントページネーション
+  .row: .column
+    .ui.center.aligned.container
+      = paginate @blog_comments
+
+  // コメントフォーム
+  .row: .column
+    .ui.segment.basic.bg-white
+      - if user_signed_in?
+        // メッセージフォーム
+        = render "blog/comments/form", blog_article: @blog_article, new_blog_comment: @new_blog_comment
+      - else
+        | コメントをするには
+        = link_to "ログイン", new_user_session_path
+        | が必要です。
+
+
+javascript:
+  $('.ui.dropdown').dropdown();

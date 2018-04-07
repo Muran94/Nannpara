@@ -49,8 +49,8 @@
           - if account_owner?(@user)
               .row: .column
                 =link_to edit_accounts_path, class: "ui basic button orange fluid", id: "account-edit-link"
-                = semantic_icon "edit"
-                | 編集
+                  = semantic_icon "edit"
+                  | 編集
 
   - if account_owner?(@user)
     .two.column.row

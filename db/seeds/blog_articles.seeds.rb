@@ -3,9 +3,9 @@ after :users do
 
   51.times do
     begin
-      BlogArticle.create(
-        title: Faker::Lorem.sentence[0...BlogArticle::MAXIMUM_TITLE_LENGTH],
-        content: Faker::Lorem.paragraphs(rand(1..10)).join("\n\n")[0...BlogArticle::MAXIMUM_CONTENT_LENGTH],
+      Blog::Article.create(
+        title: Faker::Lorem.sentence[0...Blog::Article::MAXIMUM_TITLE_LENGTH],
+        content: Faker::Lorem.paragraphs(rand(1..10)).join("\n\n")[0...Blog::Article::MAXIMUM_CONTENT_LENGTH],
         user_id: User.all.to_a.sample.id
       )
     rescue => e

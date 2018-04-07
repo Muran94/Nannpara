@@ -1,0 +1,37 @@
+// Place all the styles related to the Blog::Articles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// common styles
+
+// styles for index page
+.blog-article-list {
+    + .blog-article-list {
+        border-top: 1px solid #e0e0e0;
+    }
+}
+nav.bottom-right-create-nav-button#create-article-button {
+  background: #F2711C;
+}
+.small-font {
+    font-size: 10px;
+}
+.sub-info {
+  @extend .small-font;
+  margin-top: 5px;
+  color: #888;
+
+  span + span {
+    margin-left: 10px;
+  }
+
+  i {
+    margin-right: 2px !important;
+  }
+}
+
+// styles for show page
+
+// styles for new page
+
+// styles for edit page

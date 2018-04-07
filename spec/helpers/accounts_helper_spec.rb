@@ -27,15 +27,4 @@ RSpec.describe AccountsHelper, type: :helper do
       end
     end
   end
-
-  describe %(#activate_tab_if_correct_page(action_name)) do
-    before { allow(helper.controller).to receive(:action_name).and_return('profile') }
-
-    it %(タブが表すページが現在ページと同じであれば "active" を返し、そうでなければ nil を返す) do
-      aggregate_failures do
-        expect(helper.activate_tab_if_correct_page('profile')).to eq 'active'
-        expect(helper.activate_tab_if_correct_page('recruitments')).to eq nil
-      end
-    end
-  end
 end
