@@ -2,7 +2,7 @@
 
 .ui.segment.basic.bg-white
   .column
-    h3.ui.header.dividing ログイン
+    h1.ui.center.aligned.medium.dividing.header ログイン
     = form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "ui form"}) do |f|
       .ui.error.message
 
@@ -17,5 +17,5 @@
 
 .ui.segment.basic.bg-white
   .column
-    h3.ui.header.dividing 会員登録
+    h1.ui.center.aligned.medium.dividing.header 会員登録
     = link_to "会員登録はこちら", new_user_registration_path, class: "ui button basic fluid orange"
