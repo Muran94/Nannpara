@@ -5,7 +5,7 @@
 .ui.grid.stackable
   .row
     .column
-      .ui.segment.basic.bg-white
+      .ui.segment.basic.white-background
         .ui.grid.stackable
 
           // プロフィール画像
@@ -55,14 +55,14 @@
   - if account_owner?(@user)
     .two.column.row
       .column
-        .ui.segment.basic.bg-white#email-container
+        .ui.segment.basic.white-background#email-container
           h3.ui.header.dividing
             = semantic_icon "envelope"
             | メールアドレス
           p= @user.email
           = link_to "変更", edit_user_registration_path, id: "edit-email-link"
       .column
-        .ui.segment.basic.bg-white#password-container
+        .ui.segment.basic.white-background#password-container
           h3.ui.header.dividing
             = semantic_icon "lock"
             | パスワード

@@ -2,7 +2,7 @@
 
 article.ui.grid.stackable
   .row: .column
-    .ui.segment.basic.bg-white
+    .ui.segment.basic.white-background
       .ui.grid
 
         // 投稿者画像と投稿者ユーザー名
@@ -43,7 +43,7 @@ article.ui.grid.stackable
   // メッセージ一覧
   .row: .column
     // メッセージ一覧
-    .ui.segment.basic.bg-white
+    .ui.segment.basic.white-background
       .ui.comments
         h3.ui.dividing.small.header
           | コメント一覧
@@ -59,7 +59,7 @@ article.ui.grid.stackable
 
   // コメントフォーム
   .row: .column
-    .ui.segment.basic.bg-white
+    .ui.segment.basic.white-background
       - if user_signed_in?
         // メッセージフォーム
         = render "blog/comments/form", blog_article: @blog_article, new_blog_comment: @new_blog_comment

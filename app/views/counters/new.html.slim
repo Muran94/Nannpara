@@ -5,26 +5,17 @@
   = link_to "1週間", new_counter_path(period: "week"), class: "ui item orange #{activate_tab_if_period('week')}", id: "week-period-button"
   = link_to "１ヶ月", new_counter_path(period: "month"), class: "ui item orange #{activate_tab_if_period('month')}", id: "month-period-button"
 
-.ui.segment.basic.bg-white
+.ui.segment.basic.white-background
   h4.ui.header.dividing.center.aligned 声かけ
   #speak-counter-display.count = @speak_count
   = link_to "1UP", counters_path(counter_type: "声かけ", period: params["period"]), method: :post, class: "ui button fluid large yellow", id: "speak-counter-button"
 
-.ui.segment.basic.bg-white
+.ui.segment.basic.white-background
   h4.ui.header.dividing.center.aligned バンゲ
   #tel-counter-display.count = @tel_count
   = link_to "1UP", counters_path(counter_type: "バンゲ", period: params["period"]), method: :post, class: "ui button fluid large orange", id: "tel-counter-button"
 
-.ui.segment.basic.bg-white
+.ui.segment.basic.white-background
   h4.ui.header.dividing.center.aligned 即
   #sex-counter-display.count= @sex_count
   = link_to "1UP", counters_path(counter_type: "即", period: params["period"]), method: :post, class: "ui button fluid large red", id: "sex-counter-button"
-
-scss:
-  .count {
-    font-size: 32px;
-    font-weight: bold;
-    color: #303030;
-    text-align: center;
-    padding: 15px 0;
-  }
