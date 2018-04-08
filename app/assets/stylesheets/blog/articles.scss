@@ -2,16 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "common_styles";
+
 // common styles
 
 // styles for index page
 .blog-article-list {
     + .blog-article-list {
-        border-top: 1px solid #e0e0e0;
+        border-top: 1px solid $borderLightGray;
     }
 }
 nav.bottom-right-create-nav-button#create-article-button {
-  background: #F2711C;
+  background: $orange;
 }
 .small-font {
     font-size: 10px;
@@ -19,7 +21,7 @@ nav.bottom-right-create-nav-button#create-article-button {
 .sub-info {
   @extend .small-font;
   margin-top: 5px;
-  color: #888;
+  color: $fontGray;
 
   span + span {
     margin-left: 10px;
@@ -28,6 +30,12 @@ nav.bottom-right-create-nav-button#create-article-button {
   i {
     margin-right: 2px !important;
   }
+}
+.go-to-icon {
+  position: absolute;
+  top: 40%;
+  right: 5px;
+  color: $fontLightGray;
 }
 
 // styles for show page

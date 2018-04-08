@@ -6,11 +6,11 @@ article.row.recruitment-list
           = semantic_icon "chevron right"
 
         .ui.grid
-          .column.no-padding-right.four.wide
+          .column.no-padding-right.three.wide
             = link_to profile_account_path(recruitment.user), class: "ui rounded image" do
               = image_tag(recruitment.format_image_url)
 
-          .column.twelve.wide.recruitment-information-open-territory
+          .column.thirteen.wide.recruitment-information-open-territory
             h1.ui.header.small
               = recruitment.title
 
@@ -21,7 +21,7 @@ article.row.recruitment-list
               span
                 = semantic_icon("calendar alternate outline")
                 = recruitment.format_event_date
-    
+
     // デフォルトで非表示状態の募集記事詳細情報
     .row.recruitment-information-container
       .column

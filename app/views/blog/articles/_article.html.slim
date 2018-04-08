@@ -6,11 +6,11 @@ article.row.blog-article-list
           = semantic_icon "chevron right"
 
         .ui.grid
-          .column.no-padding-right.four.wide
+          .column.no-padding-right.three.wide
             = link_to profile_account_path(article.user), class: "ui rounded image" do
               = image_tag(article.format_image_url)
 
-          .column.twelve.wide
+          .column.thirteen.wide
             = link_to blog_article_path article, class: "no-default-link-style" do
               h1.ui.header.small
                 = article.title

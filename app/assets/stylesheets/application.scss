@@ -15,9 +15,10 @@
 */
 
 @import 'semantic-ui';
+@import 'common_styles';
 
-body {
-  background: #F5F4F5;
+body, .pusher, section.main {
+  background: $backgroundLightGray !important;
 }
 nav.bottom-right-create-nav-button {
     z-index: 5;
@@ -47,7 +48,7 @@ nav.bottom-right-create-nav-button {
 }
 .no-default-link-style {
   text-decoration: none;
-  color: #212121
+  color: #212121;
 }
 .site-logo {
   height: 50px;
@@ -58,7 +59,6 @@ nav.bottom-right-create-nav-button {
   margin-top: 5px;
 }
 .pusher {
-  background: #F5F4F5 !important;
   display: flex;
   min-height: 100vh;
   flex-direction: column;
@@ -67,7 +67,6 @@ nav.bottom-right-create-nav-button {
   flex: 1;
 }
 section.main {
-  background: #F5F4F5;
   margin: 4.7em 0 3em 0;
 }
 .column.without-right-padding {

@@ -1,0 +1,47 @@
+// colors
+// GRAY
+$baseGray: #c0c0c0;
+$borderLightGray: lighten($baseGray, 15%);
+$backgroundLightGray: lighten($baseGray, 20%);
+$fontLightGray: $baseGray;
+$fontGray: darken($baseGray, 15%);
+
+$red: #ff473e;
+$orange: #f2711c;
+
+// font-sizes
+$tinyFontSize: 8px;
+$smallFontSize: 11px;
+$mediumFontSize: 14px;
+$largeFontSize: 17px;
+$hugeFontSize: 20px;
+
+.tiny-font {
+    font-size: $tinyFontSize;
+}
+.small-font {
+    font-size: $smallFontSize;
+}
+.medium-font {
+    font-size: $mediumFontSize;
+}
+.large-font {
+    font-size: $largeFontSize;
+}
+.huge-font {
+    font-size: $hugeFontSize;
+}
+
+// font-weight
+.bold {
+  font-weight: bold;
+}
+.bolder {
+  font-weight: bolder;
+}
+
+// text-align
+
+// padding
+
+// margin
