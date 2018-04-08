@@ -1,6 +1,6 @@
 - provide(:title, "メールアドレス変更")
 
-.ui.segment.basic.bg-white
+.ui.segment.basic.white-background
   h1.ui.center.aligned.medium.dividing.header メールアドレス変更
   = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put, class: "ui form"}) do |f|
     = devise_error_messages!

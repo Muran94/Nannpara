@@ -3,7 +3,7 @@
 
 article.ui.grid.stackable
   .row: .column
-    .ui.segment.basic.bg-white
+    .ui.segment.basic.white-background
       .ui.grid
 
         // 投稿者画像と投稿者ユーザー名
@@ -42,13 +42,13 @@ article.ui.grid.stackable
   - if current_user && @recruitment.owner?(current_user) && @recruitment.linked_with_kanto_nanpa_messageboard?
     // 「関東ナンパ友募集掲示板」のコメントの削除キー
     .row: .column
-      .ui.segment.basic.bg-white
+      .ui.segment.basic.white-background
         h3.ui.dividing.small.header 「関東ナンパ友募集掲示板」コメント削除キー
         p= @recruitment.kanto_nanpa_messageboard_delete_key
 
   // メッセージ一覧
   .row: .column
-    .ui.segment.basic.bg-white
+    .ui.segment.basic.white-background
       .ui.comments
         h3.ui.dividing.small.header
           | メッセージ一覧
@@ -64,7 +64,7 @@ article.ui.grid.stackable
 
   // メッセージフォーム
   .row: .column
-    .ui.segment.basic.bg-white
+    .ui.segment.basic.white-background
       = render "messages/form", recruitment: @recruitment, new_message: @new_message
 
 = render "create_recruitment_button"

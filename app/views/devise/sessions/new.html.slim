@@ -1,6 +1,6 @@
 - provide(:title, "ログイン")
 
-.ui.segment.basic.bg-white
+.ui.segment.basic.white-background
   .column
     h1.ui.center.aligned.medium.dividing.header ログイン
     = form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "ui form"}) do |f|
@@ -15,7 +15,7 @@
 
       = f.submit "ログイン", class: "ui fluid orange submit button"
 
-.ui.segment.basic.bg-white
+.ui.segment.basic.white-background
   .column
     h1.ui.center.aligned.medium.dividing.header 会員登録
     = link_to "会員登録はこちら", new_user_registration_path, class: "ui button basic fluid orange"
