@@ -11,7 +11,6 @@ $(document).on('turbolinks:load', function() {
   // 募集リスト内の特定の募集をクリックした時に、詳細内容を表示するための処理
   $(".recruitment-information-open-territory").click(function () {
     $(this).closest(".recruitment-title-container").find(".go-to-icon").toggle();
-    $(this).closest(".recruitment-title-container").find(".message-count-countainer").toggle();
     $(this).closest(".recruitment-list").find(".recruitment-information-container").slideToggle();
   });
 

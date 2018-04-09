@@ -4,9 +4,6 @@ article.row.recruitment-list
       .column
         .go-to-icon
           = semantic_icon "chevron right"
-        .message-count-countainer
-          = semantic_icon "envelope orange"
-          .message-count-display= recruitment.messages_count
 
         .ui.grid
           .column.no-padding-right.three.wide
@@ -24,6 +21,10 @@ article.row.recruitment-list
               span
                 = semantic_icon("calendar alternate outline")
                 = recruitment.format_event_date
+              span
+                = semantic_icon "envelope"
+                = recruitment.messages_count
+
 
     // デフォルトで非表示状態の募集記事詳細情報
     .row.recruitment-information-container
