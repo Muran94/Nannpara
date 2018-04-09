@@ -12,6 +12,7 @@
 
 class Message < ApplicationRecord
   belongs_to :recruitment
+  counter_culture :recruitment
   belongs_to :user, optional: true
 
   MAXIMUM_MESSAGE_LENGTH = 1024

@@ -66,10 +66,21 @@ nav.bottom-right-create-nav-button#create-recruitment-button {
     left: 0;
     margin: -10px auto 0;
     color: rgba(255, 255, 255, 0.75);
-    font-size: 20px;
+    font-size: $hugeFontSize;
     font-weight: bold;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     text-align: center;
+  }
+}
+.message-count-countainer {
+  position: absolute;
+  right: 15px;
+  bottom: 5px;
+  font-size: $smallFontSize;
+
+  .message-count-display {
+    display: inline-block;
+    color: $fontGray;
   }
 }
 
