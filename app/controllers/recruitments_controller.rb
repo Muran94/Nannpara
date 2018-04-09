@@ -5,9 +5,9 @@ class RecruitmentsController < ApplicationController
 
   def index
     if params['search'].present? && params['search']['prefecture_code'].present?
-      @recruitments = Recruitment.where(prefecture_code: params['search']['prefecture_code'].map(&:to_i).compact).order(:closed_at, :event_date).includes(:user).page(params[:page])
+      @recruitments = Recruitment.where(prefecture_code: params['search']['prefecture_code'].map(&:to_i).compact).order({closed_at: :desc}, :event_date).includes(:user).page(params[:page])
     else
-      @recruitments = Recruitment.order(:closed_at, :event_date).includes(:user).page(params[:page])
+      @recruitments = Recruitment.order({closed_at: :desc}, :event_date).includes(:user).page(params[:page])
     end
   end
 
