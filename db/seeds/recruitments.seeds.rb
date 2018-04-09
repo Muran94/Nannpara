@@ -14,7 +14,6 @@ after :users do
 
   51.times do
     event_date = rand(-15..30).days.from_now
-    closed = event_date < Date.today
 
     recruitment = Recruitment.new(
       title: TITLE_SAMPLES.sample,
@@ -22,7 +21,6 @@ after :users do
       prefecture_code: rand(1..47),
       event_date: event_date,
       user_id: User.all.to_a.sample.id,
-      closed: closed,
       linked_with_kanto_nanpa_messageboard: false,
       kanto_nanpa_messageboard_delete_key: nil
     )

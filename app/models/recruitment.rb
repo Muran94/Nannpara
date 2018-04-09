@@ -13,6 +13,7 @@
 #  closed                               :boolean          default(FALSE)
 #  linked_with_kanto_nanpa_messageboard :boolean
 #  kanto_nanpa_messageboard_delete_key  :string
+#  closed_at                            :datetime
 #
 
 class Recruitment < ApplicationRecord

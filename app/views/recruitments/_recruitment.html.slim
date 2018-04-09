@@ -32,3 +32,8 @@ article.row.recruitment-list
           // 詳細ページへのリンク
           .row: .column
             =link_to "詳細", recruitment, class: "ui button orange fluid"
+
+    - if recruitment.closed_at
+      = link_to recruitment_path recruitment do
+        .row.closed-alpha-mask
+          span 開催終了
