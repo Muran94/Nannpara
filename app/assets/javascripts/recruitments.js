@@ -4,7 +4,7 @@ $(document).on('turbolinks:load', function() {
 
   // js for index page
   // 募集ページの都道府県絞り込み用モーダルの呼び出し処理
-  $("#prefecture-select").click(function() {
+  $("#open-prefecture-filter-modal-button").click(function() {
     $(".ui.modal").modal({centered: false, autofocus: false}).modal("show");
   });
 

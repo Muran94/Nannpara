@@ -7,6 +7,7 @@
                 h1.ui.aligned.small.header.content-list-header
                   = semantic_icon "users"
                   | 募集記事一覧
+            = semantic_icon "circular map marker alternate", id: "open-prefecture-filter-modal-button"
 
         - if @recruitments.present?
           = render @recruitments
