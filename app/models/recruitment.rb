@@ -33,6 +33,11 @@ class Recruitment < ApplicationRecord
   jp_prefecture :prefecture_code
 
   before_create :_prepare_kanto_nanpa_messageboard_delete_key
+  before_save :_reset_closed_at_unless_past_recruitment
+
+  def past_recruitment?
+    event_date < Date.today
+  end
 
   def owner?(current_user)
     current_user.id == user_id
@@ -50,5 +55,9 @@ class Recruitment < ApplicationRecord
     if kanto_nanpa_messageboard_delete_key.blank? && linked_with_kanto_nanpa_messageboard?
       self.kanto_nanpa_messageboard_delete_key = rand(100_000..999_999)
     end
+  end
+
+  def _reset_closed_at_unless_past_recruitment
+    self.closed_at = nil unless past_recruitment?
   end
 end

@@ -8,7 +8,7 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1/recruitments
   def recruitments
-    @recruitments = @user.recruitments.order('created_at DESC').page(params[:page])
+    @recruitments = @user.recruitments.order({closed_at: :desc}, :event_date).page(params[:page])
   end
 
   # GET /accounts/1/blog_articles
