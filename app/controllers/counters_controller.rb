@@ -33,15 +33,15 @@ class CountersController < ApplicationController
 
   def _convert_period_to_date_object
     case params['period']
-    when 'day'
-      1.day.ago
-    when 'week'
-      1.week.ago
-    when 'month'
-      1.month.ago
+    when '本日'
+      Date.today.beginning_of_day
+    when '週間'
+      1.week.ago.beginning_of_day
+    when '月間'
+      1.month.ago.beginning_of_day
     else
-      params['period'] = 'day'
-      1.day.ago
+      params['period'] = '本日'
+      1.day.ago.beginning_of_day
     end
   end
 end
