@@ -13,9 +13,10 @@
 *= require_tree .
 *= require_self
 */
-
 @import 'semantic-ui';
 @import 'common_styles';
+@import 'custom_semantic_ui_styles/segment.scss';
+@import 'custom_semantic_ui_styles/grid.scss';
 
 body, .pusher, section.main {
   background: $backgroundLightGray !important;

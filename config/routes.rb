@@ -20,7 +20,11 @@ Rails.application.routes.draw do
   resources :recruitments do
     resources :messages, only: [:create]
   end
-  resources :counters, only: [:new, :create]
+  resources :counters, only: [:new, :create] do
+    collection do
+      delete :destroy
+    end
+  end
   resources :blog_articles, controller: "blog/articles" do
     resources :blog_comments, only: [:create, :destroy], controller: "blog/comments" do
     end

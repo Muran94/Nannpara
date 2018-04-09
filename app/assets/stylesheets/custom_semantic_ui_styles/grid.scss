@@ -1,0 +1,39 @@
+// columns
+$lessColumnPadding: 0.5rem;
+
+.ui.grid > .column:not(.row),
+.ui.grid > .row > .column {
+    // less padding styles
+    &.less-vertical-padding {
+      padding-top: $lessColumnPadding !important;
+      padding-bottom: $lessColumnPadding !important;
+    }
+    &.less-horizontal-padding {
+        padding-right: $lessColumnPadding !important;
+        padding-left: $lessColumnPadding !important;
+    }
+    &.less-padding-top {
+        padding-top: $lessColumnPadding !important;
+    }
+    &.less-padding-bottom {
+        padding-bottom: $lessColumnPadding !important;
+    }
+    &.less-padding-left {
+        padding-left: $lessColumnPadding !important;
+    }
+    &.less-padding-right {
+        padding-right: $lessColumnPadding !important;
+    }
+
+    // no padding styles
+    &.no-horizontal-padding {
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+    }
+    &.no-padding-left {
+        padding-left: 0 !important;
+    }
+    &.no-padding-right {
+        padding-right: 0 !important;
+    }
+}

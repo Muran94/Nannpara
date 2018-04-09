@@ -1,21 +1,37 @@
 - provide(:title, "カウンター")
 
 .ui.three.item.secondary.menu
-  = link_to "１日", new_counter_path(period: "day"), class: "ui item orange #{activate_tab_if_period('day')}", id: "day-period-button"
-  = link_to "1週間", new_counter_path(period: "week"), class: "ui item orange #{activate_tab_if_period('week')}", id: "week-period-button"
-  = link_to "１ヶ月", new_counter_path(period: "month"), class: "ui item orange #{activate_tab_if_period('month')}", id: "month-period-button"
+  = link_to "１日", new_counter_path(period: "day"), class: "ui item #{activate_tab_if_period('day')}", id: "day-period-button"
+  = link_to "1週間", new_counter_path(period: "week"), class: "ui item #{activate_tab_if_period('week')}", id: "week-period-button"
+  = link_to "１ヶ月", new_counter_path(period: "month"), class: "ui item #{activate_tab_if_period('month')}", id: "month-period-button"
 
-.ui.segment.basic.white-background
-  h4.ui.header.dividing.center.aligned 声かけ
-  #speak-counter-display.count = @speak_count
-  = link_to "1UP", counters_path(counter_type: "声かけ", period: params["period"]), method: :post, class: "ui button fluid large yellow", id: "speak-counter-button"
+.ui.grid.stackable
+  .row: .column.less-vertical-padding
+    .ui.less-padding-bottom.segment.basic.white-background
+      h2.ui.small.header.dividing.center.aligned 声かけ
+      #speak-counter-display.count
+        = link_to counters_path(counter_type: "声かけ", period: params["period"]), method: :delete, class: "ui yellow circular icon button #{@speak_count == 0 ? "disabled" : ""}", id: "speak-counter-increment-button" do
+          = semantic_icon "minus large"
+        span= @speak_count
+        = link_to counters_path(counter_type: "声かけ", period: params["period"]), method: :post, class: "ui yellow circular icon button", id: "speak-counter-decrement-button" do
+          = semantic_icon "plus large"
 
-.ui.segment.basic.white-background
-  h4.ui.header.dividing.center.aligned バンゲ
-  #tel-counter-display.count = @tel_count
-  = link_to "1UP", counters_path(counter_type: "バンゲ", period: params["period"]), method: :post, class: "ui button fluid large orange", id: "tel-counter-button"
+  .row: .column.less-vertical-padding
+    .ui.less-padding-bottom.segment.basic.white-background
+      h2.ui.small.header.dividing.center.aligned バンゲ
+      #tel-counter-display.count
+        = link_to counters_path(counter_type: "バンゲ", period: params["period"]), method: :delete, class: "ui orange circular icon button #{@tel_count == 0 ? "disabled" : ""}", id: "tel-counter-increment-button" do
+          = semantic_icon "minus large"
+        span= @tel_count
+        = link_to counters_path(counter_type: "バンゲ", period: params["period"]), method: :post, class: "ui orange circular icon button", id: "tel-counter-decrement-button" do
+          = semantic_icon "plus large"
 
-.ui.segment.basic.white-background
-  h4.ui.header.dividing.center.aligned 即
-  #sex-counter-display.count= @sex_count
-  = link_to "1UP", counters_path(counter_type: "即", period: params["period"]), method: :post, class: "ui button fluid large red", id: "sex-counter-button"
+  .row: .column.less-vertical-padding
+    .ui.less-padding-bottom.segment.basic.white-background
+      h2.ui.small.header.dividing.center.aligned 即
+      #sex-counter-display.count
+        = link_to counters_path(counter_type: "即", period: params["period"]), method: :delete, class: "ui red circular icon button #{@sex_count == 0 ? "disabled" : ""}", id: "sex-counter-increment-button" do
+          = semantic_icon "minus large"
+        span= @sex_count
+        = link_to counters_path(counter_type: "即", period: params["period"]), method: :post, class: "ui red circular icon button", id: "sex-counter-decrement-button" do
+          = semantic_icon "plus large"

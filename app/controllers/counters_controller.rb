@@ -14,6 +14,17 @@ class CountersController < ApplicationController
     redirect_to new_counter_path(period: params['period'])
   end
 
+  def destroy
+    @counter = current_user.counters.order("created_at DESC").where(counter_type: params[:counter_type]).first
+
+    if @counter.nil? # 該当のカウント件数が０件の場合
+      flash[:error] = "不正な操作です。もう一度やり直してください。"
+    else
+      @counter.destroy
+    end
+    redirect_to new_counter_path(period: params['period'])
+  end
+
   private
 
   def _counters_params
