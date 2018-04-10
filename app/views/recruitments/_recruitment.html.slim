@@ -30,8 +30,14 @@ article.row.content-list
     .row.recruitment-information-container
       .column
         .ui.grid.stackable
-          // 募集についての詳細情報
-          = render "/recruitments/recruitment_information", recruitment: recruitment
+          // 募集内容
+          .row: .column
+              =simple_format(h(recruitment.description))
+
+          // ダイレクトメッセージ
+          - if recruitment.user.direct_mail
+              .row: .column
+                  = mail_to recruitment.user.email, "募集主にダイレクトメールを送る", class: "ui button orange basic fluid"
 
           // 詳細ページへのリンク
           .row: .column
