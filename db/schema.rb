@@ -10,7 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180409075608) do
+ActiveRecord::Schema.define(version: 20180410063756) do
+
+  create_table "activities", force: :cascade do |t|
+    t.integer "activity_type_id"
+    t.integer "obtained_experience_point", default: 0
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_type_id"], name: "index_activities_on_activity_type_id"
+    t.index ["user_id"], name: "index_activities_on_user_id"
+  end
+
+  create_table "activity_types", force: :cascade do |t|
+    t.string "name_ja"
+    t.string "name_en"
+    t.integer "experience_point", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name_en"], name: "index_activity_types_on_name_en"
+    t.index ["name_ja"], name: "index_activity_types_on_name_ja"
+  end
 
   create_table "blog_articles", force: :cascade do |t|
     t.string "title"
@@ -31,13 +51,12 @@ ActiveRecord::Schema.define(version: 20180409075608) do
     t.index ["user_id"], name: "index_blog_comments_on_user_id"
   end
 
-  create_table "counters", force: :cascade do |t|
-    t.string "counter_type"
-    t.integer "user_id"
+  create_table "levels", force: :cascade do |t|
+    t.integer "required_experience_point"
+    t.string "rank"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["counter_type"], name: "index_counters_on_counter_type"
-    t.index ["user_id"], name: "index_counters_on_user_id"
+    t.index ["required_experience_point"], name: "index_levels_on_required_experience_point"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -90,6 +109,8 @@ ActiveRecord::Schema.define(version: 20180409075608) do
     t.integer "prefecture_code"
     t.string "image"
     t.boolean "direct_mail"
+    t.integer "experience_point", default: 0
+    t.integer "level_id", default: 1
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

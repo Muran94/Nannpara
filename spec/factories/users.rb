@@ -24,6 +24,8 @@
 #  prefecture_code        :integer
 #  image                  :string
 #  direct_mail            :boolean
+#  experience_point       :integer          default(0)
+#  level_id               :integer          default(1)
 #
 
 FactoryGirl.define do

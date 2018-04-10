@@ -1,7 +1,6 @@
-// Place all the styles related to the Counters controller here.
+// Place all the styles related to the Activities controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
 @import "common_styles";
 
 .count {
@@ -10,6 +9,8 @@
   color: $fontExtraDarkGray;
   text-align: center;
   padding: 10px 0;
+  font-family: Areal, verdana;
+
   font-family: Areal, verdana;
 
   span {

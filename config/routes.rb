@@ -21,8 +21,9 @@ Rails.application.routes.draw do
   resources :recruitments do
     resources :messages, only: [:create]
   end
-  resources :counters, only: [:new, :create] do
+  resources :activities, only: [:create] do
     collection do
+      get :show
       delete :destroy
     end
   end

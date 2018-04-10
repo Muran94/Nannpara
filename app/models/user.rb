@@ -24,6 +24,8 @@
 #  prefecture_code        :integer
 #  image                  :string
 #  direct_mail            :boolean
+#  experience_point       :integer          default(0)
+#  level_id               :integer          default(1)
 #
 
 class User < ApplicationRecord
@@ -38,9 +40,12 @@ class User < ApplicationRecord
 
   has_many :recruitments, dependent: :destroy
   has_many :messages, dependent: :destroy
-  has_many :counters, dependent: :destroy
+  has_many :activities, dependent: :destroy
+  has_one :level
   has_many :blog_articles, dependent: :destroy, class_name: "Blog::Article"
   has_many :blog_comments, dependent: :destroy, class_name: "Blog::Comment"
+
+  before_save :_update_level
 
   MAXIMUM_NAME_LENGTH = 16
   validates :name, uniqueness: true, presence: true, length: { maximum: MAXIMUM_NAME_LENGTH }, exclusion: { in: %w(南原 南原さん 管理人) }
@@ -58,11 +63,27 @@ class User < ApplicationRecord
     image.thumb.url
   end
 
+  def level
+    Level.find(level_id)
+  end
+
+  def experience_points_required_to_level_up
+    if level_id == 100
+      0
+    else
+      Level.find(level_id + 1).required_experience_point - experience_point
+    end
+  end
+
   private
 
   def _valid_image_size?
     if image.size > 5.megabytes
       errors.add(:image, '画像のファイルサイズが大きすぎます。5MB以下の画像を選択してください。')
     end
+  end
+
+  def _update_level
+    self.level_id = Level.where('required_experience_point <= ?', experience_point).last.id
   end
 end

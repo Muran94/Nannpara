@@ -70,6 +70,26 @@ nav.bottom-right-create-nav-button {
 .pusher > .footer {
   flex: 1;
 }
+.user-level-display {
+    font-size: 15px;
+    color: #999;
+
+    span {
+        margin: 0 5px;
+        font-size: 20px;
+        font-weight: bolder;
+        color: orange;
+    }
+}
+.user-experience-point-display {
+    font-size: 15px;
+    color: #999;
+
+    span {
+        margin: 0 5px;
+        font-size: 20px;
+    }
+}
 section.main {
   margin: 4.7em 0 3em 0;
 }

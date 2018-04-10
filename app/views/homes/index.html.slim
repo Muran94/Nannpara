@@ -1,3 +1,27 @@
+- if current_user
+    .ui.basic.segment.no-horizontal-padding.white-background
+        .ui.grid.stackable
+            .row
+                .column
+                    h1.ui.small.header
+                        = semantic_icon "address card"
+                        = "#{current_user.name}様"
+                = link_to "マイページ", profile_account_path(current_user), class: "content-list-header-nav-link"
+
+        
+            .row.content-list
+                .column.user-level-display
+                    | レベル:
+                    span
+                        = current_user.level_id
+                    = "(#{current_user.level.rank})"
+                .column.user-experience-point-display
+                    | 経験値:
+                    span
+                        = current_user.experience_point
+                    = "(あと#{current_user.experience_points_required_to_level_up}でレベルアップ)"
+                
+
 .ui.basic.segment.no-horizontal-padding.white-background
     .ui.grid.stackable
         .row
