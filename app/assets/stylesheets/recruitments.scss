@@ -29,11 +29,6 @@ nav.bottom-right-create-nav-button#create-recruitment-button {
 .recruitment-information-container {
   display: none;
 }
-.recruitment-list {
-    + .recruitment-list {
-        border-top: 1px solid $borderLightGray;
-    }
-}
 .sub-info {
   @extend .small-font;
   margin-top: 5px;

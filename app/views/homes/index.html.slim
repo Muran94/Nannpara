@@ -1,0 +1,38 @@
+.ui.basic.segment.no-horizontal-padding.white-background
+    .ui.grid.stackable
+        .row
+            .column
+                h1.ui.aligned.small.header
+                    = semantic_icon "users"
+                    | 募集記事
+            = link_to "一覧", recruitments_path, class: "content-list-header-nav-link"
+
+        - if @recruitments.present?
+            = render @recruitments
+        - else
+            .row.content-list: .column
+                .nothing-yet まだ募集記事がありません。
+
+
+.ui.basic.segment.no-horizontal-padding.white-background
+    .ui.grid.stackable
+        .row
+            .column
+                h1.ui.aligned.small.header
+                    = semantic_icon "rss"
+                    | ブログ記事
+        = link_to "一覧", recruitments_path, class: "content-list-header-nav-link"
+
+        - if @blog_articles.present?
+            = render @blog_articles
+        - else
+            .row.content-list: .column
+                .nothing-yet まだブログ記事がありません。
+
+
+/ .ui.basic.segment.no-horizontal-padding.white-background
+/     .ui.grid.stackable
+/         .row: .column
+/             h1.ui.aligned.small.header
+/                 = semantic_icon "tachometer alternate"
+/                 | 直近のユーザー活動ランキング

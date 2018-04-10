@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root 'recruitments#index'
+  root 'homes#index'
+  get 'homes/index'
   devise_for :users, controllers: { registrations: 'registrations' }
   resources :accounts, only: [] do
     member do

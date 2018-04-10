@@ -32,12 +32,38 @@ article.ui.grid.stackable
                     = semantic_icon("trash alternate")
                     | 削除
       
-      .ui.grid.stackable
         // 募集記事タイトル
         .row: .column
           h1.ui.dividing.large.header.break-word= @recruitment.title
         
-        = render "recruitment_information", recruitment: @recruitment
+        // 募集内容
+        .row: .column
+            =simple_format(h(@recruitment.description))
+            
+        // 開催日と都道府県
+        .two.column.row
+            // 開催日
+            .column
+                .ui.small.header.dividing
+                    = semantic_icon("calendar alternate outline")
+                    .content 開催日
+                p= @recruitment.format_event_date
+
+            // 都道府県
+            .column
+                .ui.small.header.dividing
+                    = semantic_icon("map marker alternate")
+                    .content 都道府県
+                p= @recruitment.prefecture.name
+
+        // ダイレクトメッセージ
+        - if @recruitment.user.direct_mail
+            .row: .column
+                = mail_to @recruitment.user.email, "募集主にダイレクトメールを送る", class: "ui button orange basic fluid"
+
+        // 募集の更新日時
+        .row: .column.updated-at-container
+            = %(#{@recruitment.format_created_at}に更新)
 
   - if current_user && @recruitment.owner?(current_user) && @recruitment.linked_with_kanto_nanpa_messageboard?
     // 「関東ナンパ友募集掲示板」のコメントの削除キー
