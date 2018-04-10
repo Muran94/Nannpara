@@ -3,10 +3,12 @@ class ActivitiesController < ApplicationController
 
   def show
     period = _convert_period_to_date_object
-    @speak_count = current_user.activities.where(activity_type: ActivityType.find_by_name_ja("声かけ")).where('created_at >= ?', period).count
-    @tel_count = current_user.activities.where(activity_type: ActivityType.find_by_name_ja("番ゲ")).where('created_at >= ?', period).count
+    @talk_count = current_user.activities.where(activity_type: ActivityType.find_by_name_ja("声かけ")).where('created_at >= ?', period).count
+    @get_phone_number_count = current_user.activities.where(activity_type: ActivityType.find_by_name_ja("番ゲ")).where('created_at >= ?', period).count
     @date_count = current_user.activities.where(activity_type: ActivityType.find_by_name_ja("連れ出し")).where('created_at >= ?', period).count
-    @sex_count = current_user.activities.where(activity_type: ActivityType.find_by_name_ja("即")).where('created_at >= ?', period).count
+    @instant_sex_count = current_user.activities.where(activity_type: ActivityType.find_by_name_ja("即")).where('created_at >= ?', period).count
+    @sex_on_first_date_count = current_user.activities.where(activity_type: ActivityType.find_by_name_ja("準即")).where('created_at >= ?', period).count
+    @sex_on_second_date_count = current_user.activities.where(activity_type: ActivityType.find_by_name_ja("準々即")).where('created_at >= ?', period).count
   end
 
   def create
