@@ -43,7 +43,9 @@
 
         // カウンター
         .row.counter-list: .column
-          h2.ui.medium.header.center.aligned 声かけ
+          h2.ui.medium.header.center.aligned
+            | 声かけ
+            .reward-experience-point= "取得経験値: #{ActivityType.find_by_name_ja("声かけ").experience_point}"
           #speak-counter-display.count
             = link_to activities_path(activity_type_id: ActivityType.find_by_name_ja("声かけ").id, period: params["period"]), method: :delete, class: "ui basic circular icon button #{@speak_count == 0 ? "disabled" : ""}", id: "speak-counter-increment-button" do
               = semantic_icon "minus large"
@@ -52,7 +54,9 @@
               = semantic_icon "plus large"
 
         .row.counter-list: .column
-          h2.ui.medium.header.center.aligned 番ゲ
+          h2.ui.medium.header.center.aligned
+            | 番ゲ
+            .reward-experience-point= "取得経験値: #{ActivityType.find_by_name_ja("番ゲ").experience_point}"
           #tel-counter-display.count
             = link_to activities_path(activity_type_id: ActivityType.find_by_name_ja("番ゲ").id, period: params["period"]), method: :delete, class: "ui gray circular icon button #{@tel_count == 0 ? "disabled" : ""}", id: "tel-counter-increment-button" do
               = semantic_icon "minus large"
@@ -61,7 +65,9 @@
               = semantic_icon "plus large"
 
         .row.counter-list: .column
-          h2.ui.medium.header.center.aligned 連れ出し
+          h2.ui.medium.header.center.aligned
+            | 連れ出し
+            .reward-experience-point= "取得経験値: #{ActivityType.find_by_name_ja("連れ出し").experience_point}"
           #tel-counter-display.count
             = link_to activities_path(activity_type_id: ActivityType.find_by_name_ja("連れ出し").id, period: params["period"]), method: :delete, class: "ui olive circular icon button #{@tel_count == 0 ? "disabled" : ""}", id: "tel-counter-increment-button" do
               = semantic_icon "minus large"
@@ -70,7 +76,9 @@
               = semantic_icon "plus large"
 
         .row.counter-list: .column
-          h2.ui.medium.header.center.aligned 準々即
+          h2.ui.medium.header.center.aligned
+            | 準々即
+            .reward-experience-point= "取得経験値: #{ActivityType.find_by_name_ja("準々即").experience_point}"
           #sex-counter-display.count
             = link_to activities_path(activity_type_id: ActivityType.find_by_name_ja("準々即").id, period: params["period"]), method: :delete, class: "ui yellow circular icon button #{@sex_count == 0 ? "disabled" : ""}", id: "sex-counter-increment-button" do
               = semantic_icon "minus large"
@@ -79,7 +87,9 @@
               = semantic_icon "plus large"
         
         .row.counter-list: .column
-          h2.ui.medium.header.center.aligned 準即
+          h2.ui.medium.header.center.aligned
+            | 準即
+            .reward-experience-point= "取得経験値: #{ActivityType.find_by_name_ja("準即").experience_point}"
           #sex-counter-display.count
             = link_to activities_path(activity_type_id: ActivityType.find_by_name_ja("準即").id, period: params["period"]), method: :delete, class: "ui orange circular icon button #{@sex_count == 0 ? "disabled" : ""}", id: "sex-counter-increment-button" do
               = semantic_icon "minus large"
@@ -88,7 +98,9 @@
               = semantic_icon "plus large"
 
         .row.counter-list: .column
-          h2.ui.medium.header.center.aligned 即
+          h2.ui.medium.header.center.aligned
+            | 即
+            .reward-experience-point= "取得経験値: #{ActivityType.find_by_name_ja("即").experience_point}"
           #sex-counter-display.count
             = link_to activities_path(activity_type_id: ActivityType.find_by_name_ja("即").id, period: params["period"]), method: :delete, class: "ui red circular icon button #{@sex_count == 0 ? "disabled" : ""}", id: "sex-counter-increment-button" do
               = semantic_icon "minus large"

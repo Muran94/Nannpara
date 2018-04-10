@@ -3,6 +3,14 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "common_styles";
 
+.reward-experience-point {
+  display: inline;
+  font-size: $smallFontSize;
+  font-weight: normal;
+  color: $fontGray;
+  position: absolute;
+  right: 10px;
+}
 .count {
   font-size: $hugeFontSize;
   font-weight: bold;
@@ -22,7 +30,7 @@
 }
 .period-filter-container {
   margin-top: -2px;
-  font-size: 15px !important;
+  font-size: $mediumFontSize;
 
   .ui.dropdown {
     i {
@@ -32,6 +40,6 @@
 }
 .counter-list {
   + .counter-list {
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid $borderLightGray;
   }
 }
