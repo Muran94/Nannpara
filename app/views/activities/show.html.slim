@@ -1,0 +1,101 @@
+- provide(:title, "カウンター")
+
+.ui.grid.stackable
+  .row: .column
+    .ui.basic.segment.white-background
+        .ui.grid.stackable
+            .row
+                .column
+                    h1.ui.small.header
+                        = semantic_icon "address card"
+                        = "#{current_user.name}様"
+                = link_to "マイページ", profile_account_path(current_user), class: "content-list-header-nav-link"
+
+        
+            .row.content-list
+                .column.user-level-display
+                    | レベル:
+                    span
+                        = current_user.level_id
+                    = "(#{current_user.level.rank})"
+                .column.user-experience-point-display
+                    | 経験値:
+                    span
+                        = current_user.experience_point
+                    = "(あと#{current_user.experience_points_required_to_level_up}でレベルアップ)"
+
+    .ui.segment.basic.white-background
+      .ui.grid
+        // ページタイトルと期間絞り込み
+        .row.counter-list
+          .twelve.wide.column
+            h1.ui.aligned.small.header
+              = semantic_icon "tachometer alternate"
+              | カウンター
+          .four.wide.column.right.floated.right.aligned
+            .period-filter-container
+              .ui.dropdown
+                = semantic_icon "dropdown"
+                .text= params["period"]
+                .menu
+                  = link_to "本日", activities_path(period: "本日"), class: "item"
+                  = link_to "週間", activities_path(period: "週間"), class: "item"
+                  = link_to "月間", activities_path(period: "月間"), class: "item"
+
+        // カウンター
+        .row.counter-list: .column
+          h2.ui.medium.header.center.aligned 声かけ
+          #speak-counter-display.count
+            = link_to activities_path(activity_type_id: ActivityType.find_by_name_ja("声かけ").id, period: params["period"]), method: :delete, class: "ui basic circular icon button #{@speak_count == 0 ? "disabled" : ""}", id: "speak-counter-increment-button" do
+              = semantic_icon "minus large"
+            span= @speak_count
+            = link_to activities_path(activity_type_id: ActivityType.find_by_name_ja("声かけ").id, period: params["period"]), method: :post, class: "ui basic circular icon button", id: "speak-counter-decrement-button" do
+              = semantic_icon "plus large"
+
+        .row.counter-list: .column
+          h2.ui.medium.header.center.aligned 番ゲ
+          #tel-counter-display.count
+            = link_to activities_path(activity_type_id: ActivityType.find_by_name_ja("番ゲ").id, period: params["period"]), method: :delete, class: "ui gray circular icon button #{@tel_count == 0 ? "disabled" : ""}", id: "tel-counter-increment-button" do
+              = semantic_icon "minus large"
+            span= @tel_count
+            = link_to activities_path(activity_type_id: ActivityType.find_by_name_ja("番ゲ").id, period: params["period"]), method: :post, class: "ui gray circular icon button", id: "tel-counter-decrement-button" do
+              = semantic_icon "plus large"
+
+        .row.counter-list: .column
+          h2.ui.medium.header.center.aligned 連れ出し
+          #tel-counter-display.count
+            = link_to activities_path(activity_type_id: ActivityType.find_by_name_ja("連れ出し").id, period: params["period"]), method: :delete, class: "ui olive circular icon button #{@tel_count == 0 ? "disabled" : ""}", id: "tel-counter-increment-button" do
+              = semantic_icon "minus large"
+            span= @date_count
+            = link_to activities_path(activity_type_id: ActivityType.find_by_name_ja("連れ出し").id, period: params["period"]), method: :post, class: "ui olive circular icon button", id: "tel-counter-decrement-button" do
+              = semantic_icon "plus large"
+
+        .row.counter-list: .column
+          h2.ui.medium.header.center.aligned 準々即
+          #sex-counter-display.count
+            = link_to activities_path(activity_type_id: ActivityType.find_by_name_ja("準々即").id, period: params["period"]), method: :delete, class: "ui yellow circular icon button #{@sex_count == 0 ? "disabled" : ""}", id: "sex-counter-increment-button" do
+              = semantic_icon "minus large"
+            span= @sex_count
+            = link_to activities_path(activity_type_id: ActivityType.find_by_name_ja("準々即").id, period: params["period"]), method: :post, class: "ui yellow circular icon button", id: "sex-counter-decrement-button" do
+              = semantic_icon "plus large"
+        
+        .row.counter-list: .column
+          h2.ui.medium.header.center.aligned 準即
+          #sex-counter-display.count
+            = link_to activities_path(activity_type_id: ActivityType.find_by_name_ja("準即").id, period: params["period"]), method: :delete, class: "ui orange circular icon button #{@sex_count == 0 ? "disabled" : ""}", id: "sex-counter-increment-button" do
+              = semantic_icon "minus large"
+            span= @sex_count
+            = link_to activities_path(activity_type_id: ActivityType.find_by_name_ja("準即").id, period: params["period"]), method: :post, class: "ui orange circular icon button", id: "sex-counter-decrement-button" do
+              = semantic_icon "plus large"
+
+        .row.counter-list: .column
+          h2.ui.medium.header.center.aligned 即
+          #sex-counter-display.count
+            = link_to activities_path(activity_type_id: ActivityType.find_by_name_ja("即").id, period: params["period"]), method: :delete, class: "ui red circular icon button #{@sex_count == 0 ? "disabled" : ""}", id: "sex-counter-increment-button" do
+              = semantic_icon "minus large"
+            span= @sex_count
+            = link_to activities_path(activity_type_id: ActivityType.find_by_name_ja("即").id, period: params["period"]), method: :post, class: "ui red circular icon button", id: "sex-counter-decrement-button" do
+              = semantic_icon "plus large"
+
+javascript:
+  $('.ui.dropdown').dropdown();

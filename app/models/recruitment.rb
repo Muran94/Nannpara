@@ -10,10 +10,10 @@
 #  created_at                           :datetime         not null
 #  updated_at                           :datetime         not null
 #  prefecture_code                      :integer
-#  closed                               :boolean          default(FALSE)
 #  linked_with_kanto_nanpa_messageboard :boolean
 #  kanto_nanpa_messageboard_delete_key  :string
 #  closed_at                            :datetime
+#  messages_count                       :integer          default(0), not null
 #
 
 class Recruitment < ApplicationRecord
@@ -33,6 +33,7 @@ class Recruitment < ApplicationRecord
   jp_prefecture :prefecture_code
 
   before_create :_prepare_kanto_nanpa_messageboard_delete_key
+  after_create :_register_activity
   before_save :_reset_closed_at_unless_past_recruitment
 
   def past_recruitment?
@@ -44,6 +45,10 @@ class Recruitment < ApplicationRecord
   end
 
   private
+
+  def _register_activity
+    user.activities.create(activity_type_id: ActivityType.find_by_name_ja("募集記事の投稿").id)
+  end
 
   def _event_date_cannot_be_past
     if event_date.present? && event_date < Date.today

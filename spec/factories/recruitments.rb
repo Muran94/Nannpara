@@ -10,10 +10,10 @@
 #  created_at                           :datetime         not null
 #  updated_at                           :datetime         not null
 #  prefecture_code                      :integer
-#  closed                               :boolean          default(FALSE)
 #  linked_with_kanto_nanpa_messageboard :boolean
 #  kanto_nanpa_messageboard_delete_key  :string
 #  closed_at                            :datetime
+#  messages_count                       :integer          default(0), not null
 #
 
 FactoryGirl.define do
