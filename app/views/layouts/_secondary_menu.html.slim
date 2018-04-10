@@ -1,6 +1,6 @@
 - unless controller_name == "accounts" || controller_name == "registrations" || controller_name == "sessions"
     .ui.four.item.secondary.menu#secondary-nav-menu
-        = link_to root_path, class: %(item orange #{activate_tab("homes")}) do
+        = link_to root_path, class: %(item orange #{activate_tab("home")}) do
             = semantic_icon "home"
         = link_to recruitments_path, class: %(item orange #{activate_tab("recruitments")}) do
             = semantic_icon "users"
