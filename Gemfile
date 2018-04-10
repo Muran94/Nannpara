@@ -30,13 +30,13 @@ gem 'capybara', '~> 2.13'
 gem 'selenium-webdriver'
 gem 'chromedriver-helper'
 gem 'counter_culture'
+gem 'faker'
 
 group :development, :test do
   gem 'sqlite3'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'faker'
   gem 'rails-controller-testing'
   gem 'test-queue' # Rspecの並列実行を実現するためのGem
 end
