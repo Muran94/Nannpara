@@ -1,10 +1,10 @@
 - unless controller_name == "accounts" || controller_name == "registrations" || controller_name == "sessions"
     .ui.four.item.secondary.menu#secondary-nav-menu
-        = link_to root_path, class: %(item orange #{activate_tab("homes")}) do
+        = link_to root_path, class: %(item orange #{activate_tab("home")}),id: "secondary-menu-home-link" do
             = semantic_icon "home"
-        = link_to recruitments_path, class: %(item orange #{activate_tab("recruitments")}) do
+        = link_to recruitments_path, class: %(item orange #{activate_tab("recruitments")}), id: "secondary-menu-recruitment-link" do
             = semantic_icon "users"
-        = link_to blog_articles_path, class: %(item orange #{activate_tab("articles")}) do
+        = link_to blog_articles_path, class: %(item orange #{activate_tab("articles")}), id: "secondary-menu-blog-article-link" do
             = semantic_icon "rss"
-        = link_to activities_path, class: %(item orange #{activate_tab("activities")}) do
+        = link_to activities_path, class: %(item orange #{activate_tab("activities")}), id: "secondary-menu-counter-link" do
             = semantic_icon "tachometer alternate"
