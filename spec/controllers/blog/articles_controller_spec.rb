@@ -126,11 +126,14 @@ RSpec.describe Blog::ArticlesController, type: :controller do
       context '正常系' do
         let(:title) { 'ナンパの極意教えます' }
 
-        it 'ブログ記事の作成に成功し、正しいflash[:success]メッセージとともにブログの詳細ページにリダイレクトされる' do
+        it 'ブログ記事の作成に成功し、正しいflash[:success]メッセージとともにブログの詳細ページにリダイレクトされる && Userの経験値とレベルが上昇している' do
           aggregate_failures do
             expect { post :create, params: params }.to change(Blog::Article, :count).by(1)
             expect(flash[:success]).to eq 'ブログの投稿が完了しました。'
             expect(response).to redirect_to blog_article_path(assigns(:blog_article))
+            user.reload
+            expect(user.level_id).to eq 2
+            expect(user.experience_point).to eq 3
           end
         end
       end

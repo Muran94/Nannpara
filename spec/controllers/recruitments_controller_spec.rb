@@ -142,11 +142,14 @@ RSpec.describe RecruitmentsController, type: :controller do
         let(:params) { { recruitment: attributes_for(:recruitment) } }
 
         context 'データ作成テスト' do
-          it 'レコードが１つ増える && flash[:success]の中身が正しい && リダイレクト先が正しい' do
+          it 'レコードが１つ増える && flash[:success]の中身が正しい && リダイレクト先が正しい && ユーザーのレベルと経験値が増えている' do
             aggregate_failures do
               expect { post :create, params: params }.to change(Recruitment, :count).by(1)
               expect(flash[:success]).to eq '募集記事の作成が完了しました。'
               expect(response).to redirect_to assigns(:recruitment)
+              user.reload
+              expect(user.level_id).to eq 2 
+              expect(user.experience_point).to eq 3
             end
           end
         end

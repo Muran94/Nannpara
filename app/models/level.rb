@@ -3,7 +3,6 @@
 # Table name: levels
 #
 #  id                        :integer          not null, primary key
-#  level                     :integer
 #  required_experience_point :integer
 #  rank                      :string
 #  created_at                :datetime         not null

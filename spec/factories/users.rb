@@ -60,5 +60,11 @@ FactoryGirl.define do
         create_list(:blog_article, 3, user: user)
       end
     end
+
+    trait :with_three_talk_activities do
+      after(:create) do |user|
+        create_list(:activity, 3, activity_type: ActivityType.find_by_name_ja("声かけ"), user: user)
+      end
+    end
   end
 end

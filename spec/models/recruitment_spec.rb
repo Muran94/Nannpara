@@ -103,19 +103,18 @@ RSpec.describe Recruitment, type: :model do
 
     context 'event_date' do
       context '_event_date_cannot_be_pastチェック' do
-        it 'event_dateの日時が 過去 または 現在 の場合、バリデーションに引っかかり、正しいエラーメッセージを持つ' do
+        it 'event_dateの日時が 過去 の場合バリデーションに引っかかり、正しいエラーメッセージを持つ' do
           aggregate_failures do
             recruitment = build_stubbed(:recruitment, event_date: 1.day.ago) # event_dateが過去のRecruitment
-            expect(recruitment.valid?).to be_falsy
-            expect(recruitment.errors.messages[:event_date]).to match_array '開催日時に過去の日時を指定することはできません。'
-
-            recruitment = build_stubbed(:recruitment, event_date: Time.zone.now) # event_dateが現在のRecruitment
             expect(recruitment.valid?).to be_falsy
             expect(recruitment.errors.messages[:event_date]).to match_array '開催日時に過去の日時を指定することはできません。'
           end
         end
         it 'event_dateの日時が 未来 の場合、バリデーションに引っかからない' do
-          expect(build_stubbed(:recruitment, event_date: 1.day.from_now).valid?).to be_truthy
+          aggregate_failures do
+            expect(build_stubbed(:recruitment, event_date: Date.today).valid?).to be_truthy
+            expect(build_stubbed(:recruitment, event_date: 1.day.from_now).valid?).to be_truthy
+          end
         end
       end
     end

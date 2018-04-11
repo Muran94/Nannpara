@@ -12,7 +12,8 @@
 
 FactoryGirl.define do
   factory :activity do
-    activity_type nil
-    user nil
+    association :user
+
+    activity_type "声かけ"
   end
 end
