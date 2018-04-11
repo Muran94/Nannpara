@@ -1,5 +1,3 @@
-Faker::Config.locale = :ja
-
 required_experience_point = 0
 increase_ammount = 0
 

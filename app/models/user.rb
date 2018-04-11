@@ -41,6 +41,7 @@ class User < ApplicationRecord
   has_many :recruitments, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :activities, dependent: :destroy
+  has_many :ranking_entries, dependent: :destroy
   has_many :blog_articles, dependent: :destroy, class_name: "Blog::Article"
   has_many :blog_comments, dependent: :destroy, class_name: "Blog::Comment"
 
