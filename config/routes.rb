@@ -31,5 +31,6 @@ Rails.application.routes.draw do
     resources :blog_comments, only: [:create, :destroy], controller: "blog/comments" do
     end
   end
+  resources :rankings, only: [:index, :show]
   get 'service/inquiry'
 end

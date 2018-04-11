@@ -1,0 +1,29 @@
+.ui.basic.segment.no-horizontal-padding.white-background.recruitment-lists-segment
+    .ui.grid.stackable
+        .row
+            .column.sixteen.wide
+                h1.ui.small.header
+                    | 月間ナンパ師ランキング
+            = link_to "詳細", "#", class: "content-list-header-nav-link"
+
+        .row.content-list: .column 1位
+        .row.content-list: .column 2位
+        .row.content-list: .column 3位
+        / - if @recruitments.present?
+        /     = render @recruitments
+        / - else
+        /     .row.content-list: .column
+        /         .nothing-yet まだ募集記事がありません。
+
+
+.ui.basic.segment.no-horizontal-padding.white-background.blog_article-lists-segment
+    .ui.grid.stackable
+        .row
+            .column.sixteen.wide
+                h1.ui.small.header
+                    | リアルタイムランキング
+            = link_to "詳細", "#", class: "content-list-header-nav-link"
+
+        .row.content-list: .column 1位
+        .row.content-list: .column 2位
+        .row.content-list: .column 3位
