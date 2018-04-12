@@ -4,11 +4,10 @@
             .column.sixteen.wide
                 h1.ui.small.header
                     = @ranking.name
-                    / .entry-number= "(#{@hourly_activity_ranking_entry_number}人参加中)"
 
         - if @ranking_entry_users.present?
             - @ranking_entry_users.each.with_index(1) do |user, rank|
-                .row.content-list: .column
+                .row.content-list: .column class="#{"login-users-ranking" if current_user && current_user == user}"
                     div class="rank rank-#{rank}"= "#{rank}位"
                     .user-display= "#{user.name}さん"
                     .point-display= "(#{user.activities.from_particular_time_range(@ranking.start_at, @ranking.end_at).total_obtained_experience_point}ポイント)"
@@ -22,6 +21,9 @@ scss:
         margin-left: 10px;
         font-size: 15px;
         color: #999;
+    }
+    .login-users-ranking {
+        background: #fff0fb !important;
     }
     .rank {
         display: inline;
