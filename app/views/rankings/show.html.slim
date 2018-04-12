@@ -1,2 +1,52 @@
-h1 Rankings#show
-p Find me in app/views/rankings/show.html.slim
+.ui.basic.segment.no-horizontal-padding.white-background.recruitment-lists-segment
+    .ui.grid.stackable
+        .row
+            .column.sixteen.wide
+                h1.ui.small.header
+                    = @ranking.name
+                    / .entry-number= "(#{@hourly_activity_ranking_entry_number}人参加中)"
+
+        - if @ranking_entry_users.present?
+            - @ranking_entry_users.each.with_index(1) do |user, rank|
+                .row.content-list: .column
+                    div class="rank rank-#{rank}"= "#{rank}位"
+                    .user-display= "#{user.name}さん"
+                    .point-display= "(#{user.activities.from_particular_time_range(@ranking.start_at, @ranking.end_at).total_obtained_experience_point}ポイント)"
+        - else
+            .row.content-list: .column
+                .nothing-yet まだ参加者がいません。
+
+scss:
+    .entry-number {
+        display: inline;
+        margin-left: 10px;
+        font-size: 15px;
+        color: #999;
+    }
+    .rank {
+        display: inline;
+        font-size:15px;
+        font-weight: bold;
+    }
+    .rank-1, .rank-2, .rank-3 {
+        font-size: 20px;
+    }
+    .rank-1 {
+        color: #FFD700;
+    }
+    .rank-2 {
+        color: #C0C0C0;
+    }
+    .rank-3 {
+        color: #C47222;
+    }
+    .user-display {
+        display: inline;
+        margin-left: 5px;
+    }
+    .point-display {
+        display: inline;
+        margin-left: 5px;
+        font-size: 12px;
+        color: #999;
+    }

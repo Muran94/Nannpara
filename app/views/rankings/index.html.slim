@@ -1,29 +1,106 @@
 .ui.basic.segment.no-horizontal-padding.white-background.recruitment-lists-segment
     .ui.grid.stackable
-        .row
-            .column.sixteen.wide
-                h1.ui.small.header
-                    | 月間ナンパ師ランキング
-            = link_to "詳細", "#", class: "content-list-header-nav-link"
+        - if @hourly_activity_ranking.present?
+            .row
+                .column.sixteen.wide
+                    h1.ui.small.header
+                        = @hourly_activity_ranking.name
+                = link_to "詳細", ranking_path(@hourly_activity_ranking), class: "content-list-header-nav-link"
 
-        .row.content-list: .column 1位
-        .row.content-list: .column 2位
-        .row.content-list: .column 3位
-        / - if @recruitments.present?
-        /     = render @recruitments
-        / - else
-        /     .row.content-list: .column
-        /         .nothing-yet まだ募集記事がありません。
+            - if @hourly_activity_top_three_users.present?
+                - @hourly_activity_top_three_users.each.with_index(1) do |user, rank|
+                    .row: .column
+                        div class="rank rank-#{rank}"= "#{rank}位"
+                        .user-display= "#{user.name}さん"
+                        .point-display= "(#{user.activities.from_particular_time_range(@hourly_activity_ranking.start_at, @hourly_activity_ranking.end_at).total_obtained_experience_point}ポイント)"
+                .row: .column.sixteen.wide.entry-number= "#{@hourly_activity_ranking_entry_number}名参加中"
+            - else
+                .row: .column
+                    .nothing-yet まだ参加者がいません。
+        - else
+            .row
+                .column.sixteen.wide
+                    h1.ui.small.header= "#{Time.zone.now.hour}時台のナンパ師活動ランキング"
+            .row: .column
+                .nothing-yet 現在開催しておりません。
 
-
-.ui.basic.segment.no-horizontal-padding.white-background.blog_article-lists-segment
+.ui.basic.segment.no-horizontal-padding.white-background.recruitment-lists-segment
     .ui.grid.stackable
-        .row
-            .column.sixteen.wide
-                h1.ui.small.header
-                    | リアルタイムランキング
-            = link_to "詳細", "#", class: "content-list-header-nav-link"
+        - if @daily_activity_ranking.present?
+            .row
+                .column.sixteen.wide
+                    h1.ui.small.header 本日のナンパ師活動ランキング
+                = link_to "詳細", ranking_path(@daily_activity_ranking), class: "content-list-header-nav-link"
 
-        .row.content-list: .column 1位
-        .row.content-list: .column 2位
-        .row.content-list: .column 3位
+            - if @daily_activity_top_three_users.present?
+                - @daily_activity_top_three_users.each.with_index(1) do |user, rank|
+                    .row: .column
+                        div class="rank rank-#{rank}"= "#{rank}位"
+                        .user-display= "#{user.name}さん"
+                        .point-display= "(#{user.activities.from_particular_time_range(@daily_activity_ranking.start_at, @daily_activity_ranking.end_at).total_obtained_experience_point}ポイント)"
+                .row: .column.sixteen.wide.entry-number= "#{@daily_activity_ranking_entry_number}名参加中"
+            - else
+                .row: .column
+                    .nothing-yet まだ参加者がいません。
+        - else
+            .row
+                .column.sixteen.wide
+                    h1.ui.small.header= "本日のナンパ師活動ランキング"
+            .row: .column
+                .nothing-yet 現在開催しておりません。
+
+.ui.basic.segment.no-horizontal-padding.white-background.recruitment-lists-segment
+    .ui.grid.stackable
+        - if @monthly_activity_ranking.present?
+            .row
+                .column.sixteen.wide
+                    h1.ui.small.header 今月のナンパ師活動ランキング
+                = link_to "詳細", ranking_path(@monthly_activity_ranking), class: "content-list-header-nav-link"
+
+            - if @monthly_activity_top_three_users.present?
+                - @monthly_activity_top_three_users.each.with_index(1) do |user, rank|
+                    .row: .column
+                        div class="rank rank-#{rank}"= "#{rank}位"
+                        .user-display= "#{user.name}さん"
+                        .point-display= "(#{user.activities.from_particular_time_range(@monthly_activity_ranking.start_at, @monthly_activity_ranking.end_at).total_obtained_experience_point}ポイント)"
+                .row: .column.sixteen.wide.entry-number= "#{@monthly_activity_ranking_entry_number}名参加中"
+            - else
+                .row: .column
+                    .nothing-yet まだ参加者がいません。
+        - else
+            .row
+                .column.sixteen.wide
+                    h1.ui.small.header= "今月のナンパ師活動ランキング"
+            .row: .column
+                .nothing-yet 現在開催しておりません。
+
+scss:
+    .entry-number {
+        text-align: right;
+        font-size: 12px;
+        color: #999;
+    }
+    .rank {
+        display: inline;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .rank-1 {
+        color: #FFD700;
+    }
+    .rank-2 {
+        color: #C0C0C0;
+    }
+    .rank-3 {
+        color: #C47222;
+    }
+    .user-display {
+        display: inline;
+        margin-left: 5px;
+    }
+    .point-display {
+        display: inline;
+        margin-left: 5px;
+        font-size: 12px;
+        color: #999;
+    }

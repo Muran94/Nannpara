@@ -1,3 +1,3 @@
-RankingType.create(name_en: "monthly", name_ja: "今月")
-RankingType.create(name_en: "daily", name_ja: "本日")
-RankingType.create(name_en: "hourly", name_ja: "毎時")
+RankingType.create(name_en: "monthly_activity_ranking", name_ja: "今月の活動ランキング")
+RankingType.create(name_en: "daily_activity_ranking", name_ja: "本日の活動ランキング")
+RankingType.create(name_en: "hourly_activity_ranking", name_ja: "毎時の活動ランキング")
