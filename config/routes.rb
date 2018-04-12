@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get :profile
       get :recruitments
       get :blog_articles
+      get :rankings
     end
     collection do
       get :edit

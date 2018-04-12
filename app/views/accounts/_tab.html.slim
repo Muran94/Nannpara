@@ -1,4 +1,5 @@
-.ui.three.item.secondary.menu#account-tab
+.ui.four.item.secondary.menu#account-tab
   = link_to "プロフィール", profile_account_path(user), class: %(item orange #{activate_tab_for_account_page("profile")})
-  = link_to "募集記事", recruitments_account_path(user), class: %(item orange #{activate_tab_for_account_page("recruitments")})
-  = link_to "ブログ記事", blog_articles_account_path(user), class: %(item orange #{activate_tab_for_account_page("blog_articles")})
+  = link_to "募集", recruitments_account_path(user), class: %(item orange #{activate_tab_for_account_page("recruitments")})
+  = link_to "ブログ", blog_articles_account_path(user), class: %(item orange #{activate_tab_for_account_page("blog_articles")})
+  = link_to "ランキング", rankings_account_path(user), class: %(item orange #{activate_tab_for_account_page("rankings")})

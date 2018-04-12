@@ -87,12 +87,15 @@ ActiveRecord::Schema.define(version: 20180411120044) do
 
   create_table "rankings", force: :cascade do |t|
     t.integer "ranking_type_id"
-    t.string "name"
     t.datetime "start_at"
     t.datetime "end_at"
+    t.datetime "closed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["closed_at"], name: "index_rankings_on_closed_at"
+    t.index ["end_at"], name: "index_rankings_on_end_at"
     t.index ["ranking_type_id"], name: "index_rankings_on_ranking_type_id"
+    t.index ["start_at"], name: "index_rankings_on_start_at"
   end
 
   create_table "recruitments", force: :cascade do |t|

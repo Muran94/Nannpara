@@ -14,6 +14,7 @@ class Ranking < ApplicationRecord
     has_many :users, through: :ranking_entries
 
     before_create :_set_start_at, :_set_end_at
+    after_create :_set_announce_result_job
 
     # validates :start_at, uniqueness: {} # 同じ種類で同じ開始時間のランキングが存在してはならない
     # validates :end_at, uniqueness: {} # 同じ種類で同じ終了時間のランキングが存在してはならない
@@ -35,8 +36,17 @@ class Ranking < ApplicationRecord
         create(ranking_type: RankingType.find_by_name_ja("毎時の活動ランキング"), start_at: start_at, end_at: end_at)
     end
 
+    def close
+        self.closed_at = Time.zone.now
+        save(validate: false)
+    end
+
     def entry(user)
         ranking_entries.create(user: user)
+    end
+
+    def in_session?
+        start_at <= Time.zone.now && end_at  >= Time.zone.now
     end
 
     def possible_to_entry?(user)
@@ -64,6 +74,11 @@ class Ranking < ApplicationRecord
     end
 
     private
+
+    def _set_announce_result_job
+        # RankingResultAnnouncementJob.set(wait_until: end_at).perform_later(self)
+        RankingResultAnnouncementJob.set(wait_until: 5.seconds.from_now).perform_later(self)
+    end
 
     def _set_start_at
         return if start_at.present?

@@ -1,7 +1,7 @@
 class AccountsController < ApplicationController
-  before_action :_set_user, only: [:profile, :recruitments, :blog_articles]
+  before_action :_set_user, only: [:profile, :recruitments, :blog_articles, :rankings]
   before_action :_set_current_user, only: [:edit, :update, :edit_image, :update_image, :destroy_image, :edit_password, :update_password]
-  before_action :authenticate_user!, except: [:profile, :recruitments]
+  before_action :authenticate_user!, except: [:profile, :recruitments, :blog_articles, :rankings]
 
   # GET /accounts/1/profile
   def profile; end
@@ -14,6 +14,11 @@ class AccountsController < ApplicationController
   # GET /accounts/1/blog_articles
   def blog_articles
     @blog_articles = @user.blog_articles.order('created_at DESC').page(params[:page])
+  end
+
+  # GET /accounts/1/rankings
+  def rankings
+    @rankings = @user.rankings.includes(:ranking_type).order('start_at DESC').page(params[:page])
   end
 
   # GET /accounts/edit

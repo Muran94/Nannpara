@@ -62,7 +62,7 @@
                     .row: .column.content-list
                         div class="rank rank-#{rank}"= "#{rank}位"
                         .user-display= "#{user.name}さん"
-                        .point-display= "(#{user.activities.from_particular_time_range(@monthly_activity_ranking.start_at, @monthly_activity_ranking.end_at).total_obtained_experience_point}ポイント)"
+                        .point-display= "(#{user.activities.from_particular_time_range(@monthly_activity_ranking.start_at, @monthly_activity_ranking.end_at).total_obtained_experience_point}p)"
                 .row: .column.sixteen.wide.content-list.entry-number= "#{@monthly_activity_ranking_entry_number}名参加中"
             - else
                 .row: .column.content-list
