@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180410063756) do
+ActiveRecord::Schema.define(version: 20180411120044) do
 
   create_table "activities", force: :cascade do |t|
     t.integer "activity_type_id"
@@ -67,6 +67,35 @@ ActiveRecord::Schema.define(version: 20180410063756) do
     t.datetime "updated_at", null: false
     t.index ["recruitment_id"], name: "index_messages_on_recruitment_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "ranking_entries", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "ranking_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ranking_id"], name: "index_ranking_entries_on_ranking_id"
+    t.index ["user_id"], name: "index_ranking_entries_on_user_id"
+  end
+
+  create_table "ranking_types", force: :cascade do |t|
+    t.string "name_en"
+    t.string "name_ja"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rankings", force: :cascade do |t|
+    t.integer "ranking_type_id"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.datetime "closed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["closed_at"], name: "index_rankings_on_closed_at"
+    t.index ["end_at"], name: "index_rankings_on_end_at"
+    t.index ["ranking_type_id"], name: "index_rankings_on_ranking_type_id"
+    t.index ["start_at"], name: "index_rankings_on_start_at"
   end
 
   create_table "recruitments", force: :cascade do |t|

@@ -33,27 +33,33 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  # 共用設定
+  config.include FactoryGirl::Syntax::Methods # FactoryGirlのシンタックスを省略する
+  # config.include ActiveSupport::Testing::TimeHelpers
+
+  # コントローラ関連の設定
+  config.include Devise::Test::ControllerHelpers, type: :controller # devise認証のための設定
+  # モデル関連の設定
+
+  # システムスペック関連の設定
+  config.include WaitForAjax, type: :system
+  config.after(:each, js: :true) { wait_for_ajax }
+  config.include Warden::Test::Helpers # devise認証のための設定
+  config.include CapybaraMacros, type: :system # SystemSpec上でSemanticUIの要素を操作する際に用いる便利メソッドを導入するための設定
   config.before(:each) do |example|
     if example.metadata[:type] == :system
       driven_by :selenium_chrome_headless, screen_size: [1400, 1400]
     end
   end
 
-  config.include WaitForAjax, type: :system
-  config.after(:each, js: :true) { wait_for_ajax }
+  # ジョブ関連の設定
+  ActiveJob::Base.queue_adapter = :test
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
 
-  # note:devise認証のための設定
-  config.include Warden::Test::Helpers
-  config.include Devise::Test::ControllerHelpers, type: :controller
-  # SystemSpec上でSemanticUIの要素を操作する際に用いる便利メソッドを導入するための設定
-  config.include CapybaraMacros, type: :system
-  # FactoryGirlのシンタックスを省略する
-  config.include FactoryGirl::Syntax::Methods
 
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!

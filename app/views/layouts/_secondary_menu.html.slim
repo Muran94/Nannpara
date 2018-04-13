@@ -1,5 +1,5 @@
 - unless controller_name == "accounts" || controller_name == "registrations" || controller_name == "sessions"
-    .ui.four.item.secondary.menu#secondary-nav-menu
+    .ui.five.item.secondary.menu#secondary-nav-menu
         = link_to root_path, class: %(item orange #{activate_tab("home")}),id: "secondary-menu-home-link" do
             = semantic_icon "home"
         = link_to recruitments_path, class: %(item orange #{activate_tab("recruitments")}), id: "secondary-menu-recruitment-link" do
@@ -8,3 +8,5 @@
             = semantic_icon "rss"
         = link_to activities_path, class: %(item orange #{activate_tab("activities")}), id: "secondary-menu-counter-link" do
             = semantic_icon "tachometer alternate"
+        = link_to rankings_path, class: %(item orange #{activate_tab("rankings")}), id: "secondary-menu-ranking-link"
+            = semantic_icon "chart line"

@@ -23,7 +23,7 @@
                 h1.ui.small.header
                     = semantic_icon "rss"
                     | ブログ記事
-        = link_to "一覧", recruitments_path, class: "content-list-header-nav-link"
+            = link_to "一覧", blog_articles_path, class: "content-list-header-nav-link"
 
         - if @blog_articles.present?
             = render @blog_articles

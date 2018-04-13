@@ -1,0 +1,69 @@
+.ui.basic.segment.no-horizontal-padding.white-background.recruitment-lists-segment
+    .ui.grid.stackable
+        .row
+            .column.sixteen.wide
+                h1.ui.small.header エントリー済のランキング
+
+        - if @rankings.present?
+            - @rankings.each do |ranking|
+                - if ranking.in_session?
+                    .row.in-session: .column.content-list
+                        = link_to ranking_path(ranking) do
+                            // ranking_entriesに最終順位を持たせる必要がある。
+                            / div class="rank rank-#{rank}"= "#{rank}位"
+                            .ranking-name-display
+                                = ranking.name
+                                .ranking-result-display
+                                    | (
+                                    div class="rank rank-#{1}" 1位
+                                    | ,
+                                    .point-display= "#{@user.activities.from_particular_time_range(ranking.start_at, ranking.end_at).total_obtained_experience_point}p"
+                                | )
+                - else
+                    .row: .column.content-list
+                        = link_to ranking_path(ranking) do
+                            .ranking-name-display
+                                = ranking.archived_name
+                                .ranking-result-display
+                                    | (
+                                    div class="rank rank-#{1}" 1位
+                                    | ,
+                                    .point-display= "#{@user.activities.from_particular_time_range(ranking.start_at, ranking.end_at).total_obtained_experience_point}p"
+                                    | )
+        - else
+            .row: .column.content-list
+                .nothing-yet エントリー済のランキングがありません。
+
+.ui.center.aligned.container
+  = paginate @rankings
+
+scss:
+    .rank {
+        display: inline;
+    }
+    .rank-1 {
+        color: #FFD700;
+    }
+    .rank-2 {
+        color: #C0C0C0;
+    }
+    .rank-3 {
+        color: #C47222;
+    }
+    .ranking-name-display {
+        display: block;
+        font-weight: bold;
+    }
+    .in-session {
+        background: yellow !important;
+    }
+    .ranking-result-display {
+        display: inline;
+        color: #999;
+        margin-left: 10px;
+    }
+    .point-display {
+        display: inline;
+        margin-left: 5px;
+        color: #999;
+    }
