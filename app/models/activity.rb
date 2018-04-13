@@ -21,7 +21,7 @@ class Activity < ApplicationRecord
   validates :activity_type_id, inclusion: {in: ActivityType.pluck(:id)}
 
   scope :from_particular_time_range, -> (start_at, end_at) {where("created_at >= ?", start_at).where("created_at <= ?", end_at)}
-  scope :points_obtained_while_particular_ranking_is_in_session, -> (start_at, end_at) {from_particular_time_range(start_at, end_at).total_obtained_experience_point}
+  scope :obtained_points_in_particular_time, -> (start_at, end_at) {from_particular_time_range(start_at, end_at).total_obtained_experience_point}
   scope :total_obtained_experience_point, -> {sum(:obtained_experience_point)} 
   scope :without_writing, -> {where.not(activity_type_id: [1, 2])} # 募集記事作成やブログ記事作成をのぞいた活動
 

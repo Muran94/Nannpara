@@ -12,7 +12,7 @@
                     .row: .column.content-list
                         div class="rank rank-#{rank}"= "#{rank}位"
                         .user-display= "#{user.name}さん"
-                        .point-display= "(#{user.activities.without_writing.points_obtained_while_particular_ranking_is_in_session(@hourly_activity_ranking.start_at, @hourly_activity_ranking.end_at)}p)"
+                        .point-display= "(#{user.activities.without_writing.obtained_points_in_particular_time(@hourly_activity_ranking.start_at, @hourly_activity_ranking.end_at)}p)"
                 .row: .column.sixteen.wide.content-list.entry-number= "#{@hourly_activity_ranking_entry_number}名参加中"
             - else
                 .row: .column.content-list

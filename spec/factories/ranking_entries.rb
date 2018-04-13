@@ -11,7 +11,7 @@
 
 FactoryGirl.define do
   factory :ranking_entry do
-    user nil
-    ranking nil
+    association :user
+    association :ranking
   end
 end

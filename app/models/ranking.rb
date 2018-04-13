@@ -4,6 +4,9 @@
 #
 #  id              :integer          not null, primary key
 #  ranking_type_id :integer
+#  start_at        :datetime
+#  end_at          :datetime
+#  closed_at       :datetime
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
@@ -16,8 +19,7 @@ class Ranking < ApplicationRecord
     before_create :_set_start_at, :_set_end_at
     after_create :_set_announce_result_job
 
-    # validates :start_at, uniqueness: {} # 同じ種類で同じ開始時間のランキングが存在してはならない
-    # validates :end_at, uniqueness: {} # 同じ種類で同じ終了時間のランキングが存在してはならない
+    validates :ranking_type_id,  uniqueness: { scope: [:start_at, :end_at]  }
 
     scope :hourly_activity_ranking, -> {where(ranking_type: RankingType.find_by_name_ja("毎時の活動ランキング"))}
     scope :daily_activity_ranking, -> {where(ranking_type: RankingType.find_by_name_ja("本日の活動ランキング"))}
@@ -66,10 +68,17 @@ class Ranking < ApplicationRecord
         user_ranking.first(3)
     end
 
-    def user_ranking
-        users.sort do |user_a, user_b|
-            user_b.activities.without_writing.from_particular_time_range(start_at, end_at).total_obtained_experience_point <=> 
-            user_a.activities.without_writing.from_particular_time_range(start_at, end_at).total_obtained_experience_point
+    def user_ranking(consider_writing_activity=true)
+        if consider_writing_activity
+            users.sort do |user_a, user_b|
+                user_b.activities.obtained_points_in_particular_time(start_at, end_at) <=> 
+                user_a.activities.obtained_points_in_particular_time(start_at, end_at)
+            end
+        else
+            users.sort do |user_a, user_b|
+                user_b.activities.without_writing.obtained_points_in_particular_time(start_at, end_at) <=> 
+                user_a.activities.without_writing.obtained_points_in_particular_time(start_at, end_at)
+            end
         end
     end
 

@@ -63,7 +63,43 @@ FactoryGirl.define do
 
     trait :with_three_talk_activities do
       after(:create) do |user|
-        create_list(:activity, 3, activity_type: ActivityType.find_by_name_ja("声かけ"), user: user)
+        create_list(:activity, 3, :talk_activity, user: user)
+      end
+    end
+
+    trait :with_single_talk_activity do
+      after(:create) do |user|
+        create(:activity, :talk_activity, user: user)
+      end
+    end
+
+    trait :with_single_get_phone_number_activity do
+      after(:create) do |user|
+        create(:activity, :get_phone_number_activity, user: user)
+      end
+    end
+
+    trait :with_single_date_activity do
+      after(:create) do |user|
+        create(:activity, :date_activity, user: user)
+      end
+    end
+
+    trait :with_single_instant_sex_activity do
+      after(:create) do |user|
+        create(:activity, :instant_sex_activity, user: user)
+      end
+    end
+
+    trait :with_single_sex_on_first_date do
+      after(:create) do |user|
+        create(:activity, :sex_on_first_date, user: user)
+      end
+    end
+
+    trait :with_single_sex_on_second_date do
+      after(:create) do |user|
+        create(:activity, :sex_on_second_date, user: user)
       end
     end
   end
