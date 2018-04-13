@@ -21,7 +21,7 @@ namespace :ranking do
         # time = (Time.zone.now + 1.day).beginning_of_day
         time = Time.zone.now.beginning_of_day
         24.times do
-            ranking = Ranking.create_hourly_activity_ranking(time.beginning_of_hour, time.end_of_hour)
+            Ranking.create_hourly_activity_ranking(time.beginning_of_hour, time.end_of_hour)
             time += 1.hour
             sleep 1
         end

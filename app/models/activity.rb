@@ -36,7 +36,7 @@ class Activity < ApplicationRecord
   # エントリー後、カウント取り消しに伴い、該当期間のポイントが消滅した場合、エントリーを取り消す
   def _cancel_entry
     user.rankings.in_session.each do |ranking|
-      user.rankings.find(ranking.id).destroy if user.activities.obtained_points_in_particular_time(ranking.start_at, ranking.end_at).zero?
+      user.ranking_entries.find(ranking_id: ranking.id).destroy if user.activities.obtained_points_in_particular_time(ranking.start_at, ranking.end_at).zero?
     end
   end
 
