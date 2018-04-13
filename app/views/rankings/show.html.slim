@@ -10,7 +10,7 @@
                 .row.content-list: .column class="#{"login-users-ranking" if current_user && current_user == user}"
                     div class="rank rank-#{rank}"= "#{rank}位"
                     .user-display= "#{user.name}さん"
-                    .point-display= "(#{user.activities.from_particular_time_range(@ranking.start_at, @ranking.end_at).total_obtained_experience_point}ポイント)"
+                    .point-display= "(#{user.activities.from_particular_time_range(@ranking.start_at, @ranking.end_at).total_obtained_experience_point}p)"
         - else
             .row.content-list: .column
                 .nothing-yet まだ参加者がいません。

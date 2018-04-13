@@ -16,13 +16,14 @@ class Activity < ApplicationRecord
 
   before_create :_set_obtained_experience_point
   after_create :_update_users_experience_point, :_entry_activity_rankings
-  after_destroy :_update_users_experience_point
+  after_destroy :_update_users_experience_point, :_cancel_entry
 
   validates :activity_type_id, inclusion: {in: ActivityType.pluck(:id)}
 
-  scope :without_writing, -> {where.not(activity_type_id: [1, 2])} # 募集記事作成やブログ記事作成をのぞいた活動
   scope :from_particular_time_range, -> (start_at, end_at) {where("created_at >= ?", start_at).where("created_at <= ?", end_at)}
+  scope :points_obtained_while_particular_ranking_is_in_session, -> (start_at, end_at) {from_particular_time_range(start_at, end_at).total_obtained_experience_point}
   scope :total_obtained_experience_point, -> {sum(:obtained_experience_point)} 
+  scope :without_writing, -> {where.not(activity_type_id: [1, 2])} # 募集記事作成やブログ記事作成をのぞいた活動
 
   private
 
@@ -30,6 +31,13 @@ class Activity < ApplicationRecord
     _entry_hourly_activity_ranking
     _entry_daily_activity_ranking
     _entry_monthly_activity_ranking
+  end
+
+  # エントリー後、カウント取り消しに伴い、該当期間のポイントが消滅した場合、エントリーを取り消す
+  def _cancel_entry
+    user.rankings.in_session.each do |ranking|
+      user.ranking_entries.find_by(ranking_id: ranking.id).destroy if user.activities.from_particular_time_range(ranking.start_at, ranking.end_at).total_obtained_experience_point.zero?
+    end
   end
 
   def _entry_hourly_activity_ranking

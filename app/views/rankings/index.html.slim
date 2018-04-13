@@ -12,7 +12,7 @@
                     .row: .column.content-list
                         div class="rank rank-#{rank}"= "#{rank}位"
                         .user-display= "#{user.name}さん"
-                        .point-display= "(#{user.activities.from_particular_time_range(@hourly_activity_ranking.start_at, @hourly_activity_ranking.end_at).total_obtained_experience_point}ポイント)"
+                        .point-display= "(#{user.activities.without_writing.points_obtained_while_particular_ranking_is_in_session(@hourly_activity_ranking.start_at, @hourly_activity_ranking.end_at)}p)"
                 .row: .column.sixteen.wide.content-list.entry-number= "#{@hourly_activity_ranking_entry_number}名参加中"
             - else
                 .row: .column.content-list
@@ -37,7 +37,7 @@
                     .row: .column.content-list
                         div class="rank rank-#{rank}"= "#{rank}位"
                         .user-display= "#{user.name}さん"
-                        .point-display= "(#{user.activities.from_particular_time_range(@daily_activity_ranking.start_at, @daily_activity_ranking.end_at).total_obtained_experience_point}ポイント)"
+                        .point-display= "(#{user.activities.from_particular_time_range(@daily_activity_ranking.start_at, @daily_activity_ranking.end_at).total_obtained_experience_point}p)"
                 .row: .column.sixteen.wide.content-list.entry-number= "#{@daily_activity_ranking_entry_number}名参加中"
             - else
                 .row: .column.content-list

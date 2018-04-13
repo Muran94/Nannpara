@@ -1,7 +1,7 @@
 after :users, :levels, :activity_types do
     Faker::Config.locale = :ja
 
-    2000.times do
-        Activity.create(user_id: User.all.pluck(:id).sample, activity_type_id: ActivityType.all.pluck(:id).sample)
+    200.times do
+        Activity.create(user_id: User.all.pluck(:id).sample, activity_type_id: ActivityType.where(id: [1, 2, 3, 4, 5, 6, 7, 8]).pluck(:id).sample)
     end
 end

@@ -18,7 +18,7 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1/rankings
   def rankings
-    @rankings = @user.rankings.includes(:ranking_type).order('start_at DESC').page(params[:page])
+    @rankings = @user.rankings.includes(:ranking_type).order('closed_at DESC, start_at DESC').page(params[:page])
   end
 
   # GET /accounts/edit

@@ -76,8 +76,8 @@ class Ranking < ApplicationRecord
     private
 
     def _set_announce_result_job
-        # RankingResultAnnouncementJob.set(wait_until: end_at).perform_later(self)
-        RankingResultAnnouncementJob.set(wait_until: 5.seconds.from_now).perform_later(self)
+        RankingResultAnnouncementJob.set(wait_until: end_at).perform_later(self)
+        # RankingResultAnnouncementJob.set(wait_until: 5.seconds.from_now).perform_later(self)
     end
 
     def _set_start_at
