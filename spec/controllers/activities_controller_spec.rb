@@ -9,10 +9,10 @@ RSpec.describe ActivitiesController, type: :controller do
 
       context "paramsあり" do
         before do
-          create(:activity, activity_type: ActivityType.find_by_name_ja("声かけ"), created_at: 1.minute.ago, user: user)
-          create(:activity, activity_type: ActivityType.find_by_name_ja("声かけ"), created_at: 2.days.ago, user: user)
-          create(:activity, activity_type: ActivityType.find_by_name_ja("声かけ"), created_at: 8.days.ago, user: user)
-          create(:activity, activity_type: ActivityType.find_by_name_ja("声かけ"), created_at: 32.days.ago, user: user)
+          create(:activity, activity_type: create(:activity_type, :talk), created_at: 1.minute.ago, user: user)
+          create(:activity, activity_type: create(:activity_type, :talk), created_at: 2.days.ago, user: user)
+          create(:activity, activity_type: create(:activity_type, :talk), created_at: 8.days.ago, user: user)
+          create(:activity, activity_type: create(:activity_type, :talk), created_at: 32.days.ago, user: user)
           get :show, params
         end
         context "params['period'] = '本日'" do
@@ -126,9 +126,9 @@ RSpec.describe ActivitiesController, type: :controller do
 
       context "paramsなし" do
         before do
-          create(:activity, activity_type: ActivityType.find_by_name_ja("声かけ"), created_at: 1.week.ago, user: user)
-          create(:activity, activity_type: ActivityType.find_by_name_ja("声かけ"), created_at: 1.minute.ago, user: user)
-          create(:activity, activity_type: ActivityType.find_by_name_ja("連れ出し"), created_at: 1.minute.ago, user: user)
+          create(:activity, activity_type: create(:activity_type, :talk), created_at: 1.week.ago, user: user)
+          create(:activity, activity_type: create(:activity_type, :talk), created_at: 1.minute.ago, user: user)
+          create(:activity, activity_type: create(:activity_type, :date), created_at: 1.minute.ago, user: user)
           get :show
         end
 
@@ -177,18 +177,40 @@ RSpec.describe ActivitiesController, type: :controller do
           }
         }
       end
-      let(:activity_type_id) {ActivityType.find_by_name_ja("声かけ").id.to_s}
+      let(:activity_type_id) {create(:activity_type, :talk).id.to_s}
 
       before {sign_in user}
       
-
       context "正常形" do
-        let(:activity_type_id) {ActivityType.find_by_name_ja("声かけ").id.to_s}
+        let(:activity_type_id) {create(:activity_type, :talk).id.to_s}
 
-        it "該当のActivityカウントが１増え、カウンターページにリダイレクトされること" do
-          aggregate_failures do
-            expect {post :create, params}.to change(Activity, :count).by(1)
-            expect(response).to redirect_to activities_path
+        context "何かしらのランキングが開催中の場合" do
+          let!(:ranking) {create(:ranking, :hourly_activity_ranking)}
+
+          it "該当のActivityカウントが１増える && 開催中のRankingのエントリーの数が１増える && カウンターページにリダイレクトされる" do
+            aggregate_failures do
+              expect {
+                post :create, params
+              }.to(
+                change(Activity, :count).by(1)
+                .and change(ranking.ranking_entries, :count).by(1)
+              )
+              expect(response).to redirect_to activities_path
+            end
+          end
+        end
+
+        context "ランキングが未開催の場合" do
+          it "該当のActivityカウントが１増える && RankingEntryの数は増えない && カウンターページにリダイレクトされる" do
+            aggregate_failures do
+              expect {
+                post :create, params
+              }.to(
+                change(Activity, :count).by(1)
+                .and change(RankingEntry, :count).by(0)
+              )
+              expect(response).to redirect_to activities_path
+            end
           end
         end
       end
@@ -220,27 +242,56 @@ RSpec.describe ActivitiesController, type: :controller do
 
   describe "DELETE #destroy" do
     context "ログインユーザー" do
-      let(:user) {create(:user, :with_three_talk_activities)}
+      let(:user) {create(:user, :with_single_talk_activities)}
+      let!(:ranking) {create(:ranking, :hourly_activity_ranking)}
       let(:params) do
         {
           params: {
-            activity_type_id: ActivityType.find_by_name_ja("声かけ").id.to_s
+            activity_type_id: create(:activity_type, :talk).id.to_s
           }
         }
       end
       before {sign_in user}
 
       context "正常形" do
-        it "該当のActivityカウントが１減り、カウンターページにリダイレクトされること" do
-          aggregate_failures do
-            expect {delete :destroy, params}.to change(Activity, :count).by(-1)
-            expect(response).to redirect_to activities_path
+        context "Activityの削除によってランキングのエントリー資格を喪失する場合" do
+          # 例えば、声かけのカウントによって、開催中のランキングへのエントリーが済んだが、すぐにカウントを取り消した場合はエントリー資格を喪失する
+          let!(:user) {create(:user, :with_single_talk_activity)}
+
+          it "該当のActivityカウントが１減る && 参加していたRankingのエントリーが削除される && カウンターページにリダイレクトされる" do
+            aggregate_failures do
+              expect {
+                delete :destroy, params
+              }.to(
+                change(Activity, :count).by(-1)
+                .and change(ranking.ranking_entries, :count).from(1).to(0)
+              )
+              expect(response).to redirect_to activities_path
+            end
+          end
+        end
+
+        context "Activityの削除をしてもランキングのエントリー資格を維持できる場合" do
+          let(:user) {create(:user, :with_three_talk_activities)}
+
+          it "該当のActivityカウントが１減る && 参加していたランキングのエントリーが維持される && カウンターページにリダイレクトされる" do
+            aggregate_failures do
+              expect(ranking.ranking_entries.count).to eq 1
+              expect {
+                delete :destroy, params
+              }.to(
+                change(Activity, :count).by(-1)
+                .and change(ranking.ranking_entries, :count).by(0)
+              )
+              expect(response).to redirect_to activities_path
+            end
           end
         end
       end
 
       context "異常形" do
         let(:user) {create(:user)} # Activityなし
+
         it "該当のActivityが存在しない場合は、適切なflash[:error]とともに、カウンターページにリダイレクトされること" do
           aggregate_failures do
             expect {delete :destroy, params}.not_to change(Activity, :count)
@@ -255,7 +306,7 @@ RSpec.describe ActivitiesController, type: :controller do
       let(:params) do
         {
           params: {
-            activity_type_id: ActivityType.find_by_name_ja("声かけ").id.to_s
+            activity_type_id: create(:activity_type, :talk).id.to_s
           }
         }
       end

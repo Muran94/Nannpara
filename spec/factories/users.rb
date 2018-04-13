@@ -61,6 +61,16 @@ FactoryGirl.define do
       end
     end
 
+    trait :with_three_ranking_entries do
+      after(:create) do |user|
+        create(:ranking, :hourly_activity_ranking)
+        create(:ranking, :daily_activity_ranking)
+        create(:ranking, :monthly_activity_ranking)
+
+        create(:activity, :talk_activity, user: user)
+      end
+    end
+
     trait :with_three_talk_activities do
       after(:create) do |user|
         create_list(:activity, 3, :talk_activity, user: user)
@@ -91,15 +101,15 @@ FactoryGirl.define do
       end
     end
 
-    trait :with_single_sex_on_first_date do
+    trait :with_single_sex_on_first_date_activity do
       after(:create) do |user|
-        create(:activity, :sex_on_first_date, user: user)
+        create(:activity, :sex_on_first_date_activity, user: user)
       end
     end
 
     trait :with_single_sex_on_second_date do
       after(:create) do |user|
-        create(:activity, :sex_on_second_date, user: user)
+        create(:activity, :sex_on_second_date_activity, user: user)
       end
     end
   end

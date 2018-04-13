@@ -62,6 +62,52 @@ RSpec.describe Activity, type: :model do
           end
         end
       end
+
+      context "#_entry_activity_rankings" do
+        context "開催中のランキングがある場合" do
+          let!(:monthly_activity_ranking) {create(:ranking, :monthly_activity_ranking)}
+          let!(:daily_activity_ranking) {create(:ranking, :daily_activity_ranking)}
+          let!(:hourly_activity_ranking) {create(:ranking, :hourly_activity_ranking)}
+
+          context "執筆（募集orブログ）によるエントリー" do
+            it "「毎時の活動ランキング」へのエントリーは完了しないが、その他の「本日の活動ランキング」と「今月の活動ランキング」への参加は完了する" do
+              aggregate_failures do
+                expect {
+                  create(:activity, :post_recruitment_article_activity)
+                }.to( 
+                  change(monthly_activity_ranking.ranking_entries, :count).from(0).to(1)
+                  .and change(daily_activity_ranking.ranking_entries, :count).from(0).to(1)
+                  .and change(hourly_activity_ranking.ranking_entries, :count).by(0)
+                )
+              end
+            end
+          end
+
+          context "通常のナンパ活動によるエントリー" do
+            it "「毎時の活動ランキング」、「本日の活動ランキング」、「今月の活動ランキング」全てのエントリーが完了する" do
+              aggregate_failures do
+                expect {
+                  create(:activity, :talk_activity)
+                }.to( 
+                  change(monthly_activity_ranking.ranking_entries, :count).from(0).to(1)
+                  .and change(daily_activity_ranking.ranking_entries, :count).from(0).to(1)
+                  .and change(hourly_activity_ranking.ranking_entries, :count).from(0).to(1)
+                )
+              end
+            end
+          end
+        end
+
+        context "開催中のランキングがない場合" do
+          it "「毎時の活動ランキング」、「本日の活動ランキング」、「今月の活動ランキング」全てのエントリーが完了する" do
+            aggregate_failures do
+              expect {
+                create(:activity, :talk_activity)
+            }.not_to change(RankingEntry, :count)
+            end
+          end
+        end
+      end
     end
 
     context "after_destroy" do
@@ -78,6 +124,52 @@ RSpec.describe Activity, type: :model do
           end
         end
       end
+
+      context "#_cancel_entry" do
+        let!(:ranking) {create(:ranking, :hourly_activity_ranking)}
+
+        context "Activityの削除によってランキングのエントリー資格を喪失する場合" do
+          # 例えば、声かけのカウントによって、開催中のランキングへのエントリーが済んだが、すぐにカウントを取り消した場合はエントリー資格を喪失する
+          let!(:user) {create(:user, :with_single_talk_activity)}
+
+          it "ランキングへのエントリーが削除（キャンセル）されること" do
+            aggregate_failures do
+              expect {
+                user.activities.first.destroy
+              }.to change(ranking.ranking_entries, :count).from(1).to(0)
+            end
+          end
+        end
+
+        context "Activityの削除をしてもランキングのエントリー資格を維持できる場合" do
+          let!(:user) {create(:user, :with_three_talk_activities)}
+
+          it "ランキングへのエントリーが維持されること" do
+            aggregate_failures do
+              expect(ranking.ranking_entries.count).to eq 1
+              expect {
+                user.activities.first.destroy
+              }.not_to change(ranking.ranking_entries, :count)
+            end
+          end
+        end
+      end
     end
+  end
+
+  context "スコープテスト" do
+
+  end
+
+  context "リレーションテスト" do
+
+  end
+
+  context "クラスメソッドテスト" do
+
+  end
+
+  context "インスタンスメソッドテスト" do
+    
   end
 end

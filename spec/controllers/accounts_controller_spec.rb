@@ -21,7 +21,7 @@ RSpec.describe AccountsController, type: :controller do
       end
 
       context 'インスタンス変数' do
-        it '@userと@recruitmentsの値がそれぞれ正しいこと' do
+        it '@userの値が正しいこと' do
           expect(assigns(:user)).to eq user
         end
       end
@@ -66,6 +66,7 @@ RSpec.describe AccountsController, type: :controller do
         let(:user) { create(:user, :with_recruitments) }
 
         it '@userと@recruitmentsの値がそれぞれ正しいこと' do
+          expect(assigns(:user)).to eq user
           expect(assigns(:recruitments)).to match_array user.recruitments
         end
       end
@@ -86,7 +87,8 @@ RSpec.describe AccountsController, type: :controller do
       context 'インスタンス変数' do
         let(:other_user) { create(:user, :with_recruitments) }
 
-        it '@userの値が正しいこと' do
+        it '@userと@recruitmentsの値がそれぞれ正しいこと' do
+          expect(assigns(:user)).to eq other_user
           expect(assigns(:recruitments)).to match_array other_user.recruitments
         end
       end
@@ -118,8 +120,59 @@ RSpec.describe AccountsController, type: :controller do
     end
   end
 
+  describe "#rankings" do
+    let(:user) {create(:user, :with_three_ranking_entries)}
+    let(:other_user) {create(:user, :with_three_ranking_entries)}
+    before {get :rankings, params}
+
+    context "自分のマイページを確認" do
+      let(:params) {{ params: {id: user.id} }}
+
+      context "レスポンス" do
+        it 'ステータスコード200を返却 && rankingsテンプレートをrender' do
+          aggregate_failures do
+            expect(response).to have_http_status 200
+            expect(response).to render_template :rankings
+          end
+        end
+      end
+
+      context "インスタンス変数" do
+        it "@userと@rankingsの値がそれぞれ正しいこと" do
+          aggregate_failures do
+            expect(assigns(:user)).to eq user
+            expect(assigns(:rankings)).to match user.rankings
+          end
+        end
+      end
+    end
+
+    context "他人のマイページを確認" do
+      let(:params) {{ params: {id: other_user.id} }}
+
+      context "レスポンス" do
+        it 'ステータスコード200を返却 && rankingsテンプレートをrender' do
+          aggregate_failures do
+            expect(response).to have_http_status 200
+            expect(response).to render_template :rankings
+          end
+        end
+      end
+
+      context "インスタンス変数" do
+        it "@userと@rankingsの値がそれぞれ正しいこと" do
+          aggregate_failures do
+            expect(assigns(:user)).to eq other_user
+            expect(assigns(:rankings)).to match other_user.rankings
+          end
+        end
+      end
+    end
+  end
+
   describe %(GET #edit) do
     before { get :edit }
+
     context 'レスポンス' do
       it 'ステータスコード200を返却 && showテンプレートをrender' do
         aggregate_failures do

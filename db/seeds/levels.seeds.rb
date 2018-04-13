@@ -13,6 +13,6 @@ increase_ammount = 0
 
     Level.create(required_experience_point: required_experience_point, rank: rank)
     
-    increase_ammount += 2
+    increase_ammount += 3
     required_experience_point += increase_ammount
 end

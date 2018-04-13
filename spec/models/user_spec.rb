@@ -116,7 +116,23 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context 'メソッドテスト' do
+  context "リレーションテスト" do
+    it "Userモデルのリレーションテストを追加してください"
+  end
+
+  context "コールバックテスト" do
+    it "Userモデルのコールバックテストを追加してください"
+  end
+
+  context "スコープテスト" do
+
+  end
+
+  context "クラスメソッドテスト" do
+
+  end
+
+  context 'インスタンスメソッドテスト' do
     describe '#thumb_image_url' do
       context 'ユーザーがプロフィール画像を設定していない場合' do
         let(:user) { build_stubbed(:user, image: nil) }

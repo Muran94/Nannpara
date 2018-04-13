@@ -40,11 +40,18 @@ RSpec.describe 'ShowAccount', type: :system do
       expect(page).to have_content recruitment.title
 
       within '#account-tab' do
-        click_link 'ブログ記事'
+        click_link 'ブログ'
         sleep 0.1
       end
       expect(current_path).to eq blog_articles_account_path user.id
       expect(page).to have_content blog_article.title
+
+      within '#account-tab' do
+        click_link "ランキング"
+        sleep 0.1
+      end
+      expect(current_path).to eq rankings_account_path user.id
+      expect(page).to have_content "エントリー済みランキング"
 
       within '#account-tab' do
         click_link 'プロフィール'
