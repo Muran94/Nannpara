@@ -5,6 +5,6 @@ RSpec.describe 'ShowInquiry', type: :system do
     visit service_inquiry_path
 
     expect(page).to have_content '問い合わせ'
-    expect(page).to have_link 'bodyptag@gmail.com'
+    expect(page).to have_link Settings.service.owners_email_address
   end
 end
