@@ -30,7 +30,6 @@ RSpec.describe RankingsController, type: :controller do
           expect(assigns(:monthly_activity_ranking)).to eq monthly_activity_ranking
           expect(assigns(:monthly_activity_ranking_entry_number)).to eq monthly_activity_ranking.users.count
           expect(assigns(:monthly_activity_top_three_users)).to eq monthly_activity_ranking.top_three_rankers
-          
         end
       end
     end
