@@ -39,6 +39,7 @@ FactoryGirl.define do
     experience '3年'
     age 33
     prefecture_code 13 # 東京都
+    level_id 1
     image Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/image/sample_image.jpg'))
 
     trait :without_profile do
@@ -55,9 +56,27 @@ FactoryGirl.define do
       end
     end
 
+    trait :with_recruitment_message do
+      after(:create) do |user|
+        create(:message, user: user)
+      end
+    end
+
+    trait :with_blog_article do
+      after(:create) do |user|
+        create(:blog_article, user: user)
+      end
+    end
+
     trait :with_blog_articles do
       after(:create) do |user|
         create_list(:blog_article, 3, user: user)
+      end
+    end
+
+    trait :with_blog_comment do
+      after(:create) do |user|
+        create(:blog_comment, user: user)
       end
     end
 

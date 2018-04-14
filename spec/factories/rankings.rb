@@ -13,7 +13,7 @@
 
 FactoryGirl.define do
   factory :ranking do
-    association :ranking_type
+    ranking_type {RankingType.find_by_name_ja("毎時の活動ランキング")}
 
     start_at nil
     end_at nil

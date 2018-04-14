@@ -117,19 +117,99 @@ RSpec.describe User, type: :model do
   end
 
   context "リレーションテスト" do
-    it "Userモデルのリレーションテストを追加してください"
+    context "#recruitments" do
+      let!(:user) {create(:user, :with_recruitments)}
+
+      it "dependent: :destroy" do
+        aggregate_failures do
+          expect {
+            user.destroy
+          }.to change(user.recruitments, :count).from(3).to(0) 
+        end
+      end
+    end
+
+    context "#messages" do
+      let!(:user) {create(:user, :with_recruitment_message)}
+
+      it "dependent: :destroy" do
+        aggregate_failures do
+          expect {
+            user.destroy
+          }.to change(user.messages, :count).from(1).to(0)
+        end
+      end
+    end
+
+    context "#activities" do
+      let!(:user) {create(:user, :with_three_talk_activities)}
+
+      it "dependent: :destroy" do
+        aggregate_failures do
+          expect {
+            user.destroy
+          }.to change(user.activities, :count).from(3).to(0)
+        end
+      end
+    end
+
+    context "#ranking_entries" do
+      let!(:user) {create(:user, :with_three_ranking_entries)}
+
+      it "dependent: :destroy" do
+        aggregate_failures do
+          expect {
+            user.destroy
+          }.to change(user.ranking_entries, :count).from(3).to(0)
+        end
+      end
+    end
+
+    context "#blog_articles" do
+      let!(:user) {create(:user, :with_blog_article)}
+
+      it "dependent: :destroy" do
+        aggregate_failures do
+          expect {
+            user.destroy
+          }.to change(user.blog_articles, :count).from(1).to(0)
+        end
+      end
+    end
+
+    context "#blog_comments" do
+      let!(:user) {create(:user, :with_blog_comment)}
+
+      it "dependent: :destroy" do
+        aggregate_failures do
+          expect {
+            user.destroy
+          }.to change(user.blog_comments, :count).from(1).to(0)
+        end
+      end
+    end
   end
 
   context "コールバックテスト" do
-    it "Userモデルのコールバックテストを追加してください"
+    let(:user) {build(:user, level_id: 1, experience_point: 100)}
+
+    context "#before_save" do
+      context "#_update_level" do
+        it "セーブをする前に、適切なレベルが設定される" do
+          aggregate_failures do
+            expect {
+              user.save
+            }.to change{user.level_id}.from(1).to(8)
+          end
+        end
+      end
+    end
   end
 
-  context "スコープテスト" do
-
+  xcontext "スコープテスト" do
   end
 
-  context "クラスメソッドテスト" do
-
+  xcontext "クラスメソッドテスト" do
   end
 
   context 'インスタンスメソッドテスト' do
@@ -146,6 +226,41 @@ RSpec.describe User, type: :model do
 
         it 'サムネールサイズの画像URLを返す' do
           expect(user.thumb_image_url).to eq user.image.thumb.url
+        end
+      end
+    end
+
+    describe "#level" do
+      it "level_idと同じidを持つLevelオブジェクトを取得する" do
+        aggregate_failures do
+          expect(build_stubbed(:user, level_id: 1).level).to eq Level.find(1)
+          expect(build_stubbed(:user, level_id: 5).level).to eq Level.find(5)
+        end
+      end
+    end
+
+    describe "#experience_points_required_to_level_up" do
+      context "ユーザーレベルが100の場合" do
+        it "レベルアップに必要な経験値として0を返す（カンスト）" do
+          aggregate_failures do
+            expect(build_stubbed(:user, level_id: 100).experience_points_required_to_level_up).to eq 0
+          end
+        end
+      end
+
+      context "ユーザーレベルが1~99の場合" do
+        it "レベルアップに必要な経験値を返す" do
+          aggregate_failures do
+            expect(build_stubbed(:user, experience_point: 0, level_id: 1).experience_points_required_to_level_up).to eq 3
+            [3, 55, 99].each do |level|
+              user = build_stubbed(
+                        :user,
+                        experience_point: Level.find(level).required_experience_point,
+                        level_id: level
+                      )
+              expect(user.experience_points_required_to_level_up).to eq Level.find(level + 1).required_experience_point - user.experience_point
+            end
+          end
         end
       end
     end
