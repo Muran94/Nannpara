@@ -1,5 +1,10 @@
 service:
   owners_email_address: "bodyptag@gmail.com"
 
+security:
+  staging_basic_auth:
+    user_name: "mikeandcheese"
+    password: "guitarandbeer"
+
 image:
   no_user_image_file_name: "no_user_image.png"
