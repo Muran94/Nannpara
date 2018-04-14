@@ -27,16 +27,17 @@ RSpec.describe Blog::Article, type: :model do
 
       context 'uniqueness' do
         let(:title) { 'ナンパについて初心者に伝えたいこと' }
+        let(:user) {create(:user)}
 
-        it '既に同じタイトルのブログ記事が存在する場合はバリデーションに引っかかり、そうでない場合はひっかからない' do
+        it '特定のユーザーが既に同じタイトルのブログ記事を執筆している場合はバリデーションに引っかかり、そうでない場合はひっかからない' do
           aggregate_failures do
             # 同じタイトルのブログ記事が存在していない状態
-            blog_article = build(:blog_article, title: title)
+            blog_article = build(:blog_article, title: title, user: user)
             expect(blog_article.valid?).to be_truthy
             blog_article.save
 
             # 既に存在するタイトルである場合にはバリデーションに引っかかる
-            expect(build(:blog_article, title: title).valid?).to be_falsy
+            expect(build(:blog_article, title: title, user: user).valid?).to be_falsy
           end
         end
       end

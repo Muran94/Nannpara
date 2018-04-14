@@ -17,7 +17,7 @@ class Blog::Article < ApplicationRecord
   after_create :_register_activity
 
   MAXIMUM_TITLE_LENGTH = 128
-  validates :title, presence: true, length: { maximum: MAXIMUM_TITLE_LENGTH }
+  validates :title, presence: true, length: { maximum: MAXIMUM_TITLE_LENGTH }, uniqueness: { scope: [:user_id]  }
   MAXIMUM_CONTENT_LENGTH = 4096
   validates :content, presence: true, length: { maximum: MAXIMUM_CONTENT_LENGTH }
 
