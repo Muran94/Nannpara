@@ -33,6 +33,7 @@ gem 'counter_culture'
 gem 'faker'
 gem 'sidekiq'
 gem 'seed-fu'
+gem 'config'
 
 group :development, :test do
   gem 'sqlite3'

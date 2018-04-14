@@ -29,3 +29,7 @@
 coverage
 .DS_Store
 dump.rdb
+
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml
