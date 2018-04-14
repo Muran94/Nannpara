@@ -5,8 +5,8 @@
                 h1.ui.small.header
                     = @ranking.name
 
-        - if @ranking_entry_users.present?
-            - @ranking_entry_users.each.with_index(1) do |user, rank|
+        - if @ranking_user_ranking.present?
+            - @ranking_user_ranking.each.with_index(1) do |user, rank|
                 .row.content-list: .column class="#{"login-users-ranking" if current_user && current_user == user}"
                     div class="rank rank-#{rank}"= "#{rank}位"
                     .user-display= "#{user.name}さん"
