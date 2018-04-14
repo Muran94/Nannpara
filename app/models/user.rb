@@ -60,7 +60,7 @@ class User < ApplicationRecord
   validate :_valid_image_size?
 
   def thumb_image_url
-    return 'no_user_image.png' if image.blank?
+    return Settings.image.no_user_image_file_name if image.blank?
     image.thumb.url
   end
 

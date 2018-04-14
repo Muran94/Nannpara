@@ -39,16 +39,16 @@ describe MessageDecorator do
         let(:user) { create(:user, image: nil) }
         let(:message) { build_stubbed(:message, user: user).extend MessageDecorator }
 
-        it 'no_user_image.pngを返す' do
-          expect(message.users_thumb_image_url).to eq 'no_user_image.png'
+        it "#{Settings.image.no_user_image_file_name}を返す" do
+          expect(message.users_thumb_image_url).to eq Settings.image.no_user_image_file_name
         end
       end
     end
     context 'userを持たない場合' do
       let(:message) { build_stubbed(:message).extend MessageDecorator }
 
-      it 'no_user_image.pngを返す' do
-        expect(message.users_thumb_image_url).to eq 'no_user_image.png'
+      it "#{Settings.image.no_user_image_file_name}を返す" do
+        expect(message.users_thumb_image_url).to eq Settings.image.no_user_image_file_name
       end
     end
   end

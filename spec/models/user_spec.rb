@@ -217,8 +217,8 @@ RSpec.describe User, type: :model do
       context 'ユーザーがプロフィール画像を設定していない場合' do
         let(:user) { build_stubbed(:user, image: nil) }
 
-        it 'no_user_image.pngを返す' do
-          expect(user.thumb_image_url).to eq 'no_user_image.png'
+        it "#{Settings.image.no_user_image_file_name}を返す" do
+          expect(user.thumb_image_url).to eq Settings.image.no_user_image_file_name
         end
       end
       context 'ユーザーガプロフィール画像を設定している場合' do

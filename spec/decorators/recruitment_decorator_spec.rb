@@ -9,7 +9,7 @@ describe RecruitmentDecorator do
         aggregate_failures do
           expect(recruitment.format_image_url).to eq recruitment.user.image_url
           expect(recruitment.format_image_url('thumb')).to eq recruitment.user.image.thumb.url
-          expect(recruitment.format_image_url('something_else')).to eq 'no_user_image.png'
+          expect(recruitment.format_image_url('something_else')).to eq Settings.image.no_user_image_file_name
         end
       end
     end
@@ -17,8 +17,8 @@ describe RecruitmentDecorator do
       let(:user) { create(:user, image: nil) }
       let(:recruitment) { build(:recruitment, user: user).extend RecruitmentDecorator }
 
-      it '画像がない場合はno_user_image.pngを返す' do
-        expect(recruitment.format_image_url).to eq 'no_user_image.png'
+      it "画像がない場合は#{Settings.image.no_user_image_file_name}を返す" do
+        expect(recruitment.format_image_url).to eq Settings.image.no_user_image_file_name
       end
     end
   end

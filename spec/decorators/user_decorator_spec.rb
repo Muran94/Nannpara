@@ -52,8 +52,8 @@ describe UserDecorator do
   describe '#format_image_url' do
     context 'ユーザーがプロフィール画像を登録していない場合' do
       let(:user) { build_stubbed(:user, image: nil).extend UserDecorator }
-      it 'no_user_image.pngが返ってくること' do
-        expect(user.format_image_url).to eq 'no_user_image.png'
+      it "#{Settings.image.no_user_image_file_name}が返ってくること" do
+        expect(user.format_image_url).to eq Settings.image.no_user_image_file_name
       end
     end
 
@@ -63,7 +63,7 @@ describe UserDecorator do
         aggregate_failures do
           expect(user.format_image_url).to eq user.image_url
           expect(user.format_image_url('thumb')).to eq user.image.thumb.url
-          expect(user.format_image_url('something_else')).to eq 'no_user_image.png'
+          expect(user.format_image_url('something_else')).to eq Settings.image.no_user_image_file_name
         end
       end
     end

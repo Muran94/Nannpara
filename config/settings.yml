@@ -1,2 +1,5 @@
 service:
   owners_email_address: "bodyptag@gmail.com"
+
+image:
+  no_user_image_file_name: "no_user_image.png"
