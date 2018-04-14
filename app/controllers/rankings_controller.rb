@@ -21,6 +21,6 @@ class RankingsController < ApplicationController
 
   def show
     @ranking = Ranking.find(params[:id])
-    @ranking_entry_users = @ranking.user_ranking
+    @ranking_user_ranking = @ranking.user_ranking
   end
 end
