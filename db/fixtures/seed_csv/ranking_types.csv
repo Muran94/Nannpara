@@ -1,0 +1,4 @@
+id, name_en, name_ja
+1, monthly_activity_ranking, 今月の活動ランキング
+2, daily_activity_ranking, 本日の活動ランキング
+3, hourly_activity_ranking, 毎時の活動ランキング

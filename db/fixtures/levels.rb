@@ -1,5 +1,5 @@
 required_experience_point = 0
-increase_ammount = 0
+experience_point_required_to_level_up = 0
 
 1.upto(100) do |level|
     case level
@@ -11,8 +11,12 @@ increase_ammount = 0
         when Level::RANKS[5][:level_range] then rank = Level::RANKS[5][:name] # ナンパゴッド
     end
 
-    Level.create(required_experience_point: required_experience_point, rank: rank)
+    Level.seed do |s|
+        s.id = level
+        s.required_experience_point = required_experience_point
+        s.rank = rank
+    end
     
-    increase_ammount += 3
-    required_experience_point += increase_ammount
+    experience_point_required_to_level_up += 3
+    required_experience_point += experience_point_required_to_level_up
 end

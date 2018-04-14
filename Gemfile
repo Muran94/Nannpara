@@ -32,6 +32,7 @@ gem 'chromedriver-helper'
 gem 'counter_culture'
 gem 'faker'
 gem 'sidekiq'
+gem 'seed-fu'
 
 group :development, :test do
   gem 'sqlite3'
