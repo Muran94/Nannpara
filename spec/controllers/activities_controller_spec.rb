@@ -9,10 +9,10 @@ RSpec.describe ActivitiesController, type: :controller do
 
       context "paramsあり" do
         before do
-          create(:activity, activity_type: create(:activity_type, :talk), created_at: 1.minute.ago, user: user)
-          create(:activity, activity_type: create(:activity_type, :talk), created_at: 2.days.ago, user: user)
-          create(:activity, activity_type: create(:activity_type, :talk), created_at: 8.days.ago, user: user)
-          create(:activity, activity_type: create(:activity_type, :talk), created_at: 32.days.ago, user: user)
+          create(:activity, :talk_activity, created_at: 1.minute.ago, user: user)
+          create(:activity, :talk_activity, created_at: 2.days.ago, user: user)
+          create(:activity, :talk_activity, created_at: 8.days.ago, user: user)
+          create(:activity, :talk_activity, created_at: 32.days.ago, user: user)
           get :show, params
         end
         context "params['period'] = '本日'" do
@@ -126,9 +126,9 @@ RSpec.describe ActivitiesController, type: :controller do
 
       context "paramsなし" do
         before do
-          create(:activity, activity_type: create(:activity_type, :talk), created_at: 1.week.ago, user: user)
-          create(:activity, activity_type: create(:activity_type, :talk), created_at: 1.minute.ago, user: user)
-          create(:activity, activity_type: create(:activity_type, :date), created_at: 1.minute.ago, user: user)
+          create(:activity, :talk_activity, created_at: 1.week.ago, user: user)
+          create(:activity, :talk_activity, created_at: 1.minute.ago, user: user)
+          create(:activity, :date_activity, created_at: 1.minute.ago, user: user)
           get :show
         end
 
@@ -177,12 +177,12 @@ RSpec.describe ActivitiesController, type: :controller do
           }
         }
       end
-      let(:activity_type_id) {create(:activity_type, :talk).id.to_s}
+      let(:activity_type_id) {ActivityType.find_by_name_ja("声かけ").id.to_s}
 
       before {sign_in user}
       
       context "正常形" do
-        let(:activity_type_id) {create(:activity_type, :talk).id.to_s}
+        let(:activity_type_id) {ActivityType.find_by_name_ja("声かけ").id.to_s}
 
         context "何かしらのランキングが開催中の場合" do
           let!(:ranking) {create(:ranking, :hourly_activity_ranking)}
@@ -216,7 +216,7 @@ RSpec.describe ActivitiesController, type: :controller do
       end
 
       context "異常形" do
-        let(:activity_type_id) {"23"} # 存在しないID
+        let(:activity_type_id) {ActivityType.pluck(:id).max + 100} # 存在しないID
 
         it "バリデーションに引っかかった場合はActivityが作成されず、適切なflash[:error]メッセージとともにカウンターページにリダイレクトされること" do
           aggregate_failures do
@@ -247,7 +247,7 @@ RSpec.describe ActivitiesController, type: :controller do
       let(:params) do
         {
           params: {
-            activity_type_id: create(:activity_type, :talk).id.to_s
+            activity_type_id: ActivityType.find_by_name_ja("声かけ").id.to_s
           }
         }
       end
@@ -306,7 +306,7 @@ RSpec.describe ActivitiesController, type: :controller do
       let(:params) do
         {
           params: {
-            activity_type_id: create(:activity_type, :talk).id.to_s
+            activity_type_id: ActivityType.find_by_name_ja("声かけ").id.to_s
           }
         }
       end

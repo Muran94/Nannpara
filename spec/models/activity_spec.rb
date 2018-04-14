@@ -35,7 +35,7 @@ RSpec.describe Activity, type: :model do
 
     context "before_create" do
       context "#_set_obtained_experience_point" do
-        let(:activity) {build(:activity, activity_type: activity_type)}
+        let(:activity) {build(:activity)}
 
         it "Activityを登録すると、ActivityTypeに基づいて付与された経験値をobtained_experience_pointに記録" do
           aggregate_failures do
@@ -56,7 +56,7 @@ RSpec.describe Activity, type: :model do
         it "Activityを作成したあとに、Userのexperience_pointが増加していること" do
           aggregate_failures do
             expect(user.experience_point).to eq default_experience_point
-            create(:activity, activity_type: activity_type, user: user)
+            create(:activity, user: user)
             user.reload
             expect(user.experience_point).to eq (default_experience_point + activity_type.experience_point)
           end
@@ -113,7 +113,7 @@ RSpec.describe Activity, type: :model do
     context "after_destroy" do
       context "#_update_users_experience_point" do
         let(:user) {create(:user, :with_three_talk_activities)}
-        let(:default_experience_point) {6} # 声かけ数１回２ポイント × 3 = 6ポイント
+        let(:default_experience_point) {9} # 声かけ数１回２ポイント × 3 = 6ポイント
 
         it "Activityを削除したあとに、Userのexperience_pointが減少していること" do
           aggregate_failures do
@@ -158,18 +158,14 @@ RSpec.describe Activity, type: :model do
   end
 
   context "スコープテスト" do
-
   end
 
   context "リレーションテスト" do
-
   end
 
   context "クラスメソッドテスト" do
-
   end
 
   context "インスタンスメソッドテスト" do
-    
   end
 end

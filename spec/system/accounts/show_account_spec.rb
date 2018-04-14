@@ -51,7 +51,7 @@ RSpec.describe 'ShowAccount', type: :system do
         sleep 0.1
       end
       expect(current_path).to eq rankings_account_path user.id
-      expect(page).to have_content "エントリー済みランキング"
+      expect(page).to have_content "エントリー済のランキング"
 
       within '#account-tab' do
         click_link 'プロフィール'

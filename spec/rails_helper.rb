@@ -60,6 +60,11 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
+  config.before(:suite) do
+    SeedFu.seed
+    DatabaseCleaner.clean_with :truncation, { except: %w(activity_types levels ranking_types) }
+  end
+
 
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!

@@ -1,3 +1,7 @@
+- provide(:title, "#{@user.name}のエントリー済みのランキング一覧")
+
+= render "tab", user: @user
+
 .ui.basic.segment.no-horizontal-padding.white-background.recruitment-lists-segment
     .ui.grid.stackable
         .row

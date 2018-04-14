@@ -41,7 +41,7 @@ RSpec.describe "CounterUsage", type: :system do
                     expect(page).to have_content "2" # レベルが2に上がっている
                 end
                 within ".user-experience-point-display > span" do
-                    expect(page).to have_content "2" # 経験値を2取得し、合計2になっている
+                    expect(page).to have_content "3" # 経験値を3取得し、合計3になっている
                 end
                 within "#talk-counter-display > span" do
                     expect(page).to have_content "1" # カウントが1増えている
@@ -54,7 +54,7 @@ RSpec.describe "CounterUsage", type: :system do
                     expect(page).to have_content "3" # レベルが3に上がっている
                 end
                 within ".user-experience-point-display > span" do
-                    expect(page).to have_content "7" # 経験値を5取得し、合計7になっている
+                    expect(page).to have_content "10" # 経験値を7取得し、合計10になっている
                 end
                 within "#get-phone-number-counter-display > span" do
                     expect(page).to have_content "1" # カウントが1増えている
@@ -64,10 +64,10 @@ RSpec.describe "CounterUsage", type: :system do
                 find("#date-count-increment-button").click # 「連れ出し」のカウントアップボタンをクリック
                 sleep 0.1
                 within ".user-level-display > span" do
-                    expect(page).to have_content "4" # レベルが4に上がっている
+                    expect(page).to have_content "5" # レベルが5に上がっている
                 end
                 within ".user-experience-point-display > span" do
-                    expect(page).to have_content "17" # 経験値を5取得し、合計17になっている
+                    expect(page).to have_content "30" # 経験値を20取得し、合計30になっている
                 end
                 within "#date-counter-display > span" do
                     expect(page).to have_content "1" # カウントが1増えている
@@ -77,10 +77,10 @@ RSpec.describe "CounterUsage", type: :system do
                 find("#sex-on-second-date-count-increment-button").click # 「準々即」のカウントアップボタンをクリック
                 sleep 0.1
                 within ".user-level-display > span" do
-                    expect(page).to have_content "8" # レベルが8に上がっている
+                    expect(page).to have_content "7" # レベルが8に上がっている
                 end
                 within ".user-experience-point-display > span" do
-                    expect(page).to have_content "67" # 経験値を50取得し、合計67になっている
+                    expect(page).to have_content "80" # 経験値を50取得し、合計80になっている
                 end
                 within "#sex-on-second-date-counter-display > span" do
                     expect(page).to have_content "1" # カウントが1増えている
@@ -90,10 +90,10 @@ RSpec.describe "CounterUsage", type: :system do
                 find("#sex-on-first-date-count-increment-button").click # 「準即」のカウントアップボタンをクリック
                 sleep 0.1
                 within ".user-level-display > span" do
-                    expect(page).to have_content "12" # レベルが12に上がっている
+                    expect(page).to have_content "10" # レベルが12に上がっている
                 end
                 within ".user-experience-point-display > span" do
-                    expect(page).to have_content "142" # 経験値を75取得し、合計142になっている
+                    expect(page).to have_content "155" # 経験値を75取得し、合計155になっている
                 end
                 within "#sex-on-first-date-counter-display > span" do
                     expect(page).to have_content "1" # カウントが1増えている
@@ -103,10 +103,10 @@ RSpec.describe "CounterUsage", type: :system do
                 find("#instant-sex-count-increment-button").click # 「即」のカウントアップボタンをクリック
                 sleep 0.1
                 within ".user-level-display > span" do
-                    expect(page).to have_content "16" # レベルが16に上がっている
+                    expect(page).to have_content "13" # レベルが16に上がっている
                 end
                 within ".user-experience-point-display > span" do
-                    expect(page).to have_content "242" # 経験値を100取得し、合計242になっている
+                    expect(page).to have_content "255" # 経験値を100取得し、合計255になっている
                 end
                 within "#instant-sex-counter-display > span" do
                     expect(page).to have_content "1" # カウントが1増えている
@@ -129,10 +129,10 @@ RSpec.describe "CounterUsage", type: :system do
             it "クリックしたカウンターのカウントが１減り、経験値とレベルが減ること" do
                 # 初期状態のチェック（全てのカウンターでカウントが１になっており、それにふさわしいレベルと経験値である）
                 within ".user-level-display > span" do
-                    expect(page).to have_content "16" # 初期状態のレベルは16
+                    expect(page).to have_content "13" # 初期状態のレベルは13
                 end
                 within ".user-experience-point-display > span" do
-                    expect(page).to have_content "242" # 初期状態の経験値は242
+                    expect(page).to have_content "255" # 初期状態の経験値は255
                 end
                 within "#talk-counter-display > span" do
                     expect(page).to have_content "1" # 「声かけ」のカウントが初期状態（1）である
@@ -157,10 +157,10 @@ RSpec.describe "CounterUsage", type: :system do
                 find("#talk-count-decrement-button").click # 「声かけ」のカウントダウンボタンをクリック
                 sleep 0.1
                 within ".user-level-display > span" do
-                    expect(page).to have_content "16" # レベル16のまま
+                    expect(page).to have_content "13" # レベル13のまま
                 end
                 within ".user-experience-point-display > span" do
-                    expect(page).to have_content "240" # 経験値が2ポイント減り、合計240になっている
+                    expect(page).to have_content "252" # 経験値が3ポイント減り、合計252になっている
                 end
                 within "#talk-counter-display > span" do
                     expect(page).to have_content "0" # カウントが0に減っている
@@ -171,10 +171,10 @@ RSpec.describe "CounterUsage", type: :system do
                 find("#get-phone-number-count-decrement-button").click # 「番ゲ」のカウントダウンボタンをクリック
                 sleep 0.1
                 within ".user-level-display > span" do
-                    expect(page).to have_content "15" # レベルが15に下がっている
+                    expect(page).to have_content "13" # レベル13のまま
                 end
                 within ".user-experience-point-display > span" do
-                    expect(page).to have_content "235" # 経験値が5ポイント減り、合計235になっている
+                    expect(page).to have_content "245" # 経験値が7ポイント減り、合計245になっている
                 end
                 within "#get-phone-number-counter-display > span" do
                     expect(page).to have_content "0" # カウントが0に減っている
@@ -185,21 +185,21 @@ RSpec.describe "CounterUsage", type: :system do
                 find("#date-count-decrement-button").click # 「連れ出し」のカウントダウンボタンをクリック
                 sleep 0.1
                 within ".user-level-display > span" do
-                    expect(page).to have_content "15" # レベル15のまま
+                    expect(page).to have_content "12" # レベルが12に下がっている
                 end
                 within ".user-experience-point-display > span" do
-                    expect(page).to have_content "225" # 経験値が10ポイント減り、合計225になっている
+                    expect(page).to have_content "225" # 経験値が20ポイント減り、合計225になっている
                 end
                 within "#date-counter-display > span" do
                     expect(page).to have_content "0" # カウントが0に減っている
                 end
                 expect(find("#date-count-decrement-button")['class']).to match /disabled/ # カウントダウンボタンが無効化されている
 
-                # 準々即のカウントアップ
-                find("#sex-on-second-date-count-decrement-button").click # 「準々即」のカウントアップボタンをクリック
+                # 準々即のカウントダウン
+                find("#sex-on-second-date-count-decrement-button").click # 「準々即」のカウントダウンボタンをクリック
                 sleep 0.1
                 within ".user-level-display > span" do
-                    expect(page).to have_content "13" # レベルが13に下がっている
+                    expect(page).to have_content "11" # レベルが11に下がっている
                 end
                 within ".user-experience-point-display > span" do
                     expect(page).to have_content "175" # 経験値を50ポイント減り、合計175になっている
@@ -209,11 +209,11 @@ RSpec.describe "CounterUsage", type: :system do
                 end
                 expect(find("#sex-on-second-date-count-decrement-button")['class']).to match /disabled/ # カウントダウンボタンが無効化されている
 
-                # 準即のカウントアップ
-                find("#sex-on-first-date-count-decrement-button").click # 「準即」のカウントアップボタンをクリック
+                # 準即のカウントダウン
+                find("#sex-on-first-date-count-decrement-button").click # 「準即」のカウントダウンボタンをクリック
                 sleep 0.1
                 within ".user-level-display > span" do
-                    expect(page).to have_content "10" # レベルが10に下がっている
+                    expect(page).to have_content "8" # レベルが8に下がっている
                 end
                 within ".user-experience-point-display > span" do
                     expect(page).to have_content "100" # 経験値を75ポイント減り、合計100になっている
@@ -223,8 +223,8 @@ RSpec.describe "CounterUsage", type: :system do
                 end
                 expect(find("#sex-on-first-date-count-decrement-button")['class']).to match /disabled/ # カウントダウンボタンが無効化されている
 
-                # 即のカウントアップ
-                find("#instant-sex-count-decrement-button").click # 「即」のカウントアップボタンをクリック
+                # 即のカウントダウン
+                find("#instant-sex-count-decrement-button").click # 「即」のカウントダウンボタンをクリック
                 sleep 0.1
                 within ".user-level-display > span" do
                     expect(page).to have_content "1" # レベルが1に下がっている
