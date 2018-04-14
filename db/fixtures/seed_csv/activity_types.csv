@@ -1,18 +1,18 @@
-id, name_en, name_ja, experience_point
-1, post_recruitment_article, 募集記事の投稿, 3
-2, post_blog_article, ブログ記事の投稿, 3
-3, talk, 声かけ, 3
-4, get_phone_number, 番ゲ, 7
-5, date, 連れ出し, 20
-6, instant_sex, 即, 100
-7, sex_on_first_date, 準即, 75
-8, sex_on_second_date, 準々即, 50
-9, hourly_activity_ranking_champion, 毎時の活動ランキング優勝, 20
-10, hourly_activity_ranking_second_place, 毎時の活動ランキング準優勝, 15
-11, hourly_activity_ranking_third_place, 毎時の活動ランキング3位, 10
-12, daily_activity_ranking_champion, 本日の活動ランキング優勝, 50
-13, daily_activity_ranking_second_place, 本日の活動ランキング準優勝, 40
-14, daily_activity_ranking_third_place, 本日の活動ランキング3位, 30
-15, monthly_activity_ranking_champion, 今月の活動ランキング優勝, 300
-16, monthly_activity_ranking_second_place, 今月の活動ランキング準優勝, 200
-17, monthly_activity_ranking_third_place, 今月の活動ランキング3位, 100
+id,name_en,name_ja,experience_point
+1,post_recruitment_article,募集記事の投稿,3
+2,post_blog_article,ブログ記事の投稿,3
+3,talk,声かけ,3
+4,get_phone_number,番ゲ,7
+5,date,連れ出し,20
+6,instant_sex,即,100
+7,sex_on_first_date,準即,75
+8,sex_on_second_date,準々即,50
+9,hourly_activity_ranking_champion,毎時の活動ランキング優勝,20
+10,hourly_activity_ranking_second_place,毎時の活動ランキング準優勝,15
+11,hourly_activity_ranking_third_place,毎時の活動ランキング3位,10
+12,daily_activity_ranking_champion,本日の活動ランキング優勝,50
+13,daily_activity_ranking_second_place,本日の活動ランキング準優勝,40
+14,daily_activity_ranking_third_place,本日の活動ランキング3位,30
+15,monthly_activity_ranking_champion,今月の活動ランキング優勝,300
+16,monthly_activity_ranking_second_place,今月の活動ランキング準優勝,200
+17,monthly_activity_ranking_third_place,今月の活動ランキング3位,100
