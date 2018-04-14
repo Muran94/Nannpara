@@ -18,4 +18,6 @@ class Level < ApplicationRecord
         {level_range: 75...100, name: "ナンパ超上級者"},
         {level_range: 100, name: "ナンパゴッド"}
     ]
+    MIN = 1
+    MAX = 100
 end

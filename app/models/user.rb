@@ -69,7 +69,7 @@ class User < ApplicationRecord
   end
 
   def experience_points_required_to_level_up
-    if level_id == 100
+    if level_id == Level::MAX
       0
     else
       Level.find(level_id + 1).required_experience_point - experience_point
