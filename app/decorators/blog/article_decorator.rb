@@ -1,14 +1,14 @@
 module Blog::ArticleDecorator
   def format_image_url(size = nil)
-    return 'no_user_image.png' if user.blank?
-    return 'no_user_image.png' if user.image.blank?
+    return Settings.image.no_user_image_file_name if user.blank?
+    return Settings.image.no_user_image_file_name if user.image.blank?
     case size
     when nil
       user.image_url
     when 'thumb'
       user.image.thumb.url
     else
-      'no_user_image.png'
+      Settings.image.no_user_image_file_name
     end
   end
 

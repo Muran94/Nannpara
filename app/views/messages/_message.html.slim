@@ -4,7 +4,7 @@
       = image_tag message.user.format_image_url("thumb"), class: "ui image rounded mini"
   - else
     span.ui.image.avatar.rounded.mini
-      = image_tag "no_user_image.png"
+      = image_tag Settings.image.no_user_image_file_name
   .content
     - if message.user
       = link_to message.format_user_name, profile_account_path(message.user), class: "author"
