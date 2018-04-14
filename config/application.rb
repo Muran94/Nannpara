@@ -13,5 +13,6 @@ module Nannpara
     config.i18n.default_locale = :ja
     config.autoload_paths += Dir[Rails.root.join('app', 'uploaders')]
     config.autoload_paths += Dir[Rails.root.join('app', 'models', 'blog')]
+    # config.active_job.queue_adapter = :sidekiq
   end
 end
