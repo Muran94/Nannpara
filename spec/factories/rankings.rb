@@ -44,5 +44,11 @@ FactoryGirl.define do
         create(:ranking_entry, ranking: ranking)
       end
     end
+
+    trait :with_five_entries do
+      after(:create) do |ranking|
+        create_list(:ranking_entry, 5, ranking: ranking)
+      end
+    end
   end
 end
