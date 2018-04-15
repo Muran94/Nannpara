@@ -69,5 +69,27 @@
     {
       "url": "https://github.com/gunpowderlabs/buildpack-ruby-rake-deploy-tasks"
     }
-  ]
+  ],
+  "environments": {
+    "test": {
+      "addons": [
+        "heroku-postgresql",
+        "heorku-redis"
+      ],
+      "buildpacks": [
+        {
+          "url": "https://github.com/heroku/heroku-buildpack-ruby"
+        },
+        {
+          "url": "https://github.com/heroku/heroku-buildpack-chromedriver"
+        },
+        {
+          "url": "https://github.com/heroku/heroku-buildpack-google-chrome"
+        },
+        {
+          "url": "https://github.com/gunpowderlabs/buildpack-ruby-rake-deploy-tasks"
+        },
+      ]
+    }
+  }
 }
