@@ -1,4 +1,4 @@
-after :users, :levels, :activity_types do
+after :users do
     Faker::Config.locale = :ja
 
     200.times do

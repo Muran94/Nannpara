@@ -7,6 +7,7 @@ end
 
 gem 'rails', '~> 5.1.5'
 gem 'puma', '~> 3.7'
+gem 'pg'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
@@ -36,7 +37,6 @@ gem 'seed-fu'
 gem 'config'
 
 group :development, :test do
-  gem 'sqlite3'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
   gem 'factory_girl_rails'
@@ -62,7 +62,6 @@ group :test do
 end
 
 group :production do
-  gem 'pg'
   gem 'fog', '1.42'
 end
 

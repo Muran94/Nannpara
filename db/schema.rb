@@ -12,10 +12,13 @@
 
 ActiveRecord::Schema.define(version: 20180411110002) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "activities", force: :cascade do |t|
-    t.integer "activity_type_id"
+    t.bigint "activity_type_id"
     t.integer "obtained_experience_point", default: 0
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["activity_type_id"], name: "index_activities_on_activity_type_id"
@@ -35,7 +38,7 @@ ActiveRecord::Schema.define(version: 20180411110002) do
   create_table "blog_articles", force: :cascade do |t|
     t.string "title"
     t.text "content"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_blog_articles_on_user_id"
@@ -43,8 +46,8 @@ ActiveRecord::Schema.define(version: 20180411110002) do
 
   create_table "blog_comments", force: :cascade do |t|
     t.text "content"
-    t.integer "user_id"
-    t.integer "blog_article_id"
+    t.bigint "user_id"
+    t.bigint "blog_article_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["blog_article_id"], name: "index_blog_comments_on_blog_article_id"
@@ -61,8 +64,8 @@ ActiveRecord::Schema.define(version: 20180411110002) do
 
   create_table "messages", force: :cascade do |t|
     t.text "message"
-    t.integer "user_id"
-    t.integer "recruitment_id"
+    t.bigint "user_id"
+    t.bigint "recruitment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["recruitment_id"], name: "index_messages_on_recruitment_id"
@@ -70,8 +73,8 @@ ActiveRecord::Schema.define(version: 20180411110002) do
   end
 
   create_table "ranking_entries", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "ranking_id"
+    t.bigint "user_id"
+    t.bigint "ranking_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ranking_id"], name: "index_ranking_entries_on_ranking_id"
@@ -86,7 +89,7 @@ ActiveRecord::Schema.define(version: 20180411110002) do
   end
 
   create_table "rankings", force: :cascade do |t|
-    t.integer "ranking_type_id"
+    t.bigint "ranking_type_id"
     t.datetime "start_at"
     t.datetime "end_at"
     t.datetime "closed_at"
@@ -102,7 +105,7 @@ ActiveRecord::Schema.define(version: 20180411110002) do
     t.string "title"
     t.text "description"
     t.date "event_date"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "prefecture_code"
@@ -144,4 +147,15 @@ ActiveRecord::Schema.define(version: 20180411110002) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "activities", "activity_types"
+  add_foreign_key "activities", "users"
+  add_foreign_key "blog_articles", "users"
+  add_foreign_key "blog_comments", "blog_articles"
+  add_foreign_key "blog_comments", "users"
+  add_foreign_key "messages", "recruitments"
+  add_foreign_key "messages", "users"
+  add_foreign_key "ranking_entries", "rankings"
+  add_foreign_key "ranking_entries", "users"
+  add_foreign_key "rankings", "ranking_types"
+  add_foreign_key "recruitments", "users"
 end
