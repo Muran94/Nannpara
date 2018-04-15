@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180411110002) do
+ActiveRecord::Schema.define(version: 20180415103825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,8 @@ ActiveRecord::Schema.define(version: 20180411110002) do
     t.string "name_ja"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name_en"], name: "index_ranking_types_on_name_en"
+    t.index ["name_ja"], name: "index_ranking_types_on_name_ja"
   end
 
   create_table "rankings", force: :cascade do |t|
