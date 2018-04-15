@@ -1,6 +1,8 @@
 {
   "name": "Nannpara",
   "scripts": {
+    "postdeploy": "bundle exec rails db:seed_fu RAILS_ENV=staging",
+    "pr-predestroy": "bundle exec rails db:drop RAILS_ENV=staging"
   },
   "env": {
     "DEPLOY_TASKS": {
