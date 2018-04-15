@@ -1,6 +1,6 @@
 / | (試験運用中)
 
-.ui.basic.segment.no-horizontal-padding.white-background.recruitment-lists-segment
+.ui.basic.segment.no-horizontal-padding.white-background#hourly-activity-ranking-segment
     .ui.grid.stackable
         - if @hourly_activity_ranking.present?
             .row
@@ -26,7 +26,7 @@
             .row: .column.content-list
                 .nothing-yet 現在開催しておりません。
 
-.ui.basic.segment.no-horizontal-padding.white-background.recruitment-lists-segment
+.ui.basic.segment.no-horizontal-padding.white-background#daily-activity-ranking-segment
     .ui.grid.stackable
         - if @daily_activity_ranking.present?
             .row
@@ -51,7 +51,7 @@
             .row: .column.content-list
                 .nothing-yet 現在開催しておりません。
 
-.ui.basic.segment.no-horizontal-padding.white-background.recruitment-lists-segment
+.ui.basic.segment.no-horizontal-padding.white-background#monthly-activity-ranking-segment
     .ui.grid.stackable
         - if @monthly_activity_ranking.present?
             .row
