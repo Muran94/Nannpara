@@ -78,18 +78,11 @@
       ],
       "buildpacks": [
         {
-          "url": "https://github.com/heroku/heroku-buildpack-ruby"
-        },
-        {
           "url": "https://github.com/heroku/heroku-buildpack-chromedriver"
         },
         {
           "url": "https://github.com/heroku/heroku-buildpack-google-chrome"
-        },
-        {
-          "url": "https://github.com/gunpowderlabs/buildpack-ruby-rake-deploy-tasks"
         }
-      ]
     }
   }
 }
