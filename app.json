@@ -74,7 +74,7 @@
     "test": {
       "addons": [
         "heroku-postgresql",
-        "heorku-redis"
+        "heroku-redis"
       ],
       "buildpacks": [
         {
