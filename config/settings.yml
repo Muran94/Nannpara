@@ -1,4 +1,6 @@
 service:
+  launched_at: '2018-3-29'
+  launched_year: 2018
   owners_email_address: "bodyptag@gmail.com"
 
 security:
