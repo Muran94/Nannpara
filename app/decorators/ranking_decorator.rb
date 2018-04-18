@@ -17,7 +17,7 @@ module RankingDecorator
         when "毎時の活動ランキング"
             "#{start_at.strftime("%m月%d日 %H")}時台のナンパ師活動ランキング"
         when "本日の活動ランキング"
-            "(#{star_at.strftime("%m月%d日")})のデイリーナンパ師活動ランキング"
+            "(#{start_at.strftime("%m月%d日")})のデイリーナンパ師活動ランキング"
         when "今月の活動ランキング"
             "#{start_at.month}月のナンパ師活動ランキング"
         else
